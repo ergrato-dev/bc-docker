@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 550">
+  <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  </style>
+  
+  <!-- Fondo -->
+  <rect width="900" height="550" fill="#1a1a2e"/>
+  
+  <!-- Título -->
+  <text x="450" y="40" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="bold">Multi-Stage Build</text>
+  <text x="450" y="65" text-anchor="middle" fill="#a0a0a0" font-size="14">Separar compilación de producción</text>
+  
+  <!-- ETAPA 1: Builder -->
+  <rect x="50" y="90" width="350" height="280" rx="12" fill="#16213e" stroke="#667eea" stroke-width="3"/>
+  <rect x="50" y="90" width="350" height="40" rx="12" fill="#667eea"/>
+  <text x="225" y="117" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="bold">🔨 ETAPA 1: Builder</text>
+  
+  <text x="70" y="155" fill="#667eea" font-size="12">FROM node:20-alpine AS builder</text>
+  
+  <text x="70" y="185" fill="#a0a0a0" font-size="12">📦 Contenido:</text>
+  <text x="85" y="205" fill="#ffffff" font-size="11">• Node.js completo</text>
+  <text x="85" y="225" fill="#ffffff" font-size="11">• npm / yarn</text>
+  <text x="85" y="245" fill="#ffffff" font-size="11">• devDependencies (TypeScript, etc.)</text>
+  <text x="85" y="265" fill="#ffffff" font-size="11">• Código fuente (.ts)</text>
+  <text x="85" y="285" fill="#ffffff" font-size="11">• Herramientas de build</text>
+  
+  <text x="70" y="315" fill="#f5576c" font-size="12">⚠️ Tamaño: ~1.2 GB</text>
+  <text x="70" y="335" fill="#a0a0a0" font-size="11">Esta etapa NO va a producción</text>
+  
+  <!-- Flecha -->
+  <line x1="420" y1="230" x2="480" y2="230" stroke="#f5576c" stroke-width="4"/>
+  <polygon points="480,225 495,230 480,235" fill="#f5576c"/>
+  <text x="450" y="215" text-anchor="middle" fill="#f5576c" font-size="11">COPY</text>
+  <text x="450" y="250" text-anchor="middle" fill="#f5576c" font-size="11">--from=builder</text>
+  
+  <!-- ETAPA 2: Production -->
+  <rect x="500" y="90" width="350" height="280" rx="12" fill="#16213e" stroke="#43e97b" stroke-width="3"/>
+  <rect x="500" y="90" width="350" height="40" rx="12" fill="#43e97b"/>
+  <text x="675" y="117" text-anchor="middle" fill="#1a1a2e" font-size="16" font-weight="bold">🚀 ETAPA 2: Production</text>
+  
+  <text x="520" y="155" fill="#43e97b" font-size="12">FROM node:20-alpine AS production</text>
+  
+  <text x="520" y="185" fill="#a0a0a0" font-size="12">📦 Contenido (solo lo necesario):</text>
+  <text x="535" y="205" fill="#ffffff" font-size="11">• Node.js runtime</text>
+  <text x="535" y="225" fill="#ffffff" font-size="11">• Código compilado (.js)</text>
+  <text x="535" y="245" fill="#ffffff" font-size="11">• production dependencies</text>
+  <text x="535" y="265" fill="#a0a0a0" font-size="11">✗ Sin devDependencies</text>
+  <text x="535" y="285" fill="#a0a0a0" font-size="11">✗ Sin código fuente .ts</text>
+  <text x="535" y="305" fill="#a0a0a0" font-size="11">✗ Sin herramientas de build</text>
+  
+  <text x="520" y="335" fill="#43e97b" font-size="12">✓ Tamaño: ~150 MB</text>
+  <text x="520" y="355" fill="#43e97b" font-size="11">Esta es la imagen final</text>
+  
+  <!-- Comparativa inferior -->
+  <rect x="50" y="390" width="800" height="140" rx="10" fill="#16213e"/>
+  <text x="400" y="415" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="bold">📊 Comparativa de Tamaños</text>
+  
+  <!-- Barra sin multi-stage -->
+  <rect x="80" y="435" width="600" height="25" rx="5" fill="#f5576c"/>
+  <text x="380" y="453" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="bold">Sin Multi-stage: ~1.2 GB</text>
+  <text x="700" y="453" fill="#f5576c" font-size="12">100%</text>
+  
+  <!-- Barra con multi-stage -->
+  <rect x="80" y="470" width="75" height="25" rx="5" fill="#43e97b"/>
+  <text x="118" y="488" text-anchor="middle" fill="#1a1a2e" font-size="10" font-weight="bold">~150 MB</text>
+  <text x="700" y="488" fill="#43e97b" font-size="12">12.5%</text>
+  <text x="170" y="488" fill="#43e97b" font-size="11">Con Multi-stage</text>
+  
+  <!-- Reducción -->
+  <text x="400" y="520" text-anchor="middle" fill="#43e97b" font-size="16" font-weight="bold">🎉 Reducción: 87.5%</text>
+</svg>

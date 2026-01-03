@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480">
+  <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  </style>
+  <defs>
+    <marker id="arrow2" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#667eea"/>
+    </marker>
+  </defs>
+  
+  <!-- Fondo -->
+  <rect width="900" height="480" fill="#1a1a2e"/>
+  
+  <!-- Título -->
+  <text x="450" y="35" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="bold">Build Context y .dockerignore</text>
+  <text x="450" y="58" text-anchor="middle" fill="#a0a0a0" font-size="14">Controla qué archivos se envían al daemon de Docker</text>
+  
+  <!-- Carpeta del Proyecto (Izquierda) -->
+  <rect x="50" y="80" width="280" height="300" rx="10" fill="#16213e" stroke="#667eea" stroke-width="2"/>
+  <rect x="50" y="80" width="280" height="35" rx="10" fill="#667eea"/>
+  <text x="190" y="104" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="bold">📁 Carpeta del Proyecto</text>
+  
+  <!-- Archivos -->
+  <text x="70" y="140" fill="#43e97b" font-size="12">📄 Dockerfile</text>
+  <text x="70" y="165" fill="#43e97b" font-size="12">📄 .dockerignore</text>
+  <text x="70" y="190" fill="#43e97b" font-size="12">📄 package.json</text>
+  <text x="70" y="215" fill="#43e97b" font-size="12">📄 src/index.js</text>
+  <text x="70" y="240" fill="#43e97b" font-size="12">📄 src/utils.js</text>
+  <text x="70" y="270" fill="#f5576c" font-size="12">📁 node_modules/</text>
+  <text x="85" y="290" fill="#a0a0a0" font-size="10">(500 MB)</text>
+  <text x="70" y="315" fill="#f5576c" font-size="12">📁 .git/</text>
+  <text x="85" y="335" fill="#a0a0a0" font-size="10">(200 MB)</text>
+  <text x="70" y="360" fill="#f5576c" font-size="12">📄 .env</text>
+  <text x="85" y="375" fill="#a0a0a0" font-size="10">(secretos)</text>
+  
+  <text x="190" y="410" text-anchor="middle" fill="#f5576c" font-size="11">Total: ~750 MB</text>
+  
+  <!-- Flecha -->
+  <line x1="340" y1="230" x2="420" y2="230" stroke="#667eea" stroke-width="3" marker-end="url(#arrow2)"/>
+  <text x="380" y="215" text-anchor="middle" fill="#667eea" font-size="11">.dockerignore</text>
+  <text x="380" y="255" text-anchor="middle" fill="#667eea" font-size="11">filtra</text>
+  
+  <!-- Build Context (Centro-Derecha) -->
+  <rect x="430" y="80" width="280" height="200" rx="10" fill="#16213e" stroke="#43e97b" stroke-width="2"/>
+  <rect x="430" y="80" width="280" height="35" rx="10" fill="#43e97b"/>
+  <text x="570" y="104" text-anchor="middle" fill="#1a1a2e" font-size="14" font-weight="bold">📦 Build Context</text>
+  
+  <!-- Solo archivos incluidos -->
+  <text x="450" y="140" fill="#43e97b" font-size="12">✓ package.json</text>
+  <text x="450" y="165" fill="#43e97b" font-size="12">✓ src/index.js</text>
+  <text x="450" y="190" fill="#43e97b" font-size="12">✓ src/utils.js</text>
+  
+  <text x="570" y="230" text-anchor="middle" fill="#43e97b" font-size="14" font-weight="bold">Total: ~50 KB</text>
+  <text x="570" y="255" text-anchor="middle" fill="#43e97b" font-size="12">🚀 99.9% más pequeño</text>
+  
+  <!-- Daemon Docker -->
+  <rect x="430" y="290" width="280" height="90" rx="10" fill="#16213e" stroke="#00d4ff" stroke-width="2"/>
+  <text x="570" y="320" text-anchor="middle" fill="#00d4ff" font-size="14" font-weight="bold">🐳 Docker Daemon</text>
+  <text x="570" y="345" text-anchor="middle" fill="#ffffff" font-size="11">Recibe solo lo necesario</text>
+  <text x="570" y="365" text-anchor="middle" fill="#43e97b" font-size="11">Build más rápido</text>
+  
+  <!-- Ejemplo de .dockerignore -->
+  <rect x="720" y="80" width="160" height="200" rx="8" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+  <rect x="720" y="80" width="160" height="25" rx="8" fill="#161b22"/>
+  <text x="800" y="97" text-anchor="middle" fill="#58a6ff" font-size="10">.dockerignore</text>
+  
+  <text x="730" y="125" fill="#8b949e" font-size="9"># Dependencias</text>
+  <text x="730" y="140" fill="#f5576c" font-size="9">node_modules/</text>
+  <text x="730" y="160" fill="#8b949e" font-size="9"># Git</text>
+  <text x="730" y="175" fill="#f5576c" font-size="9">.git/</text>
+  <text x="730" y="190" fill="#f5576c" font-size="9">.gitignore</text>
+  <text x="730" y="210" fill="#8b949e" font-size="9"># Secretos</text>
+  <text x="730" y="225" fill="#f5576c" font-size="9">.env*</text>
+  <text x="730" y="245" fill="#8b949e" font-size="9"># Dockerfile</text>
+  <text x="730" y="260" fill="#f5576c" font-size="9">Dockerfile*</text>
+  
+  <!-- Beneficios -->
+  <rect x="50" y="400" width="800" height="60" rx="8" fill="#16213e"/>
+  <text x="200" y="425" text-anchor="middle" fill="#43e97b" font-size="12" font-weight="bold">✓ Build más rápido</text>
+  <text x="200" y="445" text-anchor="middle" fill="#a0a0a0" font-size="10">Menos datos a transferir</text>
+  <text x="450" y="425" text-anchor="middle" fill="#43e97b" font-size="12" font-weight="bold">✓ Imagen más pequeña</text>
+  <text x="450" y="445" text-anchor="middle" fill="#a0a0a0" font-size="10">Sin archivos innecesarios</text>
+  <text x="700" y="425" text-anchor="middle" fill="#43e97b" font-size="12" font-weight="bold">✓ Más seguro</text>
+  <text x="700" y="445" text-anchor="middle" fill="#a0a0a0" font-size="10">Sin secretos ni .env</text>
+</svg>

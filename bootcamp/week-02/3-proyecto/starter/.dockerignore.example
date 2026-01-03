@@ -1,0 +1,55 @@
+# ============================================
+# .dockerignore para API REST
+# Proyecto Semana 02 - Bootcamp Docker
+# ============================================
+
+# --- Dependencias ---
+# Se instalan durante el build
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# --- Git ---
+.git/
+.gitignore
+.gitattributes
+
+# --- IDE y Editores ---
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# --- Docker ---
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# --- Entorno y Secretos ---
+.env
+.env.*
+*.pem
+*.key
+secrets/
+
+# --- Documentación ---
+*.md
+docs/
+LICENSE
+
+# --- Tests ---
+__tests__/
+*.test.js
+*.spec.js
+coverage/
+.nyc_output/
+
+# --- Logs y Temporales ---
+logs/
+*.log
+tmp/
+temp/
+.cache/

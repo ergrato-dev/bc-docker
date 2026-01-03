@@ -33,23 +33,32 @@ Antes de comenzar esta semana, debes:
 week-02/
 ├── README.md                    # Este archivo
 ├── rubrica-evaluacion.md        # Criterios de evaluación
-├── 0-assets/                    # Recursos visuales
-│   └── week-02-header.svg
+├── 0-assets/                    # Recursos visuales (SVG)
+│   ├── README.md
+│   ├── 01-sistema-capas.svg
+│   ├── 02-multi-stage-build.svg
+│   ├── 03-dockerfile-flujo.svg
+│   ├── 04-build-cache.svg
+│   └── 05-build-context.svg
 ├── 1-teoria/                    # Material teórico
 │   ├── 01-anatomia-imagen.md
 │   ├── 02-dockerfile-basico.md
-│   ├── 03-instrucciones-dockerfile.md
-│   ├── 04-multi-stage-builds.md
-│   └── 05-optimizacion-capas.md
-├── 2-ejercicios/                # Ejercicios guiados
-│   ├── 01-primer-dockerfile/
-│   ├── 02-multi-stage/
-│   └── 03-optimizacion/
+│   ├── 03-dockerfile-avanzado.md
+│   ├── 04-build-context.md
+│   └── 05-optimizacion.md
+├── 2-ejercicios/                # Ejercicios guiados (sin solution)
+│   ├── README.md
+│   ├── 01-primera-imagen/
+│   ├── 02-variables-argumentos/
+│   ├── 03-copiando-archivos/
+│   ├── 04-multi-stage/
+│   └── 05-optimizacion-capas/
 ├── 3-proyecto/                  # Proyecto semanal
 │   ├── README.md
 │   ├── starter/
 │   └── solution/
 ├── 4-recursos/                  # Material adicional
+│   ├── README.md
 │   ├── ebooks-free/
 │   ├── videografia/
 │   └── webgrafia/
@@ -63,27 +72,29 @@ week-02/
 
 ### 📚 Teoría
 
-| #   | Tema                     | Duración | Archivo                                                                   |
-| --- | ------------------------ | -------- | ------------------------------------------------------------------------- |
-| 1   | Anatomía de una Imagen   | 20 min   | [01-anatomia-imagen.md](1-teoria/01-anatomia-imagen.md)                   |
-| 2   | Dockerfile Básico        | 25 min   | [02-dockerfile-basico.md](1-teoria/02-dockerfile-basico.md)               |
-| 3   | Instrucciones Dockerfile | 30 min   | [03-instrucciones-dockerfile.md](1-teoria/03-instrucciones-dockerfile.md) |
-| 4   | Multi-Stage Builds       | 25 min   | [04-multi-stage-builds.md](1-teoria/04-multi-stage-builds.md)             |
-| 5   | Optimización de Capas    | 20 min   | [05-optimizacion-capas.md](1-teoria/05-optimizacion-capas.md)             |
+| #   | Tema                   | Duración | Archivo                                                         |
+| --- | ---------------------- | -------- | --------------------------------------------------------------- |
+| 1   | Anatomía de una Imagen | 20 min   | [01-anatomia-imagen.md](1-teoria/01-anatomia-imagen.md)         |
+| 2   | Dockerfile Básico      | 25 min   | [02-dockerfile-basico.md](1-teoria/02-dockerfile-basico.md)     |
+| 3   | Dockerfile Avanzado    | 25 min   | [03-dockerfile-avanzado.md](1-teoria/03-dockerfile-avanzado.md) |
+| 4   | Build Context          | 20 min   | [04-build-context.md](1-teoria/04-build-context.md)             |
+| 5   | Optimización           | 30 min   | [05-optimizacion.md](1-teoria/05-optimizacion.md)               |
 
 ### 💻 Ejercicios Guiados
 
-| #   | Ejercicio                | Duración | Carpeta                                                     |
-| --- | ------------------------ | -------- | ----------------------------------------------------------- |
-| 1   | Mi Primer Dockerfile     | 45 min   | [01-primer-dockerfile/](2-ejercicios/01-primer-dockerfile/) |
-| 2   | Multi-Stage Build        | 50 min   | [02-multi-stage/](2-ejercicios/02-multi-stage/)             |
-| 3   | Optimización de Imágenes | 45 min   | [03-optimizacion/](2-ejercicios/03-optimizacion/)           |
+| #   | Ejercicio              | Duración | Carpeta                                                           |
+| --- | ---------------------- | -------- | ----------------------------------------------------------------- |
+| 1   | Primera Imagen         | 30 min   | [01-primera-imagen/](2-ejercicios/01-primera-imagen/)             |
+| 2   | Variables y Argumentos | 30 min   | [02-variables-argumentos/](2-ejercicios/02-variables-argumentos/) |
+| 3   | Copiando Archivos      | 30 min   | [03-copiando-archivos/](2-ejercicios/03-copiando-archivos/)       |
+| 4   | Multi-Stage Build      | 40 min   | [04-multi-stage/](2-ejercicios/04-multi-stage/)                   |
+| 5   | Optimización de Capas  | 30 min   | [05-optimizacion-capas/](2-ejercicios/05-optimizacion-capas/)     |
 
 ### 🚀 Proyecto Semanal
 
-**Aplicación Web Containerizada**
+**API REST Optimizada**
 
-Crear una imagen Docker optimizada para una aplicación web, aplicando multi-stage builds y buenas prácticas.
+Crear una imagen Docker optimizada para una API REST Node.js, aplicando multi-stage builds, usuario no-root y buenas prácticas.
 
 📁 [Ver instrucciones del proyecto](3-proyecto/README.md)
 
@@ -102,10 +113,11 @@ Crear una imagen Docker optimizada para una aplicación web, aplicando multi-sta
 
 ## 📌 Entregables
 
-- [ ] Ejercicios 01, 02 y 03 completados
-- [ ] Proyecto semanal funcional
-- [ ] Imagen publicada en Docker Hub (opcional)
 - [ ] Quiz teórico aprobado (≥70%)
+- [ ] 5 Ejercicios completados
+- [ ] Proyecto semanal funcional (API en contenedor)
+- [ ] Imagen optimizada (< 150MB)
+- [ ] Imagen publicada en Docker Hub (opcional)
 
 ---
 

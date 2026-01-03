@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620">
+  <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  </style>
+  <defs>
+    <marker id="arrowHead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#a0a0a0"/>
+    </marker>
+  </defs>
+  
+  <!-- Fondo -->
+  <rect width="900" height="620" fill="#1a1a2e"/>
+  
+  <!-- Título -->
+  <text x="450" y="35" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="bold">Flujo de Instrucciones Dockerfile</text>
+  <text x="450" y="58" text-anchor="middle" fill="#a0a0a0" font-size="14">Cada instrucción crea una nueva capa</text>
+  
+  <!-- FROM -->
+  <rect x="50" y="80" width="180" height="80" rx="10" fill="#16213e" stroke="#667eea" stroke-width="2"/>
+  <rect x="50" y="80" width="180" height="25" rx="10" fill="#667eea"/>
+  <text x="140" y="98" text-anchor="middle" fill="#fff" font-size="13" font-weight="bold">FROM</text>
+  <text x="140" y="130" text-anchor="middle" fill="#667eea" font-size="11">FROM node:20-alpine</text>
+  <text x="140" y="148" text-anchor="middle" fill="#a0a0a0" font-size="10">Imagen base</text>
+  
+  <!-- Flecha 1 -->
+  <line x1="230" y1="120" x2="280" y2="120" stroke="#a0a0a0" stroke-width="2" marker-end="url(#arrowHead)"/>
+  
+  <!-- WORKDIR -->
+  <rect x="290" y="80" width="180" height="80" rx="10" fill="#16213e" stroke="#4ecdc4" stroke-width="2"/>
+  <rect x="290" y="80" width="180" height="25" rx="10" fill="#4ecdc4"/>
+  <text x="380" y="98" text-anchor="middle" fill="#1a1a2e" font-size="13" font-weight="bold">WORKDIR</text>
+  <text x="380" y="130" text-anchor="middle" fill="#4ecdc4" font-size="11">WORKDIR /app</text>
+  <text x="380" y="148" text-anchor="middle" fill="#a0a0a0" font-size="10">Dir de trabajo</text>
+  
+  <!-- Flecha 2 -->
+  <line x1="470" y1="120" x2="520" y2="120" stroke="#a0a0a0" stroke-width="2" marker-end="url(#arrowHead)"/>
+  
+  <!-- COPY package -->
+  <rect x="530" y="80" width="180" height="80" rx="10" fill="#16213e" stroke="#f093fb" stroke-width="2"/>
+  <rect x="530" y="80" width="180" height="25" rx="10" fill="#f093fb"/>
+  <text x="620" y="98" text-anchor="middle" fill="#fff" font-size="13" font-weight="bold">COPY</text>
+  <text x="620" y="130" text-anchor="middle" fill="#f093fb" font-size="10">COPY package*.json ./</text>
+  <text x="620" y="148" text-anchor="middle" fill="#a0a0a0" font-size="10">Solo deps primero</text>
+  
+  <!-- Flecha 3 (hacia abajo) -->
+  <line x1="620" y1="160" x2="620" y2="190" stroke="#a0a0a0" stroke-width="2" marker-end="url(#arrowHead)"/>
+  
+  <!-- RUN npm install -->
+  <rect x="530" y="200" width="180" height="80" rx="10" fill="#16213e" stroke="#43e97b" stroke-width="2"/>
+  <rect x="530" y="200" width="180" height="25" rx="10" fill="#43e97b"/>
+  <text x="620" y="218" text-anchor="middle" fill="#1a1a2e" font-size="13" font-weight="bold">RUN</text>
+  <text x="620" y="250" text-anchor="middle" fill="#43e97b" font-size="11">RUN npm ci --only=prod</text>
+  <text x="620" y="268" text-anchor="middle" fill="#a0a0a0" font-size="10">Instalar deps</text>
+  
+  <!-- Flecha 4 -->
+  <line x1="530" y1="240" x2="470" y2="240" stroke="#a0a0a0" stroke-width="2" marker-end="url(#arrowHead)"/>
+  
+  <!-- COPY source -->
+  <rect x="290" y="200" width="180" height="80" rx="10" fill="#16213e" stroke="#f093fb" stroke-width="2"/>
+  <rect x="290" y="200" width="180" height="25" rx="10" fill="#f093fb"/>
+  <text x="380" y="218" text-anchor="middle" fill="#fff" font-size="13" font-weight="bold">COPY</text>
+  <text x="380" y="250" text-anchor="middle" fill="#f093fb" font-size="11">COPY . .</text>
+  <text x="380" y="268" text-anchor="middle" fill="#a0a0a0" font-size="10">Código fuente</text>
+  
+  <!-- Flecha 5 -->
+  <line x1="290" y1="240" x2="230" y2="240" stroke="#a0a0a0" stroke-width="2" marker-end="url(#arrowHead)"/>
+  
+  <!-- USER -->
+  <rect x="50" y="200" width="180" height="80" rx="10" fill="#16213e" stroke="#ffd93d" stroke-width="2"/>
+  <rect x="50" y="200" width="180" height="25" rx="10" fill="#ffd93d"/>
+  <text x="140" y="218" text-anchor="middle" fill="#1a1a2e" font-size="13" font-weight="bold">USER</text>
+  <text x="140" y="250" text-anchor="middle" fill="#ffd93d" font-size="11">USER node</text>
+  <text x="140" y="268" text-anchor="middle" fill="#a0a0a0" font-size="10">No-root</text>
+  
+  <!-- Flecha 6 (hacia abajo) -->
+  <line x1="140" y1="280" x2="140" y2="310" stroke="#a0a0a0" stroke-width="2" marker-end="url(#arrowHead)"/>
+  
+  <!-- EXPOSE -->
+  <rect x="50" y="320" width="180" height="80" rx="10" fill="#16213e" stroke="#00d4ff" stroke-width="2"/>
+  <rect x="50" y="320" width="180" height="25" rx="10" fill="#00d4ff"/>
+  <text x="140" y="338" text-anchor="middle" fill="#1a1a2e" font-size="13" font-weight="bold">EXPOSE</text>
+  <text x="140" y="370" text-anchor="middle" fill="#00d4ff" font-size="11">EXPOSE 3000</text>
+  <text x="140" y="388" text-anchor="middle" fill="#a0a0a0" font-size="10">Documentación</text>
+  
+  <!-- Flecha 7 -->
+  <line x1="230" y1="360" x2="280" y2="360" stroke="#a0a0a0" stroke-width="2" marker-end="url(#arrowHead)"/>
+  
+  <!-- HEALTHCHECK -->
+  <rect x="290" y="320" width="180" height="80" rx="10" fill="#16213e" stroke="#ff6b6b" stroke-width="2"/>
+  <rect x="290" y="320" width="180" height="25" rx="10" fill="#ff6b6b"/>
+  <text x="380" y="338" text-anchor="middle" fill="#fff" font-size="13" font-weight="bold">HEALTHCHECK</text>
+  <text x="380" y="368" text-anchor="middle" fill="#ff6b6b" font-size="9">HEALTHCHECK --interval=30s</text>
+  <text x="380" y="380" text-anchor="middle" fill="#ff6b6b" font-size="9">CMD wget --spider...</text>
+  <text x="380" y="394" text-anchor="middle" fill="#a0a0a0" font-size="10">Estado de salud</text>
+  
+  <!-- Flecha 8 -->
+  <line x1="470" y1="360" x2="520" y2="360" stroke="#a0a0a0" stroke-width="2" marker-end="url(#arrowHead)"/>
+  
+  <!-- CMD -->
+  <rect x="530" y="320" width="180" height="80" rx="10" fill="#16213e" stroke="#fa709a" stroke-width="2"/>
+  <rect x="530" y="320" width="180" height="25" rx="10" fill="#fa709a"/>
+  <text x="620" y="338" text-anchor="middle" fill="#1a1a2e" font-size="13" font-weight="bold">CMD</text>
+  <text x="620" y="370" text-anchor="middle" fill="#fa709a" font-size="10">CMD ["node", "index.js"]</text>
+  <text x="620" y="388" text-anchor="middle" fill="#a0a0a0" font-size="10">Comando inicial</text>
+  
+  <!-- Leyenda inferior -->
+  <rect x="50" y="430" width="800" height="170" rx="10" fill="#16213e"/>
+  <text x="400" y="455" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="bold">📋 Categorías de Instrucciones</text>
+  
+  <!-- Fila 1 -->
+  <rect x="80" y="475" width="15" height="15" rx="3" fill="#667eea"/>
+  <text x="105" y="487" fill="#ffffff" font-size="11">FROM - Imagen base (obligatoria, primera)</text>
+  
+  <rect x="420" y="475" width="15" height="15" rx="3" fill="#4ecdc4"/>
+  <text x="445" y="487" fill="#ffffff" font-size="11">WORKDIR - Directorio de trabajo</text>
+  
+  <!-- Fila 2 -->
+  <rect x="80" y="500" width="15" height="15" rx="3" fill="#f093fb"/>
+  <text x="105" y="512" fill="#ffffff" font-size="11">COPY - Copia archivos del contexto</text>
+  
+  <rect x="420" y="500" width="15" height="15" rx="3" fill="#43e97b"/>
+  <text x="445" y="512" fill="#ffffff" font-size="11">RUN - Ejecuta comandos (crea capa)</text>
+  
+  <!-- Fila 3 -->
+  <rect x="80" y="525" width="15" height="15" rx="3" fill="#ffd93d"/>
+  <text x="105" y="537" fill="#ffffff" font-size="11">USER - Usuario de ejecución (seguridad)</text>
+  
+  <rect x="420" y="525" width="15" height="15" rx="3" fill="#00d4ff"/>
+  <text x="445" y="537" fill="#ffffff" font-size="11">EXPOSE - Documenta puertos</text>
+  
+  <!-- Fila 4 -->
+  <rect x="80" y="550" width="15" height="15" rx="3" fill="#ff6b6b"/>
+  <text x="105" y="562" fill="#ffffff" font-size="11">HEALTHCHECK - Verificación de salud</text>
+  
+  <rect x="420" y="550" width="15" height="15" rx="3" fill="#fa709a"/>
+  <text x="445" y="562" fill="#ffffff" font-size="11">CMD - Comando por defecto</text>
+  
+  <!-- Nota -->
+  <text x="400" y="590" text-anchor="middle" fill="#a0a0a0" font-size="10">💡 El orden afecta el caché. Coloca lo que cambia menos frecuentemente primero.</text>
+</svg>

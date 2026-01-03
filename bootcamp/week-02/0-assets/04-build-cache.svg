@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520">
+  <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  </style>
+  
+  <!-- Fondo -->
+  <rect width="900" height="520" fill="#1a1a2e"/>
+  
+  <!-- Título -->
+  <text x="450" y="35" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="bold">Build Cache - Optimización</text>
+  <text x="450" y="58" text-anchor="middle" fill="#a0a0a0" font-size="14">Cómo Docker reutiliza capas en builds sucesivos</text>
+  
+  <!-- Columna Izquierda: Mal ordenado -->
+  <text x="220" y="95" text-anchor="middle" fill="#f5576c" font-size="16" font-weight="bold">❌ Orden Incorrecto</text>
+  
+  <!-- Capa 1 -->
+  <rect x="50" y="115" width="340" height="50" rx="6" fill="#16213e" stroke="#43e97b" stroke-width="2"/>
+  <text x="70" y="145" fill="#43e97b" font-size="11">FROM node:20-alpine</text>
+  <text x="360" y="145" fill="#43e97b" font-size="10" text-anchor="end">✓ CACHED</text>
+  
+  <!-- Capa 2 -->
+  <rect x="50" y="175" width="340" height="50" rx="6" fill="#16213e" stroke="#f5576c" stroke-width="2"/>
+  <text x="70" y="205" fill="#f5576c" font-size="11">COPY . /app</text>
+  <text x="360" y="205" fill="#f5576c" font-size="10" text-anchor="end">⚠ INVALIDADO</text>
+  
+  <!-- Línea de invalidación -->
+  <line x1="400" y1="205" x2="400" y2="375" stroke="#f5576c" stroke-width="2" stroke-dasharray="5,3"/>
+  <text x="415" y="290" fill="#f5576c" font-size="10" transform="rotate(90, 415, 290)">Cascada de invalidación</text>
+  
+  <!-- Capa 3 -->
+  <rect x="50" y="235" width="340" height="50" rx="6" fill="#16213e" stroke="#f5576c" stroke-width="2"/>
+  <text x="70" y="265" fill="#f5576c" font-size="11">RUN npm install</text>
+  <text x="360" y="265" fill="#f5576c" font-size="10" text-anchor="end">✗ REBUILD 2min</text>
+  
+  <!-- Capa 4 -->
+  <rect x="50" y="295" width="340" height="50" rx="6" fill="#16213e" stroke="#f5576c" stroke-width="2"/>
+  <text x="70" y="325" fill="#f5576c" font-size="11">CMD ["node", "index.js"]</text>
+  <text x="360" y="325" fill="#f5576c" font-size="10" text-anchor="end">✗ REBUILD</text>
+  
+  <!-- Tiempo total izq -->
+  <rect x="50" y="360" width="340" height="35" rx="6" fill="#f5576c" fill-opacity="0.2"/>
+  <text x="220" y="383" text-anchor="middle" fill="#f5576c" font-size="12" font-weight="bold">⏱️ Build time: ~2.5 minutos</text>
+  
+  <!-- Columna Derecha: Bien ordenado -->
+  <text x="680" y="95" text-anchor="middle" fill="#43e97b" font-size="16" font-weight="bold">✅ Orden Correcto</text>
+  
+  <!-- Capa 1 -->
+  <rect x="510" y="115" width="340" height="50" rx="6" fill="#16213e" stroke="#43e97b" stroke-width="2"/>
+  <text x="530" y="145" fill="#43e97b" font-size="11">FROM node:20-alpine</text>
+  <text x="820" y="145" fill="#43e97b" font-size="10" text-anchor="end">✓ CACHED</text>
+  
+  <!-- Capa 2 -->
+  <rect x="510" y="175" width="340" height="50" rx="6" fill="#16213e" stroke="#43e97b" stroke-width="2"/>
+  <text x="530" y="205" fill="#43e97b" font-size="11">COPY package*.json ./</text>
+  <text x="820" y="205" fill="#43e97b" font-size="10" text-anchor="end">✓ CACHED</text>
+  
+  <!-- Capa 3 -->
+  <rect x="510" y="235" width="340" height="50" rx="6" fill="#16213e" stroke="#43e97b" stroke-width="2"/>
+  <text x="530" y="265" fill="#43e97b" font-size="11">RUN npm ci</text>
+  <text x="820" y="265" fill="#43e97b" font-size="10" text-anchor="end">✓ CACHED</text>
+  
+  <!-- Capa 4 - Solo esta se reconstruye -->
+  <rect x="510" y="295" width="340" height="50" rx="6" fill="#16213e" stroke="#ffd93d" stroke-width="2"/>
+  <text x="530" y="325" fill="#ffd93d" font-size="11">COPY . .</text>
+  <text x="820" y="325" fill="#ffd93d" font-size="10" text-anchor="end">↻ REBUILD 2s</text>
+  
+  <!-- Tiempo total der -->
+  <rect x="510" y="360" width="340" height="35" rx="6" fill="#43e97b" fill-opacity="0.2"/>
+  <text x="680" y="383" text-anchor="middle" fill="#43e97b" font-size="12" font-weight="bold">⏱️ Build time: ~5 segundos</text>
+  
+  <!-- Explicación inferior -->
+  <rect x="50" y="420" width="800" height="80" rx="10" fill="#16213e"/>
+  <text x="450" y="445" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="bold">🎯 Regla de Oro del Cache</text>
+  <text x="80" y="470" fill="#ffffff" font-size="12">1. Las instrucciones se ejecutan de arriba hacia abajo</text>
+  <text x="80" y="490" fill="#43e97b" font-size="12" font-weight="bold">2. Si una capa cambia, TODAS las capas siguientes se invalidan → Coloca lo que cambia AL FINAL</text>
+</svg>

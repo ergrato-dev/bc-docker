@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500">
+  <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  </style>
+  
+  <!-- Fondo -->
+  <rect width="900" height="500" fill="#1a1a2e"/>
+  
+  <!-- Título -->
+  <text x="450" y="40" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="bold">Sistema de Capas en Docker</text>
+  <text x="450" y="65" text-anchor="middle" fill="#a0a0a0" font-size="14">Cada instrucción del Dockerfile crea una capa inmutable</text>
+  
+  <!-- IMAGEN (Izquierda) -->
+  <text x="200" y="100" text-anchor="middle" fill="#667eea" font-size="18" font-weight="bold">📦 IMAGEN</text>
+  <text x="200" y="120" text-anchor="middle" fill="#a0a0a0" font-size="12">Solo lectura (Read-Only)</text>
+  
+  <!-- Capas de imagen -->
+  <rect x="50" y="140" width="300" height="50" rx="8" fill="#16213e" stroke="#f5576c" stroke-width="2"/>
+  <text x="70" y="170" fill="#f5576c" font-size="12" font-weight="bold">CMD ["node", "app.js"]</text>
+  <text x="320" y="170" fill="#a0a0a0" font-size="11" text-anchor="end">0 B</text>
+  
+  <rect x="50" y="200" width="300" height="50" rx="8" fill="#16213e" stroke="#43e97b" stroke-width="2"/>
+  <text x="70" y="230" fill="#43e97b" font-size="12" font-weight="bold">COPY . /app</text>
+  <text x="320" y="230" fill="#a0a0a0" font-size="11" text-anchor="end">15 MB</text>
+  
+  <rect x="50" y="260" width="300" height="50" rx="8" fill="#16213e" stroke="#ffd93d" stroke-width="2"/>
+  <text x="70" y="290" fill="#ffd93d" font-size="12" font-weight="bold">RUN npm install</text>
+  <text x="320" y="290" fill="#a0a0a0" font-size="11" text-anchor="end">85 MB</text>
+  
+  <rect x="50" y="320" width="300" height="50" rx="8" fill="#16213e" stroke="#667eea" stroke-width="2"/>
+  <text x="70" y="350" fill="#667eea" font-size="12" font-weight="bold">FROM node:20-alpine</text>
+  <text x="320" y="350" fill="#a0a0a0" font-size="11" text-anchor="end">180 MB</text>
+  
+  <!-- CONTENEDOR (Derecha) -->
+  <text x="650" y="100" text-anchor="middle" fill="#00d4ff" font-size="18" font-weight="bold">🐳 CONTENEDOR</text>
+  <text x="650" y="120" text-anchor="middle" fill="#a0a0a0" font-size="12">Capa R/W efímera</text>
+  
+  <!-- Capa R/W -->
+  <rect x="500" y="140" width="300" height="60" rx="8" fill="#16213e" stroke="#00d4ff" stroke-width="3"/>
+  <text x="650" y="165" text-anchor="middle" fill="#00d4ff" font-size="13" font-weight="bold">Capa de Escritura (R/W)</text>
+  <text x="650" y="185" text-anchor="middle" fill="#a0a0a0" font-size="11">Logs, datos temporales, cambios</text>
+  
+  <!-- Capas compartidas (referencia) -->
+  <rect x="500" y="210" width="300" height="160" rx="8" fill="#16213e" stroke="#667eea" stroke-width="1" stroke-dasharray="5,3"/>
+  <text x="650" y="250" text-anchor="middle" fill="#667eea" font-size="12">Capas de imagen</text>
+  <text x="650" y="275" text-anchor="middle" fill="#a0a0a0" font-size="11">(compartidas, solo lectura)</text>
+  <text x="650" y="310" text-anchor="middle" fill="#43e97b" font-size="11">↑ Reutilizadas entre contenedores</text>
+  <text x="650" y="335" text-anchor="middle" fill="#43e97b" font-size="11">↑ Ahorran espacio en disco</text>
+  
+  <!-- Leyenda Copy-on-Write -->
+  <rect x="50" y="400" width="800" height="80" rx="10" fill="#16213e"/>
+  <text x="450" y="425" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="bold">📝 Copy-on-Write (CoW)</text>
+  <text x="450" y="450" text-anchor="middle" fill="#a0a0a0" font-size="12">Cuando un contenedor modifica un archivo, Docker copia ese archivo a la capa R/W</text>
+  <text x="450" y="470" text-anchor="middle" fill="#a0a0a0" font-size="12">Las capas originales de la imagen permanecen intactas</text>
+</svg>
