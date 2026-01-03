@@ -66,6 +66,15 @@ docker-compose.local.yml
 compose.override.yml
 compose.local.yml
 
+# ========================================
+# 🔐 Soluciones (solo instructores)
+# ========================================
+
+# Carpetas de solución de ejercicios y proyectos
+**/solution/
+**/solutions/
+**/soluciones/
+
 # Archivos de entorno con secretos
 .env
 .env.local
