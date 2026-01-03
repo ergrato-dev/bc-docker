@@ -1,0 +1,170 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 550">
+  <defs>
+    <linearGradient id="clientGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#74c0fc;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4dabf7;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="daemonGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2496ED;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a7bc9;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="registryGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#845ef7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7048e8;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="imageGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffd43b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fab005;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="containerGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#51cf66;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#40c057;stop-opacity:1" />
+    </linearGradient>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#ffffff"/>
+    </marker>
+    <marker id="arrowheadBlue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4dabf7"/>
+    </marker>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="900" height="550" fill="#1a1a2e"/>
+  
+  <!-- Title -->
+  <text x="450" y="40" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">🐳 Arquitectura de Docker</text>
+  
+  <!-- CLIENT Section -->
+  <rect x="30" y="80" width="200" height="420" rx="10" fill="#2d2d44" stroke="#4dabf7" stroke-width="2"/>
+  <text x="130" y="110" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#4dabf7" text-anchor="middle">Cliente Docker</text>
+  
+  <!-- CLI -->
+  <rect x="50" y="130" width="160" height="50" rx="5" fill="url(#clientGrad)"/>
+  <text x="130" y="160" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1a1a2e" text-anchor="middle">$ docker CLI</text>
+  
+  <!-- Commands -->
+  <rect x="50" y="195" width="160" height="130" rx="5" fill="#3d3d5c"/>
+  <text x="130" y="220" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle">Comandos:</text>
+  <text x="60" y="245" font-family="monospace" font-size="11" fill="#51cf66">docker run</text>
+  <text x="60" y="265" font-family="monospace" font-size="11" fill="#51cf66">docker build</text>
+  <text x="60" y="285" font-family="monospace" font-size="11" fill="#51cf66">docker pull</text>
+  <text x="60" y="305" font-family="monospace" font-size="11" fill="#51cf66">docker push</text>
+  
+  <!-- Docker Desktop -->
+  <rect x="50" y="340" width="160" height="50" rx="5" fill="url(#clientGrad)"/>
+  <text x="130" y="360" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#1a1a2e" text-anchor="middle">🖥️ Docker Desktop</text>
+  <text x="130" y="378" font-family="Arial, sans-serif" font-size="10" fill="#1a1a2e" text-anchor="middle">(GUI opcional)</text>
+  
+  <!-- REST API -->
+  <rect x="50" y="405" width="160" height="40" rx="5" fill="#4a4a6a"/>
+  <text x="130" y="430" font-family="Arial, sans-serif" font-size="11" fill="#ffffff" text-anchor="middle">REST API / Socket</text>
+  
+  <!-- Arrow Client to Daemon -->
+  <line x1="230" y1="280" x2="290" y2="280" stroke="#ffffff" stroke-width="3" marker-end="url(#arrowhead)"/>
+  <text x="260" y="265" font-family="Arial, sans-serif" font-size="10" fill="#aaaaaa" text-anchor="middle">API</text>
+  
+  <!-- DAEMON Section -->
+  <rect x="300" y="80" width="280" height="420" rx="10" fill="#2d2d44" stroke="#2496ED" stroke-width="3"/>
+  <text x="440" y="110" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2496ED" text-anchor="middle">🐳 Docker Daemon (dockerd)</text>
+  
+  <!-- Docker Engine -->
+  <rect x="320" y="130" width="240" height="50" rx="5" fill="url(#daemonGrad)"/>
+  <text x="440" y="160" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">Docker Engine</text>
+  
+  <!-- containerd -->
+  <rect x="320" y="195" width="115" height="45" rx="5" fill="#4a4a6a" stroke="#2496ED" stroke-width="1"/>
+  <text x="377" y="222" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle">containerd</text>
+  
+  <!-- runc -->
+  <rect x="445" y="195" width="115" height="45" rx="5" fill="#4a4a6a" stroke="#2496ED" stroke-width="1"/>
+  <text x="502" y="222" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle">runc</text>
+  
+  <!-- Images -->
+  <text x="380" y="270" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#ffd43b" text-anchor="middle">📦 Imágenes</text>
+  <rect x="320" y="280" width="70" height="60" rx="5" fill="url(#imageGrad)"/>
+  <text x="355" y="305" font-family="Arial, sans-serif" font-size="10" fill="#1a1a2e" text-anchor="middle">nginx</text>
+  <text x="355" y="325" font-family="Arial, sans-serif" font-size="9" fill="#1a1a2e" text-anchor="middle">:alpine</text>
+  
+  <rect x="400" y="280" width="70" height="60" rx="5" fill="url(#imageGrad)"/>
+  <text x="435" y="305" font-family="Arial, sans-serif" font-size="10" fill="#1a1a2e" text-anchor="middle">postgres</text>
+  <text x="435" y="325" font-family="Arial, sans-serif" font-size="9" fill="#1a1a2e" text-anchor="middle">:16</text>
+  
+  <rect x="480" y="280" width="70" height="60" rx="5" fill="url(#imageGrad)"/>
+  <text x="515" y="305" font-family="Arial, sans-serif" font-size="10" fill="#1a1a2e" text-anchor="middle">node</text>
+  <text x="515" y="325" font-family="Arial, sans-serif" font-size="9" fill="#1a1a2e" text-anchor="middle">:20-slim</text>
+  
+  <!-- Containers -->
+  <text x="380" y="370" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#51cf66" text-anchor="middle">🚀 Contenedores</text>
+  <rect x="320" y="380" width="70" height="50" rx="5" fill="url(#containerGrad)"/>
+  <text x="355" y="405" font-family="Arial, sans-serif" font-size="9" fill="#1a1a2e" text-anchor="middle">web-1</text>
+  <text x="355" y="420" font-family="Arial, sans-serif" font-size="8" fill="#1a1a2e" text-anchor="middle">▶ running</text>
+  
+  <rect x="400" y="380" width="70" height="50" rx="5" fill="url(#containerGrad)"/>
+  <text x="435" y="405" font-family="Arial, sans-serif" font-size="9" fill="#1a1a2e" text-anchor="middle">db-1</text>
+  <text x="435" y="420" font-family="Arial, sans-serif" font-size="8" fill="#1a1a2e" text-anchor="middle">▶ running</text>
+  
+  <rect x="480" y="380" width="70" height="50" rx="5" fill="#6c757d"/>
+  <text x="515" y="405" font-family="Arial, sans-serif" font-size="9" fill="#ffffff" text-anchor="middle">api-1</text>
+  <text x="515" y="420" font-family="Arial, sans-serif" font-size="8" fill="#ffffff" text-anchor="middle">⏹ stopped</text>
+  
+  <!-- Volumes & Networks -->
+  <rect x="320" y="445" width="115" height="40" rx="5" fill="#3d3d5c"/>
+  <text x="377" y="470" font-family="Arial, sans-serif" font-size="11" fill="#ffffff" text-anchor="middle">💾 Volúmenes</text>
+  
+  <rect x="445" y="445" width="115" height="40" rx="5" fill="#3d3d5c"/>
+  <text x="502" y="470" font-family="Arial, sans-serif" font-size="11" fill="#ffffff" text-anchor="middle">🌐 Redes</text>
+  
+  <!-- REGISTRY Section -->
+  <rect x="620" y="80" width="250" height="200" rx="10" fill="#2d2d44" stroke="#845ef7" stroke-width="2"/>
+  <text x="745" y="110" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#845ef7" text-anchor="middle">☁️ Registry</text>
+  
+  <!-- Docker Hub -->
+  <rect x="640" y="130" width="210" height="60" rx="5" fill="url(#registryGrad)"/>
+  <text x="745" y="155" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">🐳 Docker Hub</text>
+  <text x="745" y="175" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">hub.docker.com</text>
+  
+  <!-- Other registries -->
+  <rect x="640" y="200" width="100" height="35" rx="5" fill="#4a4a6a"/>
+  <text x="690" y="222" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">GitHub CR</text>
+  
+  <rect x="750" y="200" width="100" height="35" rx="5" fill="#4a4a6a"/>
+  <text x="800" y="222" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">AWS ECR</text>
+  
+  <rect x="640" y="240" width="100" height="35" rx="5" fill="#4a4a6a"/>
+  <text x="690" y="262" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">GCP GCR</text>
+  
+  <rect x="750" y="240" width="100" height="35" rx="5" fill="#4a4a6a"/>
+  <text x="800" y="262" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">Private</text>
+  
+  <!-- Arrows Daemon to Registry -->
+  <line x1="580" y1="180" x2="620" y2="180" stroke="#ffffff" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="600" y="165" font-family="Arial, sans-serif" font-size="9" fill="#aaaaaa" text-anchor="middle">pull</text>
+  
+  <line x1="620" y1="200" x2="580" y2="200" stroke="#845ef7" stroke-width="2" marker-end="url(#arrowheadBlue)"/>
+  <text x="600" y="215" font-family="Arial, sans-serif" font-size="9" fill="#aaaaaa" text-anchor="middle">push</text>
+  
+  <!-- HOST Section -->
+  <rect x="620" y="310" width="250" height="190" rx="10" fill="#2d2d44" stroke="#ffd43b" stroke-width="2"/>
+  <text x="745" y="340" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#ffd43b" text-anchor="middle">🖥️ Host</text>
+  
+  <!-- Kernel -->
+  <rect x="640" y="360" width="210" height="50" rx="5" fill="#6c757d"/>
+  <text x="745" y="385" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">Linux Kernel</text>
+  <text x="745" y="400" font-family="Arial, sans-serif" font-size="10" fill="#aaaaaa" text-anchor="middle">namespaces | cgroups</text>
+  
+  <!-- Resources -->
+  <rect x="640" y="420" width="65" height="35" rx="5" fill="#3d3d5c"/>
+  <text x="672" y="442" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">🔲 CPU</text>
+  
+  <rect x="712" y="420" width="65" height="35" rx="5" fill="#3d3d5c"/>
+  <text x="745" y="442" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">💾 RAM</text>
+  
+  <rect x="785" y="420" width="65" height="35" rx="5" fill="#3d3d5c"/>
+  <text x="817" y="442" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">📁 Disk</text>
+  
+  <rect x="640" y="462" width="210" height="30" rx="5" fill="#3d3d5c"/>
+  <text x="745" y="482" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">🌐 Network Interfaces</text>
+  
+  <!-- Legend -->
+  <text x="450" y="530" font-family="Arial, sans-serif" font-size="11" fill="#aaaaaa" text-anchor="middle">El Cliente envía comandos al Daemon vía API • El Daemon gestiona imágenes y contenedores • El Registry almacena imágenes</text>
+</svg>
