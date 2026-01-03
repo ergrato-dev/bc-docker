@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 380">
+  <!-- Fondo -->
+  <rect width="900" height="380" fill="#1a1a2e"/>
+  
+  <!-- Titulo -->
+  <text x="450" y="35" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="bold" font-family="sans-serif">DNS Interno de Docker</text>
+  <text x="450" y="58" text-anchor="middle" fill="#a0a0a0" font-size="14" font-family="sans-serif">Resolucion de nombres por contenedor en redes personalizadas</text>
+  
+  <!-- Red personalizada -->
+  <rect x="50" y="80" width="800" height="280" rx="10" fill="#16213e" stroke="#667eea" stroke-width="2"/>
+  <text x="450" y="105" text-anchor="middle" fill="#667eea" font-size="14" font-weight="bold" font-family="sans-serif">Red: mi-app-network (bridge personalizado)</text>
+  
+  <!-- DNS Server -->
+  <rect x="350" y="130" width="200" height="60" rx="8" fill="#f7971e"/>
+  <text x="450" y="155" text-anchor="middle" fill="#1a1a2e" font-size="12" font-weight="bold" font-family="sans-serif">Docker DNS Server</text>
+  <text x="450" y="175" text-anchor="middle" fill="#1a1a2e" font-size="10" font-family="sans-serif">127.0.0.11</text>
+  
+  <!-- Contenedores -->
+  <g>
+    <!-- Web -->
+    <rect x="80" y="220" width="180" height="120" rx="8" fill="#0d1117" stroke="#43e97b" stroke-width="2"/>
+    <text x="170" y="250" text-anchor="middle" fill="#43e97b" font-size="12" font-weight="bold" font-family="sans-serif">web</text>
+    <text x="170" y="275" text-anchor="middle" fill="#ffffff" font-size="10" font-family="monospace">172.20.0.2</text>
+    <text x="170" y="300" text-anchor="middle" fill="#a0a0a0" font-size="9" font-family="sans-serif">DNS name: web</text>
+    <text x="170" y="320" text-anchor="middle" fill="#667eea" font-size="9" font-family="monospace">ping api</text>
+  </g>
+  
+  <g>
+    <!-- API -->
+    <rect x="360" y="220" width="180" height="120" rx="8" fill="#0d1117" stroke="#667eea" stroke-width="2"/>
+    <text x="450" y="250" text-anchor="middle" fill="#667eea" font-size="12" font-weight="bold" font-family="sans-serif">api</text>
+    <text x="450" y="275" text-anchor="middle" fill="#ffffff" font-size="10" font-family="monospace">172.20.0.3</text>
+    <text x="450" y="300" text-anchor="middle" fill="#a0a0a0" font-size="9" font-family="sans-serif">DNS name: api</text>
+    <text x="450" y="320" text-anchor="middle" fill="#667eea" font-size="9" font-family="monospace">ping db</text>
+  </g>
+  
+  <g>
+    <!-- DB -->
+    <rect x="640" y="220" width="180" height="120" rx="8" fill="#0d1117" stroke="#f093fb" stroke-width="2"/>
+    <text x="730" y="250" text-anchor="middle" fill="#f093fb" font-size="12" font-weight="bold" font-family="sans-serif">db</text>
+    <text x="730" y="275" text-anchor="middle" fill="#ffffff" font-size="10" font-family="monospace">172.20.0.4</text>
+    <text x="730" y="300" text-anchor="middle" fill="#a0a0a0" font-size="9" font-family="sans-serif">DNS name: db</text>
+    <text x="730" y="320" text-anchor="middle" fill="#667eea" font-size="9" font-family="monospace">postgres:5432</text>
+  </g>
+  
+  <!-- Flechas DNS -->
+  <line x1="170" y1="220" x2="360" y2="175" stroke="#43e97b" stroke-width="1" stroke-dasharray="4,2"/>
+  <line x1="450" y1="190" x2="450" y2="220" stroke="#667eea" stroke-width="1" stroke-dasharray="4,2"/>
+  <line x1="730" y1="220" x2="540" y2="175" stroke="#f093fb" stroke-width="1" stroke-dasharray="4,2"/>
+  
+  <!-- Nota importante -->
+  <rect x="80" y="355" width="350" height="20" rx="3" fill="#3d5a80"/>
+  <text x="255" y="369" text-anchor="middle" fill="#ffffff" font-size="10" font-family="sans-serif">Solo funciona en redes personalizadas, NO en bridge default</text>
+  
+  <rect x="470" y="355" width="350" height="20" rx="3" fill="#43e97b"/>
+  <text x="645" y="369" text-anchor="middle" fill="#1a1a2e" font-size="10" font-family="sans-serif">Usa nombres de contenedor como hostnames</text>
+</svg>

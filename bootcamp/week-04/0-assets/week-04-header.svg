@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 200">
+  <!-- Fondo -->
+  <rect width="900" height="200" fill="#1a1a2e"/>
+  
+  <!-- Patron de red decorativo -->
+  <g opacity="0.1">
+    <circle cx="100" cy="100" r="60" fill="none" stroke="#667eea" stroke-width="1"/>
+    <circle cx="250" cy="80" r="40" fill="none" stroke="#667eea" stroke-width="1"/>
+    <circle cx="180" cy="150" r="30" fill="none" stroke="#667eea" stroke-width="1"/>
+    <line x1="100" y1="100" x2="250" y2="80" stroke="#667eea" stroke-width="1"/>
+    <line x1="100" y1="100" x2="180" y2="150" stroke="#667eea" stroke-width="1"/>
+    <line x1="250" y1="80" x2="180" y2="150" stroke="#667eea" stroke-width="1"/>
+    
+    <circle cx="800" cy="100" r="60" fill="none" stroke="#43e97b" stroke-width="1"/>
+    <circle cx="650" cy="80" r="40" fill="none" stroke="#43e97b" stroke-width="1"/>
+    <circle cx="720" cy="150" r="30" fill="none" stroke="#43e97b" stroke-width="1"/>
+    <line x1="800" y1="100" x2="650" y2="80" stroke="#43e97b" stroke-width="1"/>
+    <line x1="800" y1="100" x2="720" y2="150" stroke="#43e97b" stroke-width="1"/>
+    <line x1="650" y1="80" x2="720" y2="150" stroke="#43e97b" stroke-width="1"/>
+  </g>
+  
+  <!-- Icono de red central -->
+  <g transform="translate(350, 20)">
+    <!-- Nodo central -->
+    <circle cx="100" cy="40" r="22" fill="#667eea"/>
+    <text x="100" y="46" text-anchor="middle" fill="#ffffff" font-size="18" font-family="sans-serif">H</text>
+    
+    <!-- Nodos conectados -->
+    <circle cx="35" cy="85" r="16" fill="#43e97b"/>
+    <circle cx="165" cy="85" r="16" fill="#43e97b"/>
+    <circle cx="100" cy="110" r="16" fill="#f093fb"/>
+    
+    <!-- Conexiones -->
+    <line x1="100" y1="62" x2="48" y2="75" stroke="#667eea" stroke-width="2"/>
+    <line x1="100" y1="62" x2="152" y2="75" stroke="#667eea" stroke-width="2"/>
+    <line x1="100" y1="62" x2="100" y2="94" stroke="#667eea" stroke-width="2"/>
+  </g>
+  
+  <!-- Titulo -->
+  <text x="450" y="170" text-anchor="middle" fill="#ffffff" font-size="26" font-weight="bold" font-family="sans-serif">Semana 04: Redes en Docker</text>
+</svg>

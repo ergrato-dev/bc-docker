@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400">
+  <!-- Fondo -->
+  <rect width="900" height="400" fill="#1a1a2e"/>
+  
+  <!-- Titulo -->
+  <text x="450" y="35" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="bold" font-family="sans-serif">Port Mapping (Publicacion de Puertos)</text>
+  <text x="450" y="58" text-anchor="middle" fill="#a0a0a0" font-size="14" font-family="sans-serif">Exponer servicios de contenedores al exterior</text>
+  
+  <!-- Host -->
+  <rect x="50" y="80" width="800" height="300" rx="10" fill="#0d1117" stroke="#30363d" stroke-width="2"/>
+  <text x="70" y="105" fill="#58a6ff" font-size="14" font-weight="bold" font-family="sans-serif">Host Machine (192.168.1.100)</text>
+  
+  <!-- Internet/Cliente -->
+  <g transform="translate(50, 130)">
+    <rect x="0" y="0" width="150" height="80" rx="8" fill="#16213e" stroke="#f093fb" stroke-width="2"/>
+    <text x="75" y="30" text-anchor="middle" fill="#f093fb" font-size="12" font-weight="bold" font-family="sans-serif">Cliente</text>
+    <text x="75" y="50" text-anchor="middle" fill="#ffffff" font-size="9" font-family="monospace">curl localhost:8080</text>
+    <text x="75" y="65" text-anchor="middle" fill="#ffffff" font-size="9" font-family="monospace">curl localhost:3000</text>
+  </g>
+  
+  <!-- Puertos del Host -->
+  <rect x="230" y="130" width="80" height="180" rx="5" fill="#3d5a80"/>
+  <text x="270" y="155" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="bold" font-family="sans-serif">Puertos</text>
+  <text x="270" y="175" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="bold" font-family="sans-serif">Host</text>
+  
+  <rect x="240" y="195" width="60" height="25" rx="3" fill="#43e97b"/>
+  <text x="270" y="212" text-anchor="middle" fill="#1a1a2e" font-size="10" font-weight="bold" font-family="sans-serif">8080</text>
+  
+  <rect x="240" y="230" width="60" height="25" rx="3" fill="#667eea"/>
+  <text x="270" y="247" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="bold" font-family="sans-serif">3000</text>
+  
+  <rect x="240" y="265" width="60" height="25" rx="3" fill="#f7971e"/>
+  <text x="270" y="282" text-anchor="middle" fill="#1a1a2e" font-size="10" font-weight="bold" font-family="sans-serif">5432</text>
+  
+  <!-- Flechas de cliente a puertos -->
+  <line x1="200" y1="170" x2="240" y2="207" stroke="#f093fb" stroke-width="2"/>
+  <line x1="200" y1="180" x2="240" y2="242" stroke="#f093fb" stroke-width="2"/>
+  
+  <!-- Contenedor nginx -->
+  <rect x="380" y="130" width="180" height="90" rx="8" fill="#16213e" stroke="#43e97b" stroke-width="2"/>
+  <text x="470" y="155" text-anchor="middle" fill="#43e97b" font-size="12" font-weight="bold" font-family="sans-serif">nginx</text>
+  <text x="470" y="175" text-anchor="middle" fill="#ffffff" font-size="10" font-family="monospace">EXPOSE 80</text>
+  <rect x="400" y="185" width="60" height="25" rx="3" fill="#43e97b"/>
+  <text x="430" y="202" text-anchor="middle" fill="#1a1a2e" font-size="10" font-weight="bold" font-family="sans-serif">:80</text>
+  
+  <!-- Contenedor node -->
+  <rect x="380" y="235" width="180" height="90" rx="8" fill="#16213e" stroke="#667eea" stroke-width="2"/>
+  <text x="470" y="260" text-anchor="middle" fill="#667eea" font-size="12" font-weight="bold" font-family="sans-serif">node-app</text>
+  <text x="470" y="280" text-anchor="middle" fill="#ffffff" font-size="10" font-family="monospace">EXPOSE 3000</text>
+  <rect x="400" y="290" width="60" height="25" rx="3" fill="#667eea"/>
+  <text x="430" y="307" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="bold" font-family="sans-serif">:3000</text>
+  
+  <!-- Contenedor postgres -->
+  <rect x="620" y="180" width="180" height="90" rx="8" fill="#16213e" stroke="#f7971e" stroke-width="2"/>
+  <text x="710" y="205" text-anchor="middle" fill="#f7971e" font-size="12" font-weight="bold" font-family="sans-serif">postgres</text>
+  <text x="710" y="225" text-anchor="middle" fill="#ffffff" font-size="10" font-family="monospace">EXPOSE 5432</text>
+  <rect x="640" y="235" width="60" height="25" rx="3" fill="#f7971e"/>
+  <text x="670" y="252" text-anchor="middle" fill="#1a1a2e" font-size="10" font-weight="bold" font-family="sans-serif">:5432</text>
+  
+  <!-- Flechas puerto host a contenedor -->
+  <line x1="300" y1="207" x2="400" y2="197" stroke="#43e97b" stroke-width="2"/>
+  <line x1="300" y1="242" x2="400" y2="302" stroke="#667eea" stroke-width="2"/>
+  <line x1="300" y1="277" x2="640" y2="247" stroke="#f7971e" stroke-width="2"/>
+  
+  <!-- Sintaxis -->
+  <rect x="50" y="340" width="250" height="35" rx="5" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+  <text x="175" y="362" text-anchor="middle" fill="#43e97b" font-size="10" font-family="monospace">-p 8080:80</text>
+  
+  <rect x="320" y="340" width="250" height="35" rx="5" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+  <text x="445" y="362" text-anchor="middle" fill="#667eea" font-size="10" font-family="monospace">-p 3000:3000</text>
+  
+  <rect x="590" y="340" width="250" height="35" rx="5" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+  <text x="715" y="362" text-anchor="middle" fill="#f7971e" font-size="10" font-family="monospace">-p 5432:5432</text>
+</svg>

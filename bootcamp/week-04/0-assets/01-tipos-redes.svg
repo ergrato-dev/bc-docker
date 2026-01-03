@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 450">
+  <!-- Fondo -->
+  <rect width="900" height="450" fill="#1a1a2e"/>
+  
+  <!-- Titulo -->
+  <text x="450" y="35" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="bold" font-family="sans-serif">Tipos de Redes en Docker</text>
+  <text x="450" y="58" text-anchor="middle" fill="#a0a0a0" font-size="14" font-family="sans-serif">Drivers de red disponibles</text>
+  
+  <!-- Bridge Network -->
+  <rect x="50" y="80" width="250" height="160" rx="10" fill="#16213e" stroke="#667eea" stroke-width="2"/>
+  <text x="175" y="110" text-anchor="middle" fill="#667eea" font-size="16" font-weight="bold" font-family="sans-serif">Bridge (default)</text>
+  
+  <rect x="70" y="125" width="60" height="40" rx="5" fill="#667eea"/>
+  <text x="100" y="150" text-anchor="middle" fill="#ffffff" font-size="10" font-family="sans-serif">App 1</text>
+  
+  <rect x="170" y="125" width="60" height="40" rx="5" fill="#667eea"/>
+  <text x="200" y="150" text-anchor="middle" fill="#ffffff" font-size="10" font-family="sans-serif">App 2</text>
+  
+  <line x1="100" y1="165" x2="100" y2="200" stroke="#667eea" stroke-width="2"/>
+  <line x1="200" y1="165" x2="200" y2="200" stroke="#667eea" stroke-width="2"/>
+  
+  <rect x="70" y="200" width="160" height="25" rx="3" fill="#3d5a80"/>
+  <text x="150" y="217" text-anchor="middle" fill="#ffffff" font-size="10" font-family="sans-serif">docker0 (172.17.0.0/16)</text>
+  
+  <!-- Host Network -->
+  <rect x="325" y="80" width="250" height="160" rx="10" fill="#16213e" stroke="#43e97b" stroke-width="2"/>
+  <text x="450" y="110" text-anchor="middle" fill="#43e97b" font-size="16" font-weight="bold" font-family="sans-serif">Host</text>
+  
+  <rect x="375" y="125" width="150" height="40" rx="5" fill="#43e97b"/>
+  <text x="450" y="150" text-anchor="middle" fill="#1a1a2e" font-size="10" font-family="sans-serif">Container = Host Network</text>
+  
+  <line x1="450" y1="165" x2="450" y2="200" stroke="#43e97b" stroke-width="2"/>
+  
+  <rect x="345" y="200" width="210" height="25" rx="3" fill="#3d5a80"/>
+  <text x="450" y="217" text-anchor="middle" fill="#ffffff" font-size="10" font-family="sans-serif">Host Network Stack (eth0)</text>
+  
+  <!-- None Network -->
+  <rect x="600" y="80" width="250" height="160" rx="10" fill="#16213e" stroke="#f093fb" stroke-width="2"/>
+  <text x="725" y="110" text-anchor="middle" fill="#f093fb" font-size="16" font-weight="bold" font-family="sans-serif">None</text>
+  
+  <rect x="670" y="125" width="110" height="40" rx="5" fill="#f093fb"/>
+  <text x="725" y="150" text-anchor="middle" fill="#1a1a2e" font-size="10" font-family="sans-serif">Container</text>
+  
+  <text x="725" y="190" text-anchor="middle" fill="#a0a0a0" font-size="11" font-family="sans-serif">Sin red externa</text>
+  <text x="725" y="205" text-anchor="middle" fill="#a0a0a0" font-size="11" font-family="sans-serif">Solo loopback</text>
+  
+  <!-- Overlay Network -->
+  <rect x="50" y="260" width="380" height="170" rx="10" fill="#16213e" stroke="#f7971e" stroke-width="2"/>
+  <text x="240" y="290" text-anchor="middle" fill="#f7971e" font-size="16" font-weight="bold" font-family="sans-serif">Overlay (Swarm/Multi-host)</text>
+  
+  <!-- Host 1 -->
+  <rect x="70" y="305" width="150" height="110" rx="5" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+  <text x="145" y="325" text-anchor="middle" fill="#58a6ff" font-size="10" font-family="sans-serif">Host 1</text>
+  <rect x="85" y="335" width="50" height="30" rx="3" fill="#f7971e"/>
+  <text x="110" y="355" text-anchor="middle" fill="#1a1a2e" font-size="9" font-family="sans-serif">App</text>
+  <rect x="145" y="335" width="50" height="30" rx="3" fill="#f7971e"/>
+  <text x="170" y="355" text-anchor="middle" fill="#1a1a2e" font-size="9" font-family="sans-serif">DB</text>
+  <rect x="85" y="375" width="110" height="20" rx="2" fill="#3d5a80"/>
+  <text x="140" y="389" text-anchor="middle" fill="#ffffff" font-size="8" font-family="sans-serif">VXLAN</text>
+  
+  <!-- Host 2 -->
+  <rect x="260" y="305" width="150" height="110" rx="5" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+  <text x="335" y="325" text-anchor="middle" fill="#58a6ff" font-size="10" font-family="sans-serif">Host 2</text>
+  <rect x="275" y="335" width="50" height="30" rx="3" fill="#f7971e"/>
+  <text x="300" y="355" text-anchor="middle" fill="#1a1a2e" font-size="9" font-family="sans-serif">App</text>
+  <rect x="335" y="335" width="50" height="30" rx="3" fill="#f7971e"/>
+  <text x="360" y="355" text-anchor="middle" fill="#1a1a2e" font-size="9" font-family="sans-serif">Cache</text>
+  <rect x="275" y="375" width="110" height="20" rx="2" fill="#3d5a80"/>
+  <text x="330" y="389" text-anchor="middle" fill="#ffffff" font-size="8" font-family="sans-serif">VXLAN</text>
+  
+  <!-- Conexion overlay -->
+  <line x1="195" y1="385" x2="275" y2="385" stroke="#f7971e" stroke-width="2" stroke-dasharray="5,3"/>
+  
+  <!-- Macvlan Network -->
+  <rect x="470" y="260" width="380" height="170" rx="10" fill="#16213e" stroke="#00c9ff" stroke-width="2"/>
+  <text x="660" y="290" text-anchor="middle" fill="#00c9ff" font-size="16" font-weight="bold" font-family="sans-serif">Macvlan</text>
+  
+  <rect x="490" y="305" width="340" height="110" rx="5" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+  <text x="660" y="325" text-anchor="middle" fill="#58a6ff" font-size="10" font-family="sans-serif">Physical Network (LAN)</text>
+  
+  <rect x="510" y="340" width="80" height="35" rx="3" fill="#00c9ff"/>
+  <text x="550" y="355" text-anchor="middle" fill="#1a1a2e" font-size="9" font-family="sans-serif">Container</text>
+  <text x="550" y="367" text-anchor="middle" fill="#1a1a2e" font-size="8" font-family="sans-serif">192.168.1.10</text>
+  
+  <rect x="610" y="340" width="80" height="35" rx="3" fill="#00c9ff"/>
+  <text x="650" y="355" text-anchor="middle" fill="#1a1a2e" font-size="9" font-family="sans-serif">Container</text>
+  <text x="650" y="367" text-anchor="middle" fill="#1a1a2e" font-size="8" font-family="sans-serif">192.168.1.11</text>
+  
+  <rect x="710" y="340" width="80" height="35" rx="3" fill="#a0a0a0"/>
+  <text x="750" y="355" text-anchor="middle" fill="#1a1a2e" font-size="9" font-family="sans-serif">PC Fisica</text>
+  <text x="750" y="367" text-anchor="middle" fill="#1a1a2e" font-size="8" font-family="sans-serif">192.168.1.100</text>
+  
+  <text x="660" y="400" text-anchor="middle" fill="#a0a0a0" font-size="10" font-family="sans-serif">Contenedores con MAC propia en red fisica</text>
+</svg>

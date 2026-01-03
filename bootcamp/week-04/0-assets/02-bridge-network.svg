@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400">
+  <!-- Fondo -->
+  <rect width="900" height="400" fill="#1a1a2e"/>
+  
+  <!-- Titulo -->
+  <text x="450" y="35" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="bold" font-family="sans-serif">Bridge Network en Detalle</text>
+  <text x="450" y="58" text-anchor="middle" fill="#a0a0a0" font-size="14" font-family="sans-serif">Red virtual con NAT para comunicacion entre contenedores</text>
+  
+  <!-- Host Machine -->
+  <rect x="50" y="80" width="800" height="300" rx="10" fill="#0d1117" stroke="#30363d" stroke-width="2"/>
+  <text x="70" y="105" fill="#58a6ff" font-size="14" font-weight="bold" font-family="sans-serif">Host Machine</text>
+  
+  <!-- Internet -->
+  <rect x="700" y="100" width="130" height="50" rx="8" fill="#16213e" stroke="#f093fb" stroke-width="2"/>
+  <text x="765" y="130" text-anchor="middle" fill="#f093fb" font-size="12" font-family="sans-serif">Internet</text>
+  
+  <!-- eth0 del host -->
+  <rect x="700" y="170" width="130" height="35" rx="5" fill="#3d5a80"/>
+  <text x="765" y="192" text-anchor="middle" fill="#ffffff" font-size="10" font-family="sans-serif">eth0: 192.168.1.100</text>
+  
+  <!-- Flecha internet a eth0 -->
+  <line x1="765" y1="150" x2="765" y2="170" stroke="#f093fb" stroke-width="2"/>
+  
+  <!-- iptables/NAT -->
+  <rect x="680" y="220" width="150" height="40" rx="5" fill="#f7971e"/>
+  <text x="755" y="245" text-anchor="middle" fill="#1a1a2e" font-size="10" font-weight="bold" font-family="sans-serif">iptables / NAT</text>
+  
+  <!-- docker0 bridge -->
+  <rect x="100" y="280" width="600" height="40" rx="5" fill="#667eea"/>
+  <text x="400" y="305" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="bold" font-family="sans-serif">docker0 bridge (172.17.0.1)</text>
+  
+  <!-- Conexion bridge a NAT -->
+  <line x1="700" y1="300" x2="755" y2="260" stroke="#667eea" stroke-width="2"/>
+  
+  <!-- Contenedores -->
+  <g>
+    <!-- Container 1 -->
+    <rect x="120" y="140" width="150" height="120" rx="8" fill="#16213e" stroke="#43e97b" stroke-width="2"/>
+    <text x="195" y="165" text-anchor="middle" fill="#43e97b" font-size="11" font-weight="bold" font-family="sans-serif">nginx</text>
+    <rect x="135" y="180" width="120" height="25" rx="3" fill="#0d1117"/>
+    <text x="195" y="197" text-anchor="middle" fill="#ffffff" font-size="9" font-family="monospace">eth0: 172.17.0.2</text>
+    <rect x="135" y="210" width="120" height="25" rx="3" fill="#3d5a80"/>
+    <text x="195" y="227" text-anchor="middle" fill="#ffffff" font-size="9" font-family="sans-serif">veth123abc</text>
+    <!-- Conexion al bridge -->
+    <line x1="195" y1="260" x2="195" y2="280" stroke="#43e97b" stroke-width="2"/>
+  </g>
+  
+  <g>
+    <!-- Container 2 -->
+    <rect x="300" y="140" width="150" height="120" rx="8" fill="#16213e" stroke="#667eea" stroke-width="2"/>
+    <text x="375" y="165" text-anchor="middle" fill="#667eea" font-size="11" font-weight="bold" font-family="sans-serif">api-server</text>
+    <rect x="315" y="180" width="120" height="25" rx="3" fill="#0d1117"/>
+    <text x="375" y="197" text-anchor="middle" fill="#ffffff" font-size="9" font-family="monospace">eth0: 172.17.0.3</text>
+    <rect x="315" y="210" width="120" height="25" rx="3" fill="#3d5a80"/>
+    <text x="375" y="227" text-anchor="middle" fill="#ffffff" font-size="9" font-family="sans-serif">veth456def</text>
+    <!-- Conexion al bridge -->
+    <line x1="375" y1="260" x2="375" y2="280" stroke="#667eea" stroke-width="2"/>
+  </g>
+  
+  <g>
+    <!-- Container 3 -->
+    <rect x="480" y="140" width="150" height="120" rx="8" fill="#16213e" stroke="#f093fb" stroke-width="2"/>
+    <text x="555" y="165" text-anchor="middle" fill="#f093fb" font-size="11" font-weight="bold" font-family="sans-serif">postgres</text>
+    <rect x="495" y="180" width="120" height="25" rx="3" fill="#0d1117"/>
+    <text x="555" y="197" text-anchor="middle" fill="#ffffff" font-size="9" font-family="monospace">eth0: 172.17.0.4</text>
+    <rect x="495" y="210" width="120" height="25" rx="3" fill="#3d5a80"/>
+    <text x="555" y="227" text-anchor="middle" fill="#ffffff" font-size="9" font-family="sans-serif">veth789ghi</text>
+    <!-- Conexion al bridge -->
+    <line x1="555" y1="260" x2="555" y2="280" stroke="#f093fb" stroke-width="2"/>
+  </g>
+  
+  <!-- Leyenda -->
+  <rect x="100" y="340" width="15" height="15" rx="2" fill="#43e97b"/>
+  <text x="125" y="352" fill="#ffffff" font-size="10" font-family="sans-serif">Contenedores pueden comunicarse via IPs internas</text>
+  
+  <rect x="450" y="340" width="15" height="15" rx="2" fill="#f7971e"/>
+  <text x="475" y="352" fill="#ffffff" font-size="10" font-family="sans-serif">NAT traduce IPs para acceso externo</text>
+</svg>
