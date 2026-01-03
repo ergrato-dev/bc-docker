@@ -14,39 +14,7 @@ Al finalizar esta sección, serás capaz de:
 
 ![Arquitectura de Docker](../0-assets/02-arquitectura-docker.svg)
 
-Docker utiliza una arquitectura **cliente-servidor**:
-
-```
-┌──────────────────────────────────────────────────────────────────┐
-│                         DOCKER CLIENT                             │
-│                        (docker CLI)                               │
-│  ┌──────────────────────────────────────────────────────────┐    │
-│  │  $ docker build    $ docker pull    $ docker run         │    │
-│  │  $ docker push     $ docker ps      $ docker stop        │    │
-│  └──────────────────────────────────────────────────────────┘    │
-└────────────────────────────┬─────────────────────────────────────┘
-                             │ REST API
-                             ▼
-┌──────────────────────────────────────────────────────────────────┐
-│                        DOCKER DAEMON                              │
-│                         (dockerd)                                 │
-│  ┌────────────────┐  ┌────────────────┐  ┌────────────────┐      │
-│  │    Images      │  │   Containers   │  │   Networks     │      │
-│  └────────────────┘  └────────────────┘  └────────────────┘      │
-│  ┌────────────────┐  ┌────────────────┐                          │
-│  │    Volumes     │  │    Plugins     │                          │
-│  └────────────────┘  └────────────────┘                          │
-└────────────────────────────┬─────────────────────────────────────┘
-                             │
-                             ▼
-┌──────────────────────────────────────────────────────────────────┐
-│                        DOCKER REGISTRY                            │
-│                       (Docker Hub, etc.)                          │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐          │
-│  │  nginx   │  │  python  │  │  node    │  │  mysql   │  ...     │
-│  └──────────┘  └──────────┘  └──────────┘  └──────────┘          │
-└──────────────────────────────────────────────────────────────────┘
-```
+Docker utiliza una arquitectura **cliente-servidor** donde el **Docker Client** (CLI) envía comandos vía REST API al **Docker Daemon**, que gestiona imágenes, contenedores, redes, volúmenes y plugins. El daemon se comunica con **Docker Registry** (como Docker Hub) para descargar y publicar imágenes.
 
 ---
 
@@ -117,19 +85,12 @@ docker push miusuario/miapp:v1
 
 Una **imagen** es una plantilla de solo lectura con instrucciones para crear un contenedor.
 
-```
-┌─────────────────────────────────────┐
-│           IMAGEN DOCKER             │
-├─────────────────────────────────────┤
-│  Capa 4: CMD ["nginx"]              │  ← Instrucción de inicio
-├─────────────────────────────────────┤
-│  Capa 3: COPY app/ /usr/share/...   │  ← Tu código
-├─────────────────────────────────────┤
-│  Capa 2: RUN apt-get install nginx  │  ← Dependencias
-├─────────────────────────────────────┤
-│  Capa 1: Ubuntu base                │  ← Sistema base
-└─────────────────────────────────────┘
-```
+| Capa | Contenido                   | Descripción           |
+| ---- | --------------------------- | --------------------- |
+| 4    | `CMD ["nginx"]`             | Instrucción de inicio |
+| 3    | `COPY app/ /usr/share/...`  | Tu código             |
+| 2    | `RUN apt-get install nginx` | Dependencias          |
+| 1    | Ubuntu base                 | Sistema base          |
 
 **Características:**
 
@@ -142,21 +103,10 @@ Una **imagen** es una plantilla de solo lectura con instrucciones para crear un 
 
 Un **contenedor** es una instancia ejecutable de una imagen.
 
-```
-┌─────────────────────────────────────┐
-│          CONTENEDOR                 │
-├─────────────────────────────────────┤
-│  Capa de escritura (R/W)            │  ← Cambios en runtime
-├─────────────────────────────────────┤
-│  ┌─────────────────────────────┐    │
-│  │     IMAGEN (solo lectura)   │    │
-│  │  Capa 4                     │    │
-│  │  Capa 3                     │    │
-│  │  Capa 2                     │    │
-│  │  Capa 1                     │    │
-│  └─────────────────────────────┘    │
-└─────────────────────────────────────┘
-```
+| Capa       | Tipo         | Descripción                 |
+| ---------- | ------------ | --------------------------- |
+| **R/W**    | Escritura    | Cambios en runtime          |
+| **Imagen** | Solo lectura | Capas 1-4 de la imagen base |
 
 **Características:**
 
@@ -230,41 +180,14 @@ docker run miusuario/miapp:v1
 
 ## 🔧 Docker Engine
 
-Docker Engine está compuesto por:
+Docker Engine está compuesto por una pila de componentes que trabajan juntos:
 
-```
-┌─────────────────────────────────────────────┐
-│              DOCKER ENGINE                   │
-├─────────────────────────────────────────────┤
-│                                             │
-│  ┌─────────────────────────────────────┐   │
-│  │           Docker CLI                 │   │
-│  └──────────────────┬──────────────────┘   │
-│                     │ REST API              │
-│  ┌──────────────────▼──────────────────┐   │
-│  │          Docker Daemon               │   │
-│  │            (dockerd)                 │   │
-│  └──────────────────┬──────────────────┘   │
-│                     │                       │
-│  ┌──────────────────▼──────────────────┐   │
-│  │           containerd                 │   │
-│  │    (gestión de contenedores)         │   │
-│  └──────────────────┬──────────────────┘   │
-│                     │                       │
-│  ┌──────────────────▼──────────────────┐   │
-│  │             runc                     │   │
-│  │  (crea y ejecuta contenedores OCI)   │   │
-│  └─────────────────────────────────────┘   │
-│                                             │
-└─────────────────────────────────────────────┘
-```
-
-| Componente     | Función                             |
-| -------------- | ----------------------------------- |
-| **Docker CLI** | Interfaz de usuario                 |
-| **dockerd**    | API REST, gestión de objetos        |
-| **containerd** | Gestión del ciclo de vida           |
-| **runc**       | Ejecuta contenedores según spec OCI |
+| Componente     | Función                             | Comunicación |
+| -------------- | ----------------------------------- | ------------ |
+| **Docker CLI** | Interfaz de usuario                 | → REST API   |
+| **dockerd**    | API REST, gestión de objetos        | → containerd |
+| **containerd** | Gestión del ciclo de vida           | → runc       |
+| **runc**       | Ejecuta contenedores según spec OCI | ← Contenedor |
 
 ---
 

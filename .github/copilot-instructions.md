@@ -273,10 +273,18 @@ Update README.md
 ### Al generar teoría
 
 1. **Explicar** conceptos progresivamente
-2. **Usar** diagramas y visualizaciones cuando sea posible
+2. **Usar** diagramas SVG (en `0-assets/`) - **NUNCA ASCII art**
 3. **Incluir** ejemplos prácticos
 4. **Agregar** tips y buenas prácticas
 5. **Referenciar** documentación oficial
+
+### Formato de diagramas
+
+- **SVG es el único formato aceptado** para diagramas y visualizaciones
+- **NO usar ASCII art** (diagramas con caracteres como `┌──┐`, `│`, `└──┘`, `+---+`)
+- Guardar todos los diagramas en la carpeta `0-assets/` de cada semana
+- Referenciar los SVG desde los archivos Markdown con rutas relativas
+- Usar el estilo visual definido: fondo oscuro `#1a1a2e`, ancho 900px
 
 ---
 

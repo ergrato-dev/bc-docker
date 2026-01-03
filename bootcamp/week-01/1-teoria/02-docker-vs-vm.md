@@ -14,49 +14,7 @@ Al finalizar esta sección, serás capaz de:
 
 ![Docker vs Máquinas Virtuales](../0-assets/01-docker-vs-vm.svg)
 
-### Máquinas Virtuales
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                      HARDWARE FÍSICO                         │
-├─────────────────────────────────────────────────────────────┤
-│                    SISTEMA OPERATIVO HOST                    │
-├─────────────────────────────────────────────────────────────┤
-│                       HYPERVISOR                             │
-│                  (VMware, VirtualBox, KVM)                   │
-├───────────────┬───────────────┬───────────────┬─────────────┤
-│      VM 1     │      VM 2     │      VM 3     │    ...      │
-├───────────────┼───────────────┼───────────────┼─────────────┤
-│   Guest OS    │   Guest OS    │   Guest OS    │  Guest OS   │
-│   (Ubuntu)    │   (CentOS)    │   (Windows)   │  (Debian)   │
-├───────────────┼───────────────┼───────────────┼─────────────┤
-│   Binarios    │   Binarios    │   Binarios    │  Binarios   │
-│   Librerías   │   Librerías   │   Librerías   │  Librerías  │
-├───────────────┼───────────────┼───────────────┼─────────────┤
-│     App A     │     App B     │     App C     │    App D    │
-└───────────────┴───────────────┴───────────────┴─────────────┘
-```
-
-### Contenedores Docker
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                      HARDWARE FÍSICO                         │
-├─────────────────────────────────────────────────────────────┤
-│                    SISTEMA OPERATIVO HOST                    │
-├─────────────────────────────────────────────────────────────┤
-│                      DOCKER ENGINE                           │
-├───────────────┬───────────────┬───────────────┬─────────────┤
-│  Container 1  │  Container 2  │  Container 3  │    ...      │
-├───────────────┼───────────────┼───────────────┼─────────────┤
-│   Binarios    │   Binarios    │   Binarios    │  Binarios   │
-│   Librerías   │   Librerías   │   Librerías   │  Librerías  │
-├───────────────┼───────────────┼───────────────┼─────────────┤
-│     App A     │     App B     │     App C     │    App D    │
-└───────────────┴───────────────┴───────────────┴─────────────┘
-```
-
-> 💡 **Diferencia clave**: Los contenedores comparten el kernel del sistema operativo host.
+> 💡 **Diferencia clave**: Los contenedores comparten el kernel del sistema operativo host, mientras que las VMs tienen un sistema operativo completo cada una.
 
 ---
 
@@ -143,20 +101,10 @@ docker run -m 512m --cpus="0.5" nginx:alpine
 
 En la práctica, **ambas tecnologías coexisten**:
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                      SERVIDOR FÍSICO                         │
-├─────────────────────────────────────────────────────────────┤
-│                        HYPERVISOR                            │
-├──────────────────────────────┬──────────────────────────────┤
-│           VM Linux           │          VM Windows          │
-├──────────────────────────────┼──────────────────────────────┤
-│        Docker Engine         │        IIS / .NET            │
-├───────────┬──────────────────┤                              │
-│ Container │ Container        │      Aplicación .NET         │
-│   (API)   │   (DB)          │                              │
-└───────────┴──────────────────┴──────────────────────────────┘
-```
+| Servidor Físico | Hypervisor                                     |
+| --------------- | ---------------------------------------------- |
+| **VM Linux**    | Docker Engine → Contenedor API + Contenedor DB |
+| **VM Windows**  | IIS / .NET → Aplicación .NET                   |
 
 ---
 

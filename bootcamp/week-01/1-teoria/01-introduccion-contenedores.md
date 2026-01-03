@@ -38,34 +38,10 @@ Los **contenedores de envío estandarizados** resolvieron todo esto:
 
 ### Escenario Clásico
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    DESARROLLADOR                             │
-│  ┌─────────────────────────────────────────────────────┐    │
-│  │  Mi Laptop                                          │    │
-│  │  • Ubuntu 22.04                                     │    │
-│  │  • Python 3.11                                      │    │
-│  │  • Node.js 18                                       │    │
-│  │  • PostgreSQL 15                                    │    │
-│  │                                                     │    │
-│  │  ✅ "¡Funciona perfecto!"                           │    │
-│  └─────────────────────────────────────────────────────┘    │
-└─────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│                    SERVIDOR PRODUCCIÓN                       │
-│  ┌─────────────────────────────────────────────────────┐    │
-│  │  Servidor                                           │    │
-│  │  • CentOS 7                                         │    │
-│  │  • Python 3.6                                       │    │
-│  │  • Node.js 14                                       │    │
-│  │  • PostgreSQL 12                                    │    │
-│  │                                                     │    │
-│  │  ❌ "Error: incompatible version..."                │    │
-│  └─────────────────────────────────────────────────────┘    │
-└─────────────────────────────────────────────────────────────┘
-```
+| Entorno                    | Configuración                                        | Resultado                           |
+| -------------------------- | ---------------------------------------------------- | ----------------------------------- |
+| **Mi Laptop** (Desarrollo) | Ubuntu 22.04, Python 3.11, Node.js 18, PostgreSQL 15 | ✅ "¡Funciona perfecto!"            |
+| **Servidor** (Producción)  | CentOS 7, Python 3.6, Node.js 14, PostgreSQL 12      | ❌ "Error: incompatible version..." |
 
 ### Causas del Problema
 
@@ -84,20 +60,12 @@ Los **contenedores de envío estandarizados** resolvieron todo esto:
 
 Los contenedores encapsulan:
 
-```
-┌─────────────────────────────────────────┐
-│            CONTENEDOR                    │
-│  ┌───────────────────────────────────┐  │
-│  │  Aplicación (tu código)           │  │
-│  ├───────────────────────────────────┤  │
-│  │  Runtime (Python, Node, Java...)  │  │
-│  ├───────────────────────────────────┤  │
-│  │  Librerías y dependencias         │  │
-│  ├───────────────────────────────────┤  │
-│  │  Configuración                    │  │
-│  └───────────────────────────────────┘  │
-└─────────────────────────────────────────┘
-```
+| Capa                 | Contenido                             |
+| -------------------- | ------------------------------------- |
+| 🔷 **Aplicación**    | Tu código                             |
+| 🔷 **Runtime**       | Python, Node, Java...                 |
+| 🔷 **Librerías**     | Dependencias del sistema y aplicación |
+| 🔷 **Configuración** | Variables de entorno, archivos config |
 
 ### Beneficios
 
