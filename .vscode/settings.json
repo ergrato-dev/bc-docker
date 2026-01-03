@@ -1,0 +1,25 @@
+{
+  // 🐳 Bootcamp Docker Zero to Hero
+  // Color: Docker Blue (#2496ED)
+  "peacock.color": "#2496ED",
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#53adf1",
+    "activityBar.background": "#53adf1",
+    "activityBar.foreground": "#15202b",
+    "activityBar.inactiveForeground": "#15202b99",
+    "activityBarBadge.background": "#fde2f1",
+    "activityBarBadge.foreground": "#15202b",
+    "commandCenter.border": "#e7e7e799",
+    "sash.hoverBorder": "#53adf1",
+    "sideBar.border": "#53adf1",
+    "statusBar.background": "#2496ed",
+    "statusBar.foreground": "#e7e7e7",
+    "statusBarItem.hoverBackground": "#53adf1",
+    "statusBarItem.remoteBackground": "#2496ed",
+    "statusBarItem.remoteForeground": "#e7e7e7",
+    "titleBar.activeBackground": "#2496ed",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveBackground": "#2496ed99",
+    "titleBar.inactiveForeground": "#e7e7e799"
+  }
+}

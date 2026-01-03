@@ -1,0 +1,228 @@
+# ========================================
+# 🐳 Bootcamp Docker Zero to Hero
+# .gitignore
+# ========================================
+
+# ========================================
+# 📁 Archivos del Sistema Operativo
+# ========================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.directory
+.Trash-*
+
+# ========================================
+# 🔧 Editores e IDEs
+# ========================================
+
+# VS Code
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+
+# JetBrains (IntelliJ, PyCharm, WebStorm, etc.)
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Vim
+*.swp
+*.swo
+*.swn
+*~
+
+# Emacs
+*~
+\#*\#
+.#*
+
+# Sublime Text
+*.sublime-workspace
+*.sublime-project
+
+# ========================================
+# 🐳 Docker (archivos generados localmente)
+# ========================================
+
+# Docker Compose override local
+docker-compose.override.yml
+docker-compose.local.yml
+compose.override.yml
+compose.local.yml
+
+# Archivos de entorno con secretos
+.env
+.env.local
+.env.*.local
+*.env
+!.env.example
+!.env.template
+
+# Datos de volúmenes locales
+data/
+db-data/
+mysql-data/
+postgres-data/
+mongo-data/
+redis-data/
+volumes/
+
+# Logs de contenedores
+logs/
+*.log
+
+# Archivos de backup
+backups/
+*.backup
+*.bak
+*.tar.gz
+*.tgz
+
+# ========================================
+# 📦 Dependencias y Build
+# ========================================
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.yarn
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+venv/
+.venv/
+env/
+.env/
+pip-log.txt
+pip-delete-this-directory.txt
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Java/Maven/Gradle
+target/
+*.class
+*.jar
+*.war
+.gradle/
+
+# Go
+bin/
+pkg/
+
+# Rust
+target/
+Cargo.lock
+
+# ========================================
+# 🧪 Testing y Coverage
+# ========================================
+
+coverage/
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+.nox/
+junit.xml
+test-results/
+
+# ========================================
+# 📝 Archivos temporales
+# ========================================
+
+tmp/
+temp/
+*.tmp
+*.temp
+*.cache
+
+# ========================================
+# 🔐 Seguridad y Secretos
+# ========================================
+
+# Claves y certificados
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+secrets/
+credentials/
+
+# Archivos de configuración sensibles
+config.local.*
+settings.local.*
+
+# ========================================
+# 📊 Archivos generados por ejercicios
+# ========================================
+
+# Soluciones de estudiantes (si trabajan localmente)
+**/my-solution/
+**/mi-solucion/
+**/student-work/
+**/trabajo-estudiante/
+
+# Archivos de prueba generados
+test-output/
+output/
+
+# ========================================
+# 📚 Documentación generada
+# ========================================
+
+# Sitio generado
+_site/
+site/
+public/
+docs/_build/
+
+# ========================================
+# 🎨 Assets generados
+# ========================================
+
+# Imágenes optimizadas/procesadas
+*.min.svg
+
+# ========================================
+# ⚙️ Misceláneos
+# ========================================
+
+# Archivos de lock (excepto los necesarios)
+# package-lock.json  # Descomentar si no se quiere versionar
+# yarn.lock          # Descomentar si no se quiere versionar
+
+# Archivos comprimidos
+*.zip
+*.rar
+*.7z
+
+# Binarios
+*.exe
+*.dll
+*.so
+*.dylib
