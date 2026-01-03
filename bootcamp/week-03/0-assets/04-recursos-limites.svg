@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 450">
+  <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  </style>
+  
+  <!-- Fondo -->
+  <rect width="900" height="450" fill="#1a1a2e"/>
+  
+  <!-- Título -->
+  <text x="450" y="35" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="bold">Límites de Recursos</text>
+  <text x="450" y="58" text-anchor="middle" fill="#a0a0a0" font-size="14">Controla CPU, memoria y otros recursos del contenedor</text>
+  
+  <!-- Host System -->
+  <rect x="50" y="80" width="800" height="280" rx="10" fill="#16213e" stroke="#667eea" stroke-width="2"/>
+  <text x="70" y="105" fill="#667eea" font-size="14" font-weight="bold">🖥️ Host System</text>
+  
+  <!-- CPU Bar -->
+  <rect x="70" y="125" width="250" height="25" rx="5" fill="#0d1117"/>
+  <rect x="70" y="125" width="250" height="25" rx="5" fill="#43e97b" opacity="0.3"/>
+  <text x="195" y="142" text-anchor="middle" fill="#ffffff" font-size="11">CPU: 8 cores disponibles</text>
+  
+  <!-- Memory Bar -->
+  <rect x="70" y="160" width="250" height="25" rx="5" fill="#0d1117"/>
+  <rect x="70" y="160" width="250" height="25" rx="5" fill="#667eea" opacity="0.3"/>
+  <text x="195" y="177" text-anchor="middle" fill="#ffffff" font-size="11">RAM: 16 GB disponibles</text>
+  
+  <!-- Contenedor 1 - Con límites -->
+  <rect x="380" y="115" width="220" height="110" rx="8" fill="#0d1117" stroke="#43e97b" stroke-width="2"/>
+  <text x="490" y="138" text-anchor="middle" fill="#43e97b" font-size="12" font-weight="bold">📦 app-backend</text>
+  
+  <!-- CPU del contenedor 1 -->
+  <text x="395" y="160" fill="#a0a0a0" font-size="10">CPU:</text>
+  <rect x="430" y="150" width="150" height="15" rx="3" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+  <rect x="430" y="150" width="75" height="15" rx="3" fill="#43e97b"/>
+  <text x="580" y="160" fill="#43e97b" font-size="9">2 cores</text>
+  
+  <!-- Memory del contenedor 1 -->
+  <text x="395" y="185" fill="#a0a0a0" font-size="10">RAM:</text>
+  <rect x="430" y="175" width="150" height="15" rx="3" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+  <rect x="430" y="175" width="60" height="15" rx="3" fill="#667eea"/>
+  <text x="580" y="185" fill="#667eea" font-size="9">512 MB</text>
+  
+  <text x="395" y="210" fill="#a0a0a0" font-size="9">--cpus=2 --memory=512m</text>
+  
+  <!-- Contenedor 2 - Con límites -->
+  <rect x="620" y="115" width="220" height="110" rx="8" fill="#0d1117" stroke="#f093fb" stroke-width="2"/>
+  <text x="730" y="138" text-anchor="middle" fill="#f093fb" font-size="12" font-weight="bold">📦 redis-cache</text>
+  
+  <!-- CPU del contenedor 2 -->
+  <text x="635" y="160" fill="#a0a0a0" font-size="10">CPU:</text>
+  <rect x="670" y="150" width="150" height="15" rx="3" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+  <rect x="670" y="150" width="37" height="15" rx="3" fill="#43e97b"/>
+  <text x="820" y="160" fill="#43e97b" font-size="9">0.5 cores</text>
+  
+  <!-- Memory del contenedor 2 -->
+  <text x="635" y="185" fill="#a0a0a0" font-size="10">RAM:</text>
+  <rect x="670" y="175" width="150" height="15" rx="3" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+  <rect x="670" y="175" width="120" height="15" rx="3" fill="#667eea"/>
+  <text x="820" y="185" fill="#667eea" font-size="9">1 GB</text>
+  
+  <text x="635" y="210" fill="#a0a0a0" font-size="9">--cpus=0.5 --memory=1g</text>
+  
+  <!-- Contenedor 3 - Sin límites (peligro) -->
+  <rect x="380" y="240" width="220" height="110" rx="8" fill="#0d1117" stroke="#f5576c" stroke-width="2" stroke-dasharray="5,5"/>
+  <text x="490" y="263" text-anchor="middle" fill="#f5576c" font-size="12" font-weight="bold">⚠️ app-sin-limites</text>
+  
+  <!-- CPU sin límite -->
+  <text x="395" y="285" fill="#a0a0a0" font-size="10">CPU:</text>
+  <rect x="430" y="275" width="150" height="15" rx="3" fill="#f5576c" opacity="0.5"/>
+  <text x="580" y="285" fill="#f5576c" font-size="9">∞ (todo)</text>
+  
+  <!-- Memory sin límite -->
+  <text x="395" y="310" fill="#a0a0a0" font-size="10">RAM:</text>
+  <rect x="430" y="300" width="150" height="15" rx="3" fill="#f5576c" opacity="0.5"/>
+  <text x="580" y="310" fill="#f5576c" font-size="9">∞ (todo)</text>
+  
+  <text x="395" y="335" fill="#f5576c" font-size="9">⚠️ Puede consumir todos los recursos</text>
+  
+  <!-- OOM Killer -->
+  <rect x="620" y="240" width="220" height="110" rx="8" fill="#0d1117" stroke="#ffd93d" stroke-width="2"/>
+  <text x="730" y="263" text-anchor="middle" fill="#ffd93d" font-size="12" font-weight="bold">💀 OOM Killer</text>
+  <text x="635" y="285" fill="#a0a0a0" font-size="10">Si un contenedor excede</text>
+  <text x="635" y="300" fill="#a0a0a0" font-size="10">su límite de memoria:</text>
+  <text x="635" y="320" fill="#f5576c" font-size="10" font-weight="bold">→ Proceso KILLED</text>
+  <text x="635" y="340" fill="#a0a0a0" font-size="9">Exit code: 137 (128+9)</text>
+  
+  <!-- Comandos -->
+  <rect x="50" y="375" width="800" height="65" rx="8" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+  <text x="70" y="397" fill="#43e97b" font-size="11" font-family="monospace">$ docker run --memory=512m --cpus=1.5 nginx</text>
+  <text x="500" y="397" fill="#a0a0a0" font-size="10"># Límite 512MB RAM, 1.5 CPUs</text>
+  <text x="70" y="417" fill="#667eea" font-size="11" font-family="monospace">$ docker update --memory=1g mi-contenedor</text>
+  <text x="500" y="417" fill="#a0a0a0" font-size="10"># Actualizar límites en caliente</text>
+  <text x="70" y="437" fill="#f093fb" font-size="11" font-family="monospace">$ docker stats --no-stream</text>
+  <text x="500" y="437" fill="#a0a0a0" font-size="10"># Ver uso actual de recursos</text>
+</svg>

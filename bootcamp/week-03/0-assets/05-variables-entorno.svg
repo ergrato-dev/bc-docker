@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 420">
+  <defs>
+    <marker id="arrow-env" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#667eea"/>
+    </marker>
+  </defs>
+  
+  <!-- Fondo -->
+  <rect width="900" height="420" fill="#1a1a2e"/>
+  
+  <!-- Titulo -->
+  <text x="450" y="35" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="bold" font-family="sans-serif">Variables de Entorno en Contenedores</text>
+  <text x="450" y="58" text-anchor="middle" fill="#a0a0a0" font-size="14" font-family="sans-serif">Configuracion externa sin modificar la imagen</text>
+  
+  <!-- Metodos de pasar variables -->
+  <text x="50" y="95" fill="#ffffff" font-size="14" font-weight="bold" font-family="sans-serif">Metodos para pasar variables:</text>
+  
+  <!-- Metodo 1: -e -->
+  <rect x="50" y="110" width="250" height="100" rx="8" fill="#16213e" stroke="#43e97b" stroke-width="2"/>
+  <text x="175" y="135" text-anchor="middle" fill="#43e97b" font-size="12" font-weight="bold" font-family="sans-serif">[1] Flag -e</text>
+  <text x="65" y="160" fill="#ffffff" font-size="10" font-family="monospace">docker run \</text>
+  <text x="75" y="175" fill="#43e97b" font-size="10" font-family="monospace">-e DB_HOST=localhost \</text>
+  <text x="75" y="190" fill="#43e97b" font-size="10" font-family="monospace">-e DB_PORT=5432 \</text>
+  <text x="75" y="205" fill="#ffffff" font-size="10" font-family="monospace">mi-app</text>
+  
+  <!-- Metodo 2: env-file -->
+  <rect x="325" y="110" width="250" height="100" rx="8" fill="#16213e" stroke="#667eea" stroke-width="2"/>
+  <text x="450" y="135" text-anchor="middle" fill="#667eea" font-size="12" font-weight="bold" font-family="sans-serif">[2] Archivo env-file</text>
+  <text x="340" y="160" fill="#ffffff" font-size="10" font-family="monospace">docker run \</text>
+  <text x="350" y="175" fill="#667eea" font-size="10" font-family="monospace">  --env-file .env \</text>
+  <text x="350" y="190" fill="#ffffff" font-size="10" font-family="monospace">mi-app</text>
+  
+  <!-- Metodo 3: Dockerfile ENV -->
+  <rect x="600" y="110" width="250" height="100" rx="8" fill="#16213e" stroke="#f093fb" stroke-width="2"/>
+  <text x="725" y="135" text-anchor="middle" fill="#f093fb" font-size="12" font-weight="bold" font-family="sans-serif">[3] Dockerfile ENV</text>
+  <text x="615" y="160" fill="#a0a0a0" font-size="10" font-family="monospace"># En Dockerfile:</text>
+  <text x="615" y="175" fill="#f093fb" font-size="10" font-family="monospace">ENV NODE_ENV=production</text>
+  <text x="615" y="190" fill="#f093fb" font-size="10" font-family="monospace">ENV PORT=3000</text>
+  <text x="615" y="205" fill="#a0a0a0" font-size="9" font-family="sans-serif">(valores por defecto)</text>
+  
+  <!-- Flujo de prioridad -->
+  <text x="50" y="240" fill="#ffffff" font-size="14" font-weight="bold" font-family="sans-serif">Prioridad (mayor a menor):</text>
+  
+  <rect x="50" y="255" width="180" height="40" rx="5" fill="#43e97b"/>
+  <text x="140" y="280" text-anchor="middle" fill="#1a1a2e" font-size="11" font-weight="bold" font-family="sans-serif">1. docker run -e</text>
+  
+  <line x1="230" y1="275" x2="280" y2="275" stroke="#667eea" stroke-width="2" marker-end="url(#arrow-env)"/>
+  
+  <rect x="290" y="255" width="180" height="40" rx="5" fill="#667eea"/>
+  <text x="380" y="280" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="bold" font-family="sans-serif">2. env-file</text>
+  
+  <line x1="470" y1="275" x2="520" y2="275" stroke="#667eea" stroke-width="2" marker-end="url(#arrow-env)"/>
+  
+  <rect x="530" y="255" width="180" height="40" rx="5" fill="#f093fb"/>
+  <text x="620" y="280" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="bold" font-family="sans-serif">3. Dockerfile ENV</text>
+  
+  <line x1="710" y1="275" x2="760" y2="275" stroke="#667eea" stroke-width="2" marker-end="url(#arrow-env)"/>
+  
+  <rect x="770" y="255" width="80" height="40" rx="5" fill="#16213e" stroke="#a0a0a0" stroke-width="1"/>
+  <text x="810" y="280" text-anchor="middle" fill="#a0a0a0" font-size="11" font-family="sans-serif">vacio</text>
+  
+  <!-- Ejemplo de archivo .env -->
+  <rect x="50" y="310" width="300" height="100" rx="8" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+  <text x="200" y="330" text-anchor="middle" fill="#58a6ff" font-size="11" font-weight="bold" font-family="sans-serif">.env</text>
+  <text x="65" y="355" fill="#8b949e" font-size="10" font-family="monospace"># Configuracion de base de datos</text>
+  <text x="65" y="370" fill="#43e97b" font-size="10" font-family="monospace">DB_HOST=postgres</text>
+  <text x="65" y="385" fill="#43e97b" font-size="10" font-family="monospace">DB_PORT=5432</text>
+  <text x="65" y="400" fill="#43e97b" font-size="10" font-family="monospace">DB_USER=admin</text>
+  
+  <!-- Contenedor con variables -->
+  <rect x="400" y="310" width="450" height="100" rx="8" fill="#16213e" stroke="#43e97b" stroke-width="2"/>
+  <text x="625" y="335" text-anchor="middle" fill="#43e97b" font-size="12" font-weight="bold" font-family="sans-serif">Contenedor (variables disponibles)</text>
+  
+  <text x="420" y="360" fill="#ffffff" font-size="10" font-family="monospace">$ printenv | grep DB</text>
+  <text x="420" y="378" fill="#43e97b" font-size="10" font-family="monospace">DB_HOST=postgres</text>
+  <text x="420" y="393" fill="#43e97b" font-size="10" font-family="monospace">DB_PORT=5432</text>
+  
+  <text x="620" y="360" fill="#ffffff" font-size="10" font-family="monospace">// En codigo:</text>
+  <text x="620" y="378" fill="#667eea" font-size="10" font-family="monospace">process.env.DB_HOST</text>
+  <text x="620" y="393" fill="#667eea" font-size="10" font-family="monospace">os.environ['DB_PORT']</text>
+</svg>

@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 450">
+  <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  </style>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#667eea"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#43e97b"/>
+    </marker>
+    <marker id="arrow-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#f5576c"/>
+    </marker>
+  </defs>
+  
+  <!-- Fondo -->
+  <rect width="900" height="450" fill="#1a1a2e"/>
+  
+  <!-- Título -->
+  <text x="450" y="35" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="bold">Ciclo de Vida del Contenedor</text>
+  <text x="450" y="58" text-anchor="middle" fill="#a0a0a0" font-size="14">Estados y transiciones de un contenedor Docker</text>
+  
+  <!-- Estado: Created -->
+  <rect x="50" y="150" width="130" height="70" rx="10" fill="#16213e" stroke="#667eea" stroke-width="3"/>
+  <text x="115" y="180" text-anchor="middle" fill="#667eea" font-size="14" font-weight="bold">CREATED</text>
+  <text x="115" y="200" text-anchor="middle" fill="#a0a0a0" font-size="10">docker create</text>
+  
+  <!-- Estado: Running -->
+  <rect x="250" y="150" width="130" height="70" rx="10" fill="#16213e" stroke="#43e97b" stroke-width="3"/>
+  <circle cx="275" cy="185" r="8" fill="#43e97b"/>
+  <text x="330" y="180" text-anchor="middle" fill="#43e97b" font-size="14" font-weight="bold">RUNNING</text>
+  <text x="315" y="200" text-anchor="middle" fill="#a0a0a0" font-size="10">docker start/run</text>
+  
+  <!-- Estado: Paused -->
+  <rect x="450" y="90" width="130" height="70" rx="10" fill="#16213e" stroke="#ffd93d" stroke-width="3"/>
+  <rect x="475" y="115" width="8" height="20" fill="#ffd93d"/>
+  <rect x="490" y="115" width="8" height="20" fill="#ffd93d"/>
+  <text x="540" y="125" text-anchor="middle" fill="#ffd93d" font-size="14" font-weight="bold">PAUSED</text>
+  <text x="515" y="145" text-anchor="middle" fill="#a0a0a0" font-size="10">docker pause</text>
+  
+  <!-- Estado: Stopped/Exited -->
+  <rect x="450" y="210" width="130" height="70" rx="10" fill="#16213e" stroke="#f5576c" stroke-width="3"/>
+  <rect x="475" y="235" width="25" height="25" fill="#f5576c" rx="3"/>
+  <text x="540" y="245" text-anchor="middle" fill="#f5576c" font-size="14" font-weight="bold">STOPPED</text>
+  <text x="515" y="265" text-anchor="middle" fill="#a0a0a0" font-size="10">docker stop</text>
+  
+  <!-- Estado: Removed -->
+  <rect x="650" y="150" width="130" height="70" rx="10" fill="#16213e" stroke="#a0a0a0" stroke-width="3" stroke-dasharray="5,5"/>
+  <text x="715" y="180" text-anchor="middle" fill="#a0a0a0" font-size="14" font-weight="bold">REMOVED</text>
+  <text x="715" y="200" text-anchor="middle" fill="#a0a0a0" font-size="10">docker rm</text>
+  
+  <!-- Flechas de transición -->
+  <!-- Created -> Running -->
+  <line x1="180" y1="185" x2="245" y2="185" stroke="#43e97b" stroke-width="2" marker-end="url(#arrow-green)"/>
+  <text x="212" y="175" text-anchor="middle" fill="#43e97b" font-size="9">start</text>
+  
+  <!-- Running -> Paused -->
+  <line x1="350" y1="150" x2="450" y2="125" stroke="#ffd93d" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="400" y="125" text-anchor="middle" fill="#ffd93d" font-size="9">pause</text>
+  
+  <!-- Paused -> Running -->
+  <line x1="450" y1="140" x2="360" y2="165" stroke="#43e97b" stroke-width="2" marker-end="url(#arrow-green)"/>
+  <text x="405" y="165" text-anchor="middle" fill="#43e97b" font-size="9">unpause</text>
+  
+  <!-- Running -> Stopped -->
+  <line x1="350" y1="220" x2="450" y2="245" stroke="#f5576c" stroke-width="2" marker-end="url(#arrow-red)"/>
+  <text x="400" y="245" text-anchor="middle" fill="#f5576c" font-size="9">stop/kill</text>
+  
+  <!-- Stopped -> Running -->
+  <line x1="450" y1="230" x2="360" y2="205" stroke="#43e97b" stroke-width="2" marker-end="url(#arrow-green)"/>
+  <text x="405" y="205" text-anchor="middle" fill="#43e97b" font-size="9">start</text>
+  
+  <!-- Stopped -> Removed -->
+  <line x1="580" y1="245" x2="650" y2="200" stroke="#a0a0a0" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="615" y="210" text-anchor="middle" fill="#a0a0a0" font-size="9">rm</text>
+  
+  <!-- Created -> Removed -->
+  <path d="M 115 220 Q 115 310 715 310 Q 715 250 715 220" stroke="#a0a0a0" stroke-width="2" fill="none" marker-end="url(#arrow)" stroke-dasharray="5,5"/>
+  <text x="400" y="325" text-anchor="middle" fill="#a0a0a0" font-size="9">rm (nunca iniciado)</text>
+  
+  <!-- Leyenda -->
+  <rect x="50" y="360" width="800" height="75" rx="8" fill="#16213e"/>
+  <text x="70" y="385" fill="#ffffff" font-size="12" font-weight="bold">Comandos de transición:</text>
+  
+  <rect x="70" y="400" width="12" height="12" fill="#43e97b"/>
+  <text x="90" y="410" fill="#a0a0a0" font-size="10">docker start/run - Iniciar contenedor</text>
+  
+  <rect x="280" y="400" width="12" height="12" fill="#ffd93d"/>
+  <text x="300" y="410" fill="#a0a0a0" font-size="10">docker pause/unpause - Pausar/reanudar</text>
+  
+  <rect x="520" y="400" width="12" height="12" fill="#f5576c"/>
+  <text x="540" y="410" fill="#a0a0a0" font-size="10">docker stop/kill - Detener</text>
+  
+  <rect x="720" y="400" width="12" height="12" fill="#a0a0a0"/>
+  <text x="740" y="410" fill="#a0a0a0" font-size="10">docker rm - Eliminar</text>
+  
+  <text x="70" y="425" fill="#667eea" font-size="10">💡 restart = stop + start | rm -f = kill + rm</text>
+</svg>

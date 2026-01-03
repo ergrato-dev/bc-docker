@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 200">
+  <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  </style>
+  
+  <!-- Fondo -->
+  <rect width="900" height="200" fill="#1a1a2e"/>
+  
+  <!-- Patrón decorativo -->
+  <rect x="50" y="30" width="100" height="8" rx="4" fill="#43e97b" opacity="0.3"/>
+  <rect x="50" y="45" width="80" height="8" rx="4" fill="#38f9d7" opacity="0.3"/>
+  <rect x="50" y="60" width="120" height="8" rx="4" fill="#667eea" opacity="0.3"/>
+  <rect x="730" y="130" width="100" height="8" rx="4" fill="#43e97b" opacity="0.3"/>
+  <rect x="750" y="145" width="80" height="8" rx="4" fill="#38f9d7" opacity="0.3"/>
+  <rect x="710" y="160" width="120" height="8" rx="4" fill="#667eea" opacity="0.3"/>
+  
+  <!-- Icono de contenedor con estados (izquierda) -->
+  <rect x="180" y="55" width="100" height="90" rx="8" fill="#16213e" stroke="#43e97b" stroke-width="2"/>
+  <circle cx="200" cy="75" r="6" fill="#43e97b"/>
+  <text x="215" y="79" fill="#43e97b" font-size="10">running</text>
+  <rect x="195" y="90" width="70" height="8" rx="2" fill="#43e97b" opacity="0.5"/>
+  <rect x="195" y="103" width="55" height="8" rx="2" fill="#43e97b" opacity="0.3"/>
+  <rect x="195" y="116" width="65" height="8" rx="2" fill="#43e97b" opacity="0.4"/>
+  <text x="230" y="138" text-anchor="middle" fill="#a0a0a0" font-size="9">container</text>
+  
+  <!-- Título principal -->
+  <text x="450" y="85" text-anchor="middle" fill="#43e97b" font-size="42" font-weight="bold">Semana 03</text>
+  <text x="450" y="125" text-anchor="middle" fill="#ffffff" font-size="28">Gestión de Contenedores</text>
+  
+  <!-- Subtítulo -->
+  <text x="450" y="160" text-anchor="middle" fill="#a0a0a0" font-size="14">Ciclo de Vida • Logs • Exec • Variables • Recursos</text>
+  
+  <!-- Terminal icon (derecha) -->
+  <rect x="650" y="55" width="110" height="90" rx="8" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+  <rect x="650" y="55" width="110" height="20" rx="8" fill="#161b22"/>
+  <circle cx="665" cy="65" r="4" fill="#f5576c"/>
+  <circle cx="678" cy="65" r="4" fill="#ffd93d"/>
+  <circle cx="691" cy="65" r="4" fill="#43e97b"/>
+  <text x="660" y="90" fill="#43e97b" font-size="9" font-family="monospace">$ docker exec</text>
+  <text x="660" y="105" fill="#667eea" font-size="9" font-family="monospace">$ docker logs</text>
+  <text x="660" y="120" fill="#f093fb" font-size="9" font-family="monospace">$ docker stats</text>
+  <text x="660" y="135" fill="#a0a0a0" font-size="9" font-family="monospace">█</text>
+  
+  <!-- Badge semana -->
+  <rect x="800" y="20" width="80" height="30" rx="15" fill="#43e97b"/>
+  <text x="840" y="40" text-anchor="middle" fill="#1a1a2e" font-size="12" font-weight="bold">WEEK 03</text>
+</svg>
