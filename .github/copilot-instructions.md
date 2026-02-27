@@ -57,7 +57,7 @@ bc-docker/
 │       │   ├── ebooks-free/
 │       │   ├── videografia/
 │       │   └── webgrafia/
-│       └── 5-glosario/              # Términos clave
+│       └── 5-glosario/              # Términos clave de la semana
 ├── CONTRIBUTING.md
 ├── CODE_OF_CONDUCT.md
 ├── LICENSE
@@ -262,7 +262,7 @@ Update README.md
 4. **Documentar** variables de entorno
 5. **Usar** depends_on con condiciones cuando sea necesario
 
-### Al generar ejercicios
+### Al generar ejercicioshttps://github.com/ergrato-dev/bc-docker.git
 
 1. **Estructurar** con objetivos claros
 2. **Incluir** pasos numerados
@@ -273,7 +273,7 @@ Update README.md
 ### Al generar teoría
 
 1. **Explicar** conceptos progresivamente
-2. **Usar** diagramas SVG (en `0-assets/`) - **NUNCA ASCII art**
+2. **Usar** diagramas SVG (en `0-assets/`), si animar los svg agrega valor significativo para el aprendizaje -> crear svg animados - **NUNCA ASCII art**
 3. **Incluir** ejemplos prácticos
 4. **Agregar** tips y buenas prácticas
 5. **Referenciar** documentación oficial

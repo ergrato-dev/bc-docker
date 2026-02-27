@@ -1,0 +1,152 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 300" width="900" height="300">
+  <defs>
+    <linearGradient id="bg07" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117"/>
+      <stop offset="100%" style="stop-color:#1a1a2e"/>
+    </linearGradient>
+    <linearGradient id="coreGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2563eb;stop-opacity:0.8"/>
+      <stop offset="100%" style="stop-color:#1e3a8a;stop-opacity:0.8"/>
+    </linearGradient>
+    <linearGradient id="toolsGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#059669;stop-opacity:0.8"/>
+      <stop offset="100%" style="stop-color:#064e3b;stop-opacity:0.8"/>
+    </linearGradient>
+    <linearGradient id="monitorGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#d97706;stop-opacity:0.8"/>
+      <stop offset="100%" style="stop-color:#78350f;stop-opacity:0.8"/>
+    </linearGradient>
+    <style>
+      .title07 { font-family: 'Courier New', monospace; font-size: 26px; font-weight: bold; fill: #f59e0b; }
+      .sub07 { font-family: 'Courier New', monospace; font-size: 13px; fill: #a8b2d8; }
+      .svc07 { font-family: 'Courier New', monospace; font-size: 10px; fill: #fff; font-weight:bold; }
+      .hint07 { font-family: 'Courier New', monospace; font-size: 9px; fill: #ccc; }
+      .profile-label { font-family: 'Courier New', monospace; font-size: 10px; fill: #fbbf24; font-weight:bold; }
+    </style>
+  </defs>
+
+  <!-- Fondo -->
+  <rect width="900" height="300" fill="url(#bg07)" rx="12"/>
+  <rect width="900" height="300" fill="none" stroke="#d97706" stroke-width="1" stroke-opacity="0.4" rx="12"/>
+
+  <!-- Título -->
+  <text x="450" y="34" class="title07" text-anchor="middle">🐳 Semana 07: Docker Compose Avanzado</text>
+  <text x="450" y="50" class="sub07" text-anchor="middle">Profiles · Healthchecks · Secrets · Extends · Scaling</text>
+
+  <!-- ===== ZONA CORE ===== -->
+  <rect x="20" y="58" width="370" height="105" rx="8" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="0" fill="#0a0f1e" fill-opacity="0.7"/>
+  <text x="30" y="72" class="hint07" fill="#60a5fa">CORE (siempre activo)</text>
+
+  <!-- nginx -->
+  <rect x="30" y="78" width="85" height="50" rx="6" fill="url(#coreGrad)"/>
+  <text x="72" y="99" class="svc07" text-anchor="middle">nginx</text>
+  <text x="72" y="113" class="hint07" text-anchor="middle">:80</text>
+  <circle cx="42" cy="86" r="4" fill="#22c55e">
+    <animate attributeName="opacity" values="1;0.2;1" dur="2s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- api -->
+  <rect x="125" y="78" width="85" height="50" rx="6" fill="url(#coreGrad)"/>
+  <text x="167" y="99" class="svc07" text-anchor="middle">api</text>
+  <text x="167" y="113" class="hint07" text-anchor="middle">/health ✓</text>
+  <circle cx="138" cy="86" r="4" fill="#22c55e">
+    <animate attributeName="opacity" values="1;0.2;1" dur="2.5s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- worker x2 -->
+  <rect x="220" y="78" width="80" height="50" rx="6" fill="url(#coreGrad)"/>
+  <text x="260" y="96" class="svc07" text-anchor="middle">worker</text>
+  <text x="260" y="110" class="hint07" text-anchor="middle">--scale=N</text>
+  <!-- clone worker shadow -->
+  <rect x="225" y="82" width="80" height="50" rx="6" fill="url(#coreGrad)" opacity="0.4"/>
+  <text x="265" y="100" class="hint07" text-anchor="middle" fill="#93c5fd">× N</text>
+
+  <!-- db -->
+  <rect x="315" y="78" width="65" height="50" rx="6" fill="url(#coreGrad)"/>
+  <text x="347" y="99" class="svc07" text-anchor="middle">db</text>
+  <text x="347" y="113" class="hint07" text-anchor="middle">🔐 secret</text>
+  <circle cx="327" cy="86" r="4" fill="#22c55e">
+    <animate attributeName="opacity" values="1;0.2;1" dur="3s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- depends_on arrows (animated dashes) -->
+  <line x1="115" y1="103" x2="125" y2="103" stroke="#60a5fa" stroke-width="1.5" stroke-dasharray="3,2">
+    <animate attributeName="stroke-dashoffset" values="0;-10" dur="1s" repeatCount="indefinite"/>
+  </line>
+  <line x1="210" y1="103" x2="220" y2="103" stroke="#60a5fa" stroke-width="1.5" stroke-dasharray="3,2">
+    <animate attributeName="stroke-dashoffset" values="0;-10" dur="1s" repeatCount="indefinite"/>
+  </line>
+  <line x1="300" y1="103" x2="315" y2="103" stroke="#60a5fa" stroke-width="1.5" stroke-dasharray="3,2">
+    <animate attributeName="stroke-dashoffset" values="0;-10" dur="1s" repeatCount="indefinite"/>
+  </line>
+
+  <!-- condition: service_healthy label -->
+  <text x="205" y="145" class="hint07" text-anchor="middle" fill="#60a5fa">condition: service_healthy</text>
+
+  <!-- ===== ZONA TOOLS PROFILE ===== -->
+  <rect x="400" y="58" width="180" height="105" rx="8" stroke="#059669" stroke-width="1.5" stroke-dasharray="6,3" fill="#071a12" fill-opacity="0.7"/>
+  <text x="412" y="72" class="profile-label">--profile tools</text>
+
+  <!-- adminer -->
+  <rect x="415" y="78" width="80" height="50" rx="6" fill="url(#toolsGrad)"/>
+  <text x="455" y="99" class="svc07" text-anchor="middle">adminer</text>
+  <text x="455" y="113" class="hint07" text-anchor="middle">:8081</text>
+
+  <!-- secret badge -->
+  <rect x="510" y="85" width="60" height="35" rx="5" fill="#064e3b" stroke="#059669" stroke-width="1"/>
+  <text x="540" y="100" class="hint07" text-anchor="middle" fill="#6ee7b7">🔐</text>
+  <text x="540" y="113" class="hint07" text-anchor="middle" fill="#6ee7b7">secrets</text>
+
+  <!-- ===== ZONA MONITORING PROFILE ===== -->
+  <rect x="595" y="58" width="290" height="105" rx="8" stroke="#d97706" stroke-width="1.5" stroke-dasharray="6,3" fill="#1c1000" fill-opacity="0.7"/>
+  <text x="607" y="72" class="profile-label" fill="#fbbf24">--profile monitoring</text>
+
+  <!-- prometheus -->
+  <rect x="610" y="78" width="120" height="50" rx="6" fill="url(#monitorGrad)"/>
+  <text x="670" y="99" class="svc07" text-anchor="middle">prometheus</text>
+  <text x="670" y="113" class="hint07" text-anchor="middle">:9090</text>
+  <circle cx="622" cy="86" r="4" fill="#fbbf24">
+    <animate attributeName="opacity" values="1;0.2;1" dur="2s" begin="0.5s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- grafana -->
+  <rect x="745" y="78" width="130" height="50" rx="6" fill="url(#monitorGrad)"/>
+  <text x="810" y="99" class="svc07" text-anchor="middle">grafana</text>
+  <text x="810" y="113" class="hint07" text-anchor="middle">:3000</text>
+  <circle cx="757" cy="86" r="4" fill="#fbbf24">
+    <animate attributeName="opacity" values="1;0.2;1" dur="2.5s" begin="0.3s" repeatCount="indefinite"/>
+  </circle>
+  <line x1="732" y1="103" x2="745" y2="103" stroke="#f59e0b" stroke-width="1" stroke-dasharray="3,2">
+    <animate attributeName="stroke-dashoffset" values="0;-10" dur="0.8s" repeatCount="indefinite"/>
+  </line>
+
+  <!-- ===== FILA INFERIOR: Conceptos ===== -->
+  <line x1="20" y1="175" x2="880" y2="175" stroke="#333" stroke-width="0.5"/>
+  <text x="20" y="193" class="hint07" fill="#9ca3af">CONCEPTOS CLAVE:</text>
+
+  <!-- Anchors -->
+  <rect x="20" y="200" width="160" height="28" rx="4" fill="#111827" stroke="#374151"/>
+  <text x="100" y="219" class="hint07" text-anchor="middle" fill="#a78bfa">x-base: &amp;base → &lt;&lt;: *base</text>
+
+  <!-- Secrets -->
+  <rect x="190" y="200" width="150" height="28" rx="4" fill="#111827" stroke="#374151"/>
+  <text x="265" y="219" class="hint07" text-anchor="middle" fill="#34d399">/run/secrets/name</text>
+
+  <!-- extends -->
+  <rect x="350" y="200" width="130" height="28" rx="4" fill="#111827" stroke="#374151"/>
+  <text x="415" y="219" class="hint07" text-anchor="middle" fill="#fb923c">extends: service</text>
+
+  <!-- Scaling -->
+  <rect x="490" y="200" width="155" height="28" rx="4" fill="#111827" stroke="#374151"/>
+  <text x="567" y="219" class="hint07" text-anchor="middle" fill="#60a5fa">--scale worker=N</text>
+
+  <!-- restart policy -->
+  <rect x="655" y="200" width="165" height="28" rx="4" fill="#111827" stroke="#374151"/>
+  <text x="737" y="219" class="hint07" text-anchor="middle" fill="#f87171">restart: unless-stopped</text>
+
+  <!-- Segunda fila inferior: comandos -->
+  <text x="20" y="252" class="hint07" fill="#9ca3af">ACTIVAR PROFILES:</text>
+  <text x="150" y="252" class="hint07" fill="#fbbf24">docker compose --profile tools --profile monitoring up -d</text>
+  <text x="150" y="268" class="hint07" fill="#60a5fa">COMPOSE_PROFILES=tools,monitoring docker compose up -d</text>
+  <text x="150" y="284" class="hint07" fill="#34d399">docker compose --env-file .env.production up -d</text>
+</svg>

@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 300" width="900" height="300">
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#16213e;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="blue-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#2496ED;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d72b8;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="vol-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2ecc71;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#27ae60;stop-opacity:0.7" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="300" fill="url(#bg-grad)" rx="12"/>
+
+  <!-- Decorative grid -->
+  <g opacity="0.05">
+    <line x1="0" y1="60" x2="900" y2="60" stroke="#2496ED" stroke-width="1"/>
+    <line x1="0" y1="120" x2="900" y2="120" stroke="#2496ED" stroke-width="1"/>
+    <line x1="0" y1="180" x2="900" y2="180" stroke="#2496ED" stroke-width="1"/>
+    <line x1="0" y1="240" x2="900" y2="240" stroke="#2496ED" stroke-width="1"/>
+    <line x1="150" y1="0" x2="150" y2="300" stroke="#2496ED" stroke-width="1"/>
+    <line x1="300" y1="0" x2="300" y2="300" stroke="#2496ED" stroke-width="1"/>
+    <line x1="450" y1="0" x2="450" y2="300" stroke="#2496ED" stroke-width="1"/>
+    <line x1="600" y1="0" x2="600" y2="300" stroke="#2496ED" stroke-width="1"/>
+    <line x1="750" y1="0" x2="750" y2="300" stroke="#2496ED" stroke-width="1"/>
+  </g>
+
+  <!-- Left side: Volume icons stacked -->
+  <!-- Volume 1 (bottom) -->
+  <rect x="40" y="200" width="120" height="60" rx="6" fill="#27ae60" opacity="0.85"/>
+  <rect x="40" y="192" width="120" height="16" rx="4" fill="#2ecc71"/>
+  <text x="100" y="235" font-family="monospace" font-size="11" fill="white" text-anchor="middle">datos-postgres</text>
+  <text x="100" y="251" font-family="monospace" font-size="10" fill="#a8f0c6" text-anchor="middle">named volume</text>
+
+  <!-- Volume 2 (middle) -->
+  <rect x="40" y="130" width="120" height="60" rx="6" fill="#27ae60" opacity="0.7">
+    <animate attributeName="y" values="130;125;130" dur="3s" repeatCount="indefinite"/>
+  </rect>
+  <rect x="40" y="122" width="120" height="16" rx="4" fill="#2ecc71" opacity="0.85">
+    <animate attributeName="y" values="122;117;122" dur="3s" repeatCount="indefinite"/>
+  </rect>
+  <text x="100" y="165" font-family="monospace" font-size="11" fill="white" text-anchor="middle">app-uploads</text>
+  <text x="100" y="181" font-family="monospace" font-size="10" fill="#a8f0c6" text-anchor="middle">named volume</text>
+
+  <!-- Volume 3 (top) -->
+  <rect x="40" y="60" width="120" height="60" rx="6" fill="#1abc9c" opacity="0.7">
+    <animate attributeName="y" values="60;54;60" dur="2.5s" repeatCount="indefinite"/>
+  </rect>
+  <rect x="40" y="52" width="120" height="16" rx="4" fill="#16a085" opacity="0.85">
+    <animate attributeName="y" values="52;46;52" dur="2.5s" repeatCount="indefinite"/>
+  </rect>
+  <text x="100" y="95" font-family="monospace" font-size="11" fill="white" text-anchor="middle">redis-cache</text>
+  <text x="100" y="111" font-family="monospace" font-size="10" fill="#a8f0c6" text-anchor="middle">named volume</text>
+
+  <!-- Arrow: Volumes to Container -->
+  <line x1="165" y1="150" x2="245" y2="150" stroke="#2496ED" stroke-width="2" stroke-dasharray="5,3">
+    <animate attributeName="stroke-dashoffset" values="0;-16" dur="1s" repeatCount="indefinite"/>
+  </line>
+  <polygon points="245,145 258,150 245,155" fill="#2496ED"/>
+
+  <!-- Container box -->
+  <rect x="260" y="80" width="200" height="140" rx="10" fill="none" stroke="#2496ED" stroke-width="2.5" filter="url(#glow)"/>
+  <rect x="260" y="80" width="200" height="32" rx="6" fill="url(#blue-grad)" opacity="0.9"/>
+  <text x="360" y="101" font-family="Arial, sans-serif" font-size="13" fill="white" text-anchor="middle" font-weight="bold">🐳 Contenedor</text>
+  <text x="360" y="135" font-family="monospace" font-size="11" fill="#a0c4ff" text-anchor="middle">/var/lib/postgresql</text>
+  <text x="360" y="155" font-family="monospace" font-size="11" fill="#a0c4ff" text-anchor="middle">/var/www/uploads</text>
+  <text x="360" y="175" font-family="monospace" font-size="11" fill="#a0c4ff" text-anchor="middle">/data (redis)</text>
+  <text x="360" y="202" font-family="monospace" font-size="10" fill="#666" text-anchor="middle">Capa efímera (desaparece)</text>
+
+  <!-- Main title area -->
+  <text x="540" y="90" font-family="Arial, sans-serif" font-size="36" fill="white" font-weight="bold" filter="url(#glow)">Semana 05</text>
+  <rect x="538" y="100" width="280" height="4" rx="2" fill="url(#blue-grad)"/>
+  <text x="540" y="135" font-family="Arial, sans-serif" font-size="20" fill="#2496ED">Volúmenes y Persistencia</text>
+
+  <!-- Feature tags -->
+  <rect x="540" y="155" width="130" height="26" rx="13" fill="#27ae60" opacity="0.8"/>
+  <text x="605" y="173" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">Named Volumes</text>
+
+  <rect x="682" y="155" width="120" height="26" rx="13" fill="#e67e22" opacity="0.8"/>
+  <text x="742" y="173" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">Bind Mounts</text>
+
+  <rect x="540" y="191" width="80" height="26" rx="13" fill="#9b59b6" opacity="0.8"/>
+  <text x="580" y="209" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">tmpfs</text>
+
+  <rect x="632" y="191" width="170" height="26" rx="13" fill="#c0392b" opacity="0.8"/>
+  <text x="717" y="209" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">Backup &amp; Restore</text>
+
+  <!-- Animated data flow dots -->
+  <circle r="5" fill="#2ecc71" opacity="0.9">
+    <animateMotion dur="2s" repeatCount="indefinite">
+      <mpath href="#flow-path-1"/>
+    </animateMotion>
+  </circle>
+  <path id="flow-path-1" d="M 160 150 L 260 150" fill="none"/>
+
+  <circle r="4" fill="#1abc9c" opacity="0.8">
+    <animateMotion dur="2.5s" repeatCount="indefinite" begin="0.8s">
+      <mpath href="#flow-path-2"/>
+    </animateMotion>
+  </circle>
+  <path id="flow-path-2" d="M 160 120 L 260 130" fill="none"/>
+
+  <!-- Duration badge -->
+  <rect x="540" y="232" width="260" height="40" rx="8" fill="white" fill-opacity="0.05" stroke="#2496ED" stroke-width="1" stroke-opacity="0.3"/>
+  <text x="550" y="249" font-family="Arial, sans-serif" font-size="11" fill="#8899aa">Duración</text>
+  <text x="550" y="265" font-family="Arial, sans-serif" font-size="13" fill="#2496ED" font-weight="bold">6 horas  ·  Sem. 5 de 8</text>
+  <text x="730" y="257" font-family="Arial, sans-serif" font-size="22" fill="#2496ED" text-anchor="middle">💾</text>
+</svg>

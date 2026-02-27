@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 300" width="900" height="300">
+  <defs>
+    <linearGradient id="bg08" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117"/>
+      <stop offset="100%" style="stop-color:#1a0a0a"/>
+    </linearGradient>
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#dc2626;stop-opacity:0.9"/>
+      <stop offset="100%" style="stop-color:#7f1d1d;stop-opacity:0.9"/>
+    </linearGradient>
+    <linearGradient id="checkGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#16a34a;stop-opacity:0.9"/>
+      <stop offset="100%" style="stop-color:#14532d;stop-opacity:0.9"/>
+    </linearGradient>
+    <linearGradient id="ciGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#7c3aed;stop-opacity:0.9"/>
+      <stop offset="100%" style="stop-color:#3b0764;stop-opacity:0.9"/>
+    </linearGradient>
+    <style>
+      .t08 { font-family: 'Courier New', monospace; font-size: 25px; font-weight:bold; fill: #ef4444; }
+      .s08 { font-family: 'Courier New', monospace; font-size: 13px; fill: #a8b2d8; }
+      .lab { font-family: 'Courier New', monospace; font-size: 10px; fill: #fff; font-weight:bold; }
+      .hint { font-family: 'Courier New', monospace; font-size: 9px; fill: #ccc; }
+      .good { fill: #4ade80; }
+      .bad { fill: #f87171; }
+    </style>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Fondo -->
+  <rect width="900" height="300" fill="url(#bg08)" rx="12"/>
+  <rect width="900" height="300" fill="none" stroke="#dc2626" stroke-width="1" stroke-opacity="0.5" rx="12"/>
+
+  <!-- Título -->
+  <text x="450" y="33" class="t08" text-anchor="middle">🛡️ Semana 08: Seguridad y Producción</text>
+  <text x="450" y="50" class="s08" text-anchor="middle">Usuario No-Root · Escaneo CVEs · Hardening · CI/CD</text>
+
+  <!-- ===== COLUMNA 1: ANTES / INSEGURO ===== -->
+  <rect x="15" y="58" width="195" height="185" rx="8" stroke="#ef4444" stroke-width="1.5" fill="#1a0505" fill-opacity="0.8"/>
+  <text x="112" y="74" class="lab bad" text-anchor="middle">❌ INSEGURO</text>
+
+  <text x="25" y="92" class="hint bad">FROM ubuntu:latest</text>
+  <text x="25" y="108" class="hint bad">RUN npm install -g express</text>
+  <text x="25" y="124" class="hint bad">COPY . .</text>
+  <text x="25" y="140" class="hint bad">EXPOSE 80</text>
+  <text x="25" y="156" class="hint bad">CMD ["node", "app.js"]</text>
+  <line x1="20" y1="165" x2="205" y2="165" stroke="#444" stroke-width="0.5"/>
+  <text x="25" y="180" class="hint bad">• root (uid=0)</text>
+  <text x="25" y="195" class="hint bad">• latest = no reproducible</text>
+  <text x="25" y="210" class="hint bad">• CVEs críticos sin detectar</text>
+  <text x="25" y="225" class="hint bad">• credenciales en ENV</text>
+  <text x="25" y="240" class="hint bad">• sin límite de recursos</text>
+
+  <!-- Flecha TRANSFORMACIÓN -->
+  <line x1="215" y1="150" x2="270" y2="150" stroke="#7c3aed" stroke-width="2.5">
+    <animate attributeName="stroke-dasharray" values="0,200;60,0;0,200" dur="2s" repeatCount="indefinite"/>
+  </line>
+  <polygon points="270,145 280,150 270,155" fill="#7c3aed"/>
+  <text x="242" y="140" class="hint" fill="#a78bfa" text-anchor="middle">hardening</text>
+
+  <!-- ===== COLUMNA 2: DESPUÉS / SEGURO ===== -->
+  <rect x="283" y="58" width="220" height="185" rx="8" stroke="#16a34a" stroke-width="1.5" fill="#011a05" fill-opacity="0.8"/>
+  <text x="393" y="74" class="lab good" text-anchor="middle">✅ SEGURO</text>
+
+  <text x="293" y="92" class="hint good">FROM node:20.18-alpine</text>
+  <text x="293" y="108" class="hint good">RUN adduser -S app -G app</text>
+  <text x="293" y="124" class="hint good">COPY --chown=app:app . .</text>
+  <text x="293" y="140" class="hint good">USER app</text>
+  <text x="293" y="156" class="hint good">EXPOSE 8080</text>
+  <line x1="288" y1="165" x2="498" y2="165" stroke="#444" stroke-width="0.5"/>
+  <text x="293" y="180" class="hint good">• uid=1001 (no-root)</text>
+  <text x="293" y="195" class="hint good">• tag específico</text>
+  <text x="293" y="210" class="hint good">• trivy: 0 CRITICAL</text>
+  <text x="293" y="225" class="hint good">• /run/secrets/ (secrets)</text>
+  <text x="293" y="240" class="hint good">• cap_drop: ALL</text>
+
+  <!-- ===== COLUMNA 3: CI/CD PIPELINE ===== -->
+  <rect x="515" y="58" width="365" height="115" rx="8" stroke="#7c3aed" stroke-width="1.5" fill="#0a0518" fill-opacity="0.8"/>
+  <text x="697" y="74" class="lab" text-anchor="middle" fill="#a78bfa">🚀 CI/CD PIPELINE</text>
+
+  <!-- Pasos del pipeline -->
+  <rect x="525" y="82" width="65" height="30" rx="4" fill="#1e3a8a"/>
+  <text x="557" y="102" class="hint" text-anchor="middle" fill="#93c5fd">1. push</text>
+
+  <line x1="591" y1="97" x2="600" y2="97" stroke="#7c3aed" stroke-width="1.5">
+    <animate attributeName="stroke-dasharray" values="0,20;20,0;0,20" dur="1s" repeatCount="indefinite"/>
+  </line>
+
+  <rect x="601" y="82" width="65" height="30" rx="4" fill="#1e3a8a"/>
+  <text x="633" y="102" class="hint" text-anchor="middle" fill="#93c5fd">2. build</text>
+
+  <line x1="667" y1="97" x2="676" y2="97" stroke="#7c3aed" stroke-width="1.5">
+    <animate attributeName="stroke-dasharray" values="0,20;20,0;0,20" dur="1s" begin="0.3s" repeatCount="indefinite"/>
+  </line>
+
+  <rect x="677" y="82" width="65" height="30" rx="4" fill="#1e3a8a"/>
+  <text x="709" y="102" class="hint" text-anchor="middle" fill="#93c5fd">3. test</text>
+
+  <line x1="743" y1="97" x2="752" y2="97" stroke="#7c3aed" stroke-width="1.5">
+    <animate attributeName="stroke-dasharray" values="0,20;20,0;0,20" dur="1s" begin="0.6s" repeatCount="indefinite"/>
+  </line>
+
+  <rect x="753" y="82" width="65" height="30" rx="4" fill="#7f1d1d"/>
+  <text x="785" y="102" class="hint" text-anchor="middle" fill="#fca5a5">4. trivy</text>
+
+  <line x1="819" y1="97" x2="828" y2="97" stroke="#7c3aed" stroke-width="1.5">
+    <animate attributeName="stroke-dasharray" values="0,20;20,0;0,20" dur="1s" begin="0.9s" repeatCount="indefinite"/>
+  </line>
+
+  <rect x="829" y="82" width="43" height="30" rx="4" fill="#14532d"/>
+  <text x="850" y="102" class="hint" text-anchor="middle" fill="#86efac">push</text>
+
+  <!-- GitHub Actions badge -->
+  <text x="697" y="150" class="hint" text-anchor="middle" fill="#6366f1">GitHub Actions · .github/workflows/docker.yml</text>
+  <text x="697" y="165" class="hint" text-anchor="middle" fill="#fbbf24">exit-code: 1 en CRITICAL → Pipeline bloqueado</text>
+
+  <!-- ===== FILA INFERIOR: Checklist ===== -->
+  <rect x="515" y="185" width="365" height="58" rx="8" fill="#0a0518" fill-opacity="0.8" stroke="#374151" stroke-width="1"/>
+  <text x="525" y="202" class="hint good">✅ uid=1001</text>
+  <text x="600" y="202" class="hint good">✅ read_only</text>
+  <text x="670" y="202" class="hint good">✅ cap_drop:ALL</text>
+  <text x="755" y="202" class="hint good">✅ secrets</text>
+  <text x="828" y="202" class="hint good">✅ scan</text>
+  <text x="525" y="220" class="hint good">✅ no-new-privs</text>
+  <text x="620" y="220" class="hint good">✅ healthcheck</text>
+  <text x="700" y="220" class="hint good">✅ limits CPU/RAM</text>
+  <text x="800" y="220" class="hint good">✅ .dockerignore</text>
+  <text x="525" y="236" class="hint" fill="#f59e0b">🏆  Semana Final del Bootcamp — Production-Ready Docker</text>
+
+  <!-- Pulse en el shield -->
+  <circle cx="467" cy="150" r="35" fill="none" stroke="#ef4444" stroke-width="1.5" opacity="0.3">
+    <animate attributeName="r" values="25;38;25" dur="3s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.5;0;0.5" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  <text x="467" y="145" font-size="28" text-anchor="middle" filter="url(#glow)">🛡️</text>
+  <text x="467" y="163" class="hint" text-anchor="middle" fill="#ef4444">Zero Trust</text>
+</svg>

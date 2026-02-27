@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 300" width="900" height="300">
+  <defs>
+    <style>
+      .title { font-family: 'Courier New', monospace; font-size: 28px; font-weight: bold; fill: #00d4ff; }
+      .subtitle { font-family: 'Courier New', monospace; font-size: 14px; fill: #a8b2d8; }
+      .service-label { font-family: 'Courier New', monospace; font-size: 10px; fill: #cdd6f4; font-weight: bold; }
+      .arrow { stroke: #7c3aed; stroke-width: 1.5; fill: none; }
+      .compose-label { font-family: 'Courier New', monospace; font-size: 9px; fill: #888; }
+    </style>
+    <!-- Gradientes -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a1a2e;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="nginxGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#009009;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#004d00;stop-opacity:0.9" />
+    </linearGradient>
+    <linearGradient id="apiGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#306998;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#183d66;stop-opacity:0.9" />
+    </linearGradient>
+    <linearGradient id="pgGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#336791;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#1a3a52;stop-opacity:0.9" />
+    </linearGradient>
+    <linearGradient id="redisGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#cf1322;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#7c0b14;stop-opacity:0.9" />
+    </linearGradient>
+    <linearGradient id="composeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#7c3aed;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#2563eb;stop-opacity:0.3" />
+    </linearGradient>
+    <!-- Pulse animation gradient -->
+    <radialGradient id="pulse" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:0.4" />
+      <stop offset="100%" style="stop-color:#00d4ff;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Fondo -->
+  <rect width="900" height="300" fill="url(#bg)" rx="12"/>
+
+  <!-- Borde sutil -->
+  <rect width="900" height="300" fill="none" stroke="#7c3aed" stroke-width="1" stroke-opacity="0.4" rx="12"/>
+
+  <!-- === COMPOSE BOUNDARY BOX === -->
+  <rect x="20" y="55" width="860" height="220" rx="8" stroke="#7c3aed" stroke-width="1" stroke-dasharray="6,3" fill="url(#composeGrad)" />
+  <text x="30" y="72" class="compose-label">docker-compose.yml</text>
+
+  <!-- Título -->
+  <text x="450" y="38" class="title" text-anchor="middle">🐳 Semana 06: Docker Compose Básico</text>
+  <text x="450" y="52" class="subtitle" text-anchor="middle">Orquestación de múltiples servicios con un solo archivo YAML</text>
+
+  <!-- === SERVICIO: NGINX === -->
+  <rect x="50" y="80" width="120" height="70" rx="8" fill="url(#nginxGrad)" stroke="#00aa00" stroke-width="1.5"/>
+  <text x="110" y="108" class="service-label" text-anchor="middle">nginx</text>
+  <text x="110" y="122" class="compose-label" text-anchor="middle">:8080</text>
+  <text x="110" y="136" class="compose-label" text-anchor="middle">alpine</text>
+  <!-- Pulse en nginx -->
+  <circle cx="82" cy="88" r="5" fill="#00dd00" opacity="0.7">
+    <animate attributeName="r" values="3;6;3" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.9;0.3;0.9" dur="2s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- === FLECHA nginx → api === -->
+  <line x1="172" y1="115" x2="228" y2="115" class="arrow">
+    <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="1.5s" repeatCount="indefinite"/>
+  </line>
+  <polygon points="228,111 236,115 228,119" fill="#7c3aed">
+    <animate attributeName="fill-opacity" values="0.4;1;0.4" dur="1.5s" repeatCount="indefinite"/>
+  </polygon>
+  <text x="200" y="109" class="compose-label" text-anchor="middle">public-net</text>
+
+  <!-- === SERVICIO: API === -->
+  <rect x="238" y="80" width="120" height="70" rx="8" fill="url(#apiGrad)" stroke="#4a90d9" stroke-width="1.5"/>
+  <text x="298" y="108" class="service-label" text-anchor="middle">api</text>
+  <text x="298" y="122" class="compose-label" text-anchor="middle">FastAPI / Node</text>
+  <text x="298" y="136" class="compose-label" text-anchor="middle">build: ./api</text>
+  <!-- Healthcheck icon -->
+  <circle cx="270" cy="88" r="5" fill="#4a90d9" opacity="0.7">
+    <animate attributeName="r" values="3;6;3" dur="2.5s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.9;0.3;0.9" dur="2.5s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- === FLECHA api → db === -->
+  <line x1="360" y1="108" x2="440" y2="108" class="arrow">
+    <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="1.8s" repeatCount="indefinite"/>
+  </line>
+  <polygon points="440,104 448,108 440,112" fill="#7c3aed">
+    <animate attributeName="fill-opacity" values="0.4;1;0.4" dur="1.8s" repeatCount="indefinite"/>
+  </polygon>
+  <text x="400" y="102" class="compose-label" text-anchor="middle">internal-net</text>
+
+  <!-- === FLECHA api → redis === -->
+  <line x1="360" y1="125" x2="620" y2="125" class="arrow" stroke-dasharray="4,2">
+    <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="2.2s" repeatCount="indefinite"/>
+  </line>
+  <polygon points="620,121 628,125 620,129" fill="#7c3aed">
+    <animate attributeName="fill-opacity" values="0.4;1;0.4" dur="2.2s" repeatCount="indefinite"/>
+  </polygon>
+
+  <!-- === SERVICIO: PostgreSQL === -->
+  <rect x="450" y="80" width="130" height="70" rx="8" fill="url(#pgGrad)" stroke="#336791" stroke-width="1.5"/>
+  <text x="515" y="108" class="service-label" text-anchor="middle">db</text>
+  <text x="515" y="122" class="compose-label" text-anchor="middle">postgres:16-alpine</text>
+  <text x="515" y="136" class="compose-label" text-anchor="middle">vol: pg-data</text>
+  <circle cx="475" cy="88" r="5" fill="#336791" opacity="0.8">
+    <animate attributeName="r" values="3;6;3" dur="3s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.9;0.3;0.9" dur="3s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- === SERVICIO: Redis === -->
+  <rect x="630" y="80" width="120" height="70" rx="8" fill="url(#redisGrad)" stroke="#cf1322" stroke-width="1.5"/>
+  <text x="690" y="108" class="service-label" text-anchor="middle">cache</text>
+  <text x="690" y="122" class="compose-label" text-anchor="middle">redis:7-alpine</text>
+  <text x="690" y="136" class="compose-label" text-anchor="middle">in-memory</text>
+  <circle cx="655" cy="88" r="5" fill="#cf1322" opacity="0.8">
+    <animate attributeName="r" values="3;6;3" dur="2s" begin="0.5s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.9;0.3;0.9" dur="2s" begin="0.5s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- === LEYENDA INFERIOR === -->
+  <!-- depends_on arrows -->
+  <line x1="50" y1="195" x2="850" y2="195" stroke="#333" stroke-width="0.5"/>
+
+  <text x="50" y="215" class="compose-label">CICLO DE VIDA:</text>
+
+  <!-- Comandos compose -->
+  <rect x="50" y="222" width="160" height="22" rx="4" fill="#111827" stroke="#374151" stroke-width="1"/>
+  <text x="130" y="238" class="compose-label" text-anchor="middle" fill="#00d4ff">docker compose up -d</text>
+
+  <rect x="220" y="222" width="160" height="22" rx="4" fill="#111827" stroke="#374151" stroke-width="1"/>
+  <text x="300" y="238" class="compose-label" text-anchor="middle" fill="#fbbf24">docker compose ps</text>
+
+  <rect x="390" y="222" width="160" height="22" rx="4" fill="#111827" stroke="#374151" stroke-width="1"/>
+  <text x="470" y="238" class="compose-label" text-anchor="middle" fill="#a78bfa">docker compose logs -f</text>
+
+  <rect x="560" y="222" width="130" height="22" rx="4" fill="#111827" stroke="#374151" stroke-width="1"/>
+  <text x="625" y="238" class="compose-label" text-anchor="middle" fill="#f87171">docker compose down</text>
+
+  <rect x="700" y="222" width="130" height="22" rx="4" fill="#111827" stroke="#374151" stroke-width="1"/>
+  <text x="765" y="238" class="compose-label" text-anchor="middle" fill="#fb923c">down -v</text>
+
+  <!-- Leyenda redes -->
+  <text x="50" y="265" class="compose-label">REDES:</text>
+  <rect x="95" y="255" width="12" height="12" fill="#7c3aed" opacity="0.6" rx="2"/>
+  <text x="112" y="265" class="compose-label">public-net (nginx ↔ api)</text>
+  <rect x="280" y="255" width="12" height="12" fill="#2563eb" opacity="0.6" rx="2"/>
+  <text x="298" y="265" class="compose-label">internal-net (api ↔ db ↔ cache, isolada)</text>
+  <rect x="520" y="255" width="12" height="12" fill="#059669" opacity="0.6" rx="2"/>
+  <text x="538" y="265" class="compose-label">healthcheck activo</text>
+  <rect x="660" y="255" width="12" height="12" fill="#d97706" opacity="0.6" rx="2"/>
+  <text x="678" y="265" class="compose-label">volumen persistente</text>
+</svg>
