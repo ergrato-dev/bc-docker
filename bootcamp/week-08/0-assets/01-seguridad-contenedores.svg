@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 390" width="900" height="390">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117"/>
+      <stop offset="100%" style="stop-color:#1a0505"/>
+    </linearGradient>
+    <style>
+      .title   { font-family:'Courier New',monospace; font-size:18px; font-weight:bold; fill:#f87171; }
+      .label   { font-family:'Courier New',monospace; font-size:10px; fill:#fff; font-weight:bold; }
+      .sublabel{ font-family:'Courier New',monospace; font-size:9px; fill:#94a3b8; }
+      .cmd     { font-family:'Courier New',monospace; font-size:9px; fill:#4ade80; }
+      .key     { font-family:'Courier New',monospace; font-size:9px; fill:#a78bfa; }
+      .bad     { font-family:'Courier New',monospace; font-size:9px; fill:#f87171; }
+      .note    { font-family:'Courier New',monospace; font-size:9px; fill:#fbbf24; }
+    </style>
+  </defs>
+  <rect width="900" height="390" fill="url(#bg)" rx="12"/>
+  <rect width="900" height="390" fill="none" stroke="#dc2626" stroke-width="1" stroke-opacity="0.5" rx="12"/>
+
+  <text x="450" y="28" class="title" text-anchor="middle">Superficie de Ataque y Capas de Defensa</text>
+
+  <!-- Attack surface column -->
+  <rect x="20" y="44" width="400" height="196" rx="8" fill="#1a0505" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="220" y="64" class="label" text-anchor="middle" fill="#f87171">⚠️  Vectores de Ataque</text>
+
+  <rect x="30" y="72" width="380" height="28" rx="4" fill="#2a0505" stroke="#ef4444" stroke-width="1"/>
+  <text x="40" y="91" class="bad">🔴 Imagen con vulnerabilidades conocidas (CVEs)</text>
+
+  <rect x="30" y="106" width="380" height="28" rx="4" fill="#2a0505" stroke="#ef4444" stroke-width="1"/>
+  <text x="40" y="125" class="bad">🔴 Ejecutar como root UID=0</text>
+
+  <rect x="30" y="140" width="380" height="28" rx="4" fill="#2a0505" stroke="#ef4444" stroke-width="1"/>
+  <text x="40" y="159" class="bad">🔴 Secretos en variables de entorno / capas</text>
+
+  <rect x="30" y="174" width="380" height="28" rx="4" fill="#2a0505" stroke="#ef4444" stroke-width="1"/>
+  <text x="40" y="193" class="bad">🔴 Capabilities excesivos (--privileged)</text>
+
+  <rect x="30" y="208" width="380" height="24" rx="4" fill="#2a0505" stroke="#ef4444" stroke-width="1"/>
+  <text x="40" y="225" class="bad">🔴 Red: acceso no restringido entre contenedores</text>
+
+  <!-- Defense layers -->
+  <rect x="440" y="44" width="440" height="196" rx="8" fill="#052e16" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="660" y="64" class="label" text-anchor="middle" fill="#4ade80">🛡️  Capas de Defensa</text>
+
+  <rect x="450" y="72" width="420" height="28" rx="4" fill="#0f3a2a" stroke="#4ade80" stroke-width="1"/>
+  <text x="460" y="91" class="cmd">✅ Imagen base mínima: alpine / distroless</text>
+
+  <rect x="450" y="106" width="420" height="28" rx="4" fill="#0f3a2a" stroke="#4ade80" stroke-width="1"/>
+  <text x="460" y="125" class="cmd">✅ USER no-root: adduser + USER appuser</text>
+
+  <rect x="450" y="140" width="420" height="28" rx="4" fill="#0f3a2a" stroke="#4ade80" stroke-width="1"/>
+  <text x="460" y="159" class="cmd">✅ Secrets: /run/secrets + .env en .gitignore</text>
+
+  <rect x="450" y="174" width="420" height="28" rx="4" fill="#0f3a2a" stroke="#4ade80" stroke-width="1"/>
+  <text x="460" y="193" class="cmd">✅ Drop capabilities: cap_drop: - ALL</text>
+
+  <rect x="450" y="208" width="420" height="24" rx="4" fill="#0f3a2a" stroke="#4ade80" stroke-width="1"/>
+  <text x="460" y="225" class="cmd">✅ Redes internas: internal: true</text>
+
+  <!-- Defense-in-depth rings -->
+  <rect x="20" y="256" width="860" height="116" rx="8" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <text x="450" y="276" class="label" text-anchor="middle" fill="#f87171">Defense in Depth — capas concéntricas</text>
+
+  <!-- Visual rings text based -->
+  <text x="450" y="298" class="note" text-anchor="middle">imagen segura → contenedor no-root → red aislada → secrets en archivo → scan en CI</text>
+  <text x="450" y="316" class="sublabel" text-anchor="middle">Cada capa falla independientemente — si una cae, las otras protegen</text>
+
+  <text x="30" y="340" class="label" fill="#fbbf24">Principio de mínimo privilegio</text>
+  <text x="30" y="356" class="sublabel">Un proceso solo debe tener los permisos estrictamente necesarios para funcionar</text>
+  <text x="30" y="370" class="sublabel">→ Aplica a: usuario, capabilities, puertos, volúmenes, redes y variables</text>
+</svg>

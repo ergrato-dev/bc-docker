@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 380" width="900" height="380">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117"/>
+      <stop offset="100%" style="stop-color:#0f1a0a"/>
+    </linearGradient>
+    <style>
+      .title   { font-family:'Courier New',monospace; font-size:18px; font-weight:bold; fill:#4ade80; }
+      .label   { font-family:'Courier New',monospace; font-size:10px; fill:#fff; font-weight:bold; }
+      .sublabel{ font-family:'Courier New',monospace; font-size:9px; fill:#94a3b8; }
+      .cmd     { font-family:'Courier New',monospace; font-size:9px; fill:#4ade80; }
+      .key     { font-family:'Courier New',monospace; font-size:9px; fill:#a78bfa; }
+      .val     { font-family:'Courier New',monospace; font-size:9px; fill:#4ade80; }
+      .note    { font-family:'Courier New',monospace; font-size:9px; fill:#fbbf24; }
+      .state   { font-family:'Courier New',monospace; font-size:11px; font-weight:bold; }
+    </style>
+    <marker id="arrowg" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#4ade80"/>
+    </marker>
+    <marker id="arrowr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#ef4444"/>
+    </marker>
+    <marker id="arrowy" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#fbbf24"/>
+    </marker>
+  </defs>
+  <rect width="900" height="380" fill="url(#bg)" rx="12"/>
+  <rect width="900" height="380" fill="none" stroke="#16a34a" stroke-width="1" stroke-opacity="0.5" rx="12"/>
+
+  <text x="450" y="28" class="title" text-anchor="middle">Healthchecks en Docker Compose</text>
+
+  <!-- State machine states -->
+  <!-- starting -->
+  <circle cx="140" cy="110" r="48" fill="#1a1a0a" stroke="#fbbf24" stroke-width="2">
+    <animate attributeName="stroke-dasharray" values="0 302;302 0;302 0" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  <text x="140" y="106" class="state" text-anchor="middle" fill="#fbbf24">starting</text>
+  <text x="140" y="122" class="sublabel" text-anchor="middle">probe en progreso</text>
+  <text x="140" y="136" class="sublabel" text-anchor="middle">start_period</text>
+
+  <!-- healthy -->
+  <circle cx="420" cy="110" r="48" fill="#052e16" stroke="#4ade80" stroke-width="2.5">
+    <animate attributeName="stroke-width" values="2.5;4;2.5" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <text x="420" y="106" class="state" text-anchor="middle" fill="#4ade80">healthy</text>
+  <text x="420" y="122" class="sublabel" text-anchor="middle">exit code 0</text>
+  <text x="420" y="136" class="sublabel" text-anchor="middle">consecutivo ✅</text>
+
+  <!-- unhealthy -->
+  <circle cx="700" cy="110" r="48" fill="#1a0505" stroke="#ef4444" stroke-width="2"/>
+  <text x="700" y="106" class="state" text-anchor="middle" fill="#f87171">unhealthy</text>
+  <text x="700" y="122" class="sublabel" text-anchor="middle">retries agotados</text>
+  <text x="700" y="136" class="sublabel" text-anchor="middle">exit code ≠ 0</text>
+
+  <!-- Arrows -->
+  <!-- starting → healthy -->
+  <line x1="189" y1="95" x2="370" y2="95" stroke="#4ade80" stroke-width="1.5" marker-end="url(#arrowg)"/>
+  <text x="280" y="87" class="cmd" text-anchor="middle">exit 0</text>
+
+  <!-- starting → unhealthy -->
+  <path d="M150 158 Q 420 210 652 158" fill="none" stroke="#ef4444" stroke-width="1.5" marker-end="url(#arrowr)"/>
+  <text x="420" y="225" class="sublabel" text-anchor="middle" fill="#f87171">exit ≠ 0  (retries agotados)</text>
+
+  <!-- healthy → unhealthy -->
+  <line x1="468" y1="110" x2="650" y2="110" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrowr)"/>
+  <text x="560" y="102" class="sublabel" text-anchor="middle" fill="#f87171">fallo</text>
+
+  <!-- unhealthy → starting (restart) -->
+  <path d="M 700 62 Q 420 20 140 62" fill="none" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrowy)"/>
+  <text x="420" y="16" class="note" text-anchor="middle">restart_policy reintenta</text>
+
+  <!-- YAML definition -->
+  <rect x="20" y="248" width="390" height="120" rx="8" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+  <text x="215" y="267" class="label" text-anchor="middle" fill="#4ade80">Definición en compose.yml</text>
+  <text x="30" y="284" class="cmd" xml:space="preserve">healthcheck:</text>
+  <text x="30" y="298" class="key" xml:space="preserve">  test: <tspan class="val">["CMD","curl","-f","http://localhost/health"]</tspan></text>
+  <text x="30" y="312" class="key" xml:space="preserve">  interval: <tspan class="val">30s</tspan>     <tspan class="sublabel"># tiempo entre pruebas</tspan></text>
+  <text x="30" y="326" class="key" xml:space="preserve">  timeout:  <tspan class="val">10s</tspan>     <tspan class="sublabel"># máx espera por prueba</tspan></text>
+  <text x="30" y="340" class="key" xml:space="preserve">  retries:  <tspan class="val">3</tspan>       <tspan class="sublabel"># fallos antes unhealthy</tspan></text>
+  <text x="30" y="354" class="key" xml:space="preserve">  start_period: <tspan class="val">15s</tspan>  <tspan class="sublabel"># gracia al inicio</tspan></text>
+
+  <!-- depends_on condition -->
+  <rect x="430" y="248" width="445" height="120" rx="8" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+  <text x="652" y="267" class="label" text-anchor="middle" fill="#4ade80">depends_on con condition</text>
+  <text x="440" y="284" class="cmd" xml:space="preserve">services:</text>
+  <text x="440" y="298" class="sublabel" xml:space="preserve">  api:</text>
+  <text x="440" y="312" class="sublabel" xml:space="preserve">    depends_on:</text>
+  <text x="440" y="326" class="sublabel" xml:space="preserve">      db:</text>
+  <text x="440" y="340" class="key" xml:space="preserve">        condition: <tspan class="val">service_healthy</tspan></text>
+  <text x="440" y="360" class="note" xml:space="preserve">  → api espera que db esté healthy antes de iniciar</text>
+</svg>

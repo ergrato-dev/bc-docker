@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 370" width="900" height="370">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117"/>
+      <stop offset="100%" style="stop-color:#0f1a0a"/>
+    </linearGradient>
+    <style>
+      .title   { font-family:'Courier New',monospace; font-size:18px; font-weight:bold; fill:#4ade80; }
+      .label   { font-family:'Courier New',monospace; font-size:10px; fill:#fff; font-weight:bold; }
+      .sublabel{ font-family:'Courier New',monospace; font-size:9px; fill:#94a3b8; }
+      .cmd     { font-family:'Courier New',monospace; font-size:9px; fill:#4ade80; }
+      .key     { font-family:'Courier New',monospace; font-size:9px; fill:#a78bfa; }
+      .val     { font-family:'Courier New',monospace; font-size:9px; fill:#4ade80; }
+      .note    { font-family:'Courier New',monospace; font-size:9px; fill:#fbbf24; }
+      .zonelabel { font-family:'Courier New',monospace; font-size:12px; font-weight:bold; }
+    </style>
+  </defs>
+  <rect width="900" height="370" fill="url(#bg)" rx="12"/>
+  <rect width="900" height="370" fill="none" stroke="#16a34a" stroke-width="1" stroke-opacity="0.5" rx="12"/>
+
+  <text x="450" y="28" class="title" text-anchor="middle">Docker Compose Profiles</text>
+
+  <!-- Core zone (always active) -->
+  <rect x="20" y="48" width="860" height="140" rx="10" fill="#052e16" stroke="#16a34a" stroke-width="2"/>
+  <text x="450" y="68" class="zonelabel" text-anchor="middle" fill="#4ade80">CORE — siempre activo (sin profiles:)</text>
+
+  <!-- db service -->
+  <rect x="50" y="80" width="120" height="90" rx="8" fill="#0f3a2a" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="110" y="100" class="label" text-anchor="middle">db</text>
+  <text x="110" y="114" class="sublabel" text-anchor="middle">postgres</text>
+  <text x="110" y="128" class="val" text-anchor="middle">:5432</text>
+  <text x="110" y="142" class="note" text-anchor="middle">siempre</text>
+  <text x="110" y="156" class="sublabel" text-anchor="middle">arriba ✅</text>
+
+  <!-- app service -->
+  <rect x="220" y="80" width="120" height="90" rx="8" fill="#0f3a2a" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="280" y="100" class="label" text-anchor="middle">app</text>
+  <text x="280" y="114" class="sublabel" text-anchor="middle">web server</text>
+  <text x="280" y="128" class="val" text-anchor="middle">:3000</text>
+  <text x="280" y="142" class="note" text-anchor="middle">siempre</text>
+  <text x="280" y="156" class="sublabel" text-anchor="middle">arriba ✅</text>
+
+  <!-- profile zone: debug -->
+  <rect x="420" y="80" width="160" height="90" rx="8" fill="#0f1a2e" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="500" y="100" class="label" text-anchor="middle" fill="#38bdf8">📦 profile: debug</text>
+  <text x="500" y="116" class="sublabel" text-anchor="middle">pgadmin</text>
+  <text x="500" y="130" class="sublabel" text-anchor="middle">UI de base de datos</text>
+  <text x="500" y="144" class="sublabel" text-anchor="middle" fill="#f87171">solo con</text>
+  <text x="500" y="158" class="cmd" text-anchor="middle">--profile debug</text>
+
+  <!-- profile zone: monitoring -->
+  <rect x="610" y="80" width="160" height="90" rx="8" fill="#1a0a1a" stroke="#a78bfa" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="690" y="100" class="label" text-anchor="middle" fill="#a78bfa">📦 profile: monitoring</text>
+  <text x="690" y="116" class="sublabel" text-anchor="middle">prometheus</text>
+  <text x="690" y="128" class="sublabel" text-anchor="middle">+ grafana</text>
+  <text x="690" y="144" class="sublabel" text-anchor="middle" fill="#f87171">solo con</text>
+  <text x="690" y="158" class="cmd" text-anchor="middle">--profile monitoring</text>
+
+  <!-- Profile YAML definition -->
+  <rect x="20" y="205" width="400" height="148" rx="8" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+  <text x="220" y="224" class="label" text-anchor="middle" fill="#4ade80">Definición en compose.yml</text>
+  <text x="30" y="242" class="cmd" xml:space="preserve">services:</text>
+  <text x="30" y="256" class="cmd" xml:space="preserve">  app:   <tspan class="sublabel"># sin profiles → siempre activo</tspan></text>
+  <text x="30" y="270" class="cmd" xml:space="preserve">    image: my-app</text>
+  <text x="30" y="284" class="cmd" xml:space="preserve">  pgadmin:</text>
+  <text x="30" y="298" class="cmd" xml:space="preserve">    image: dpage/pgadmin4</text>
+  <text x="30" y="312" class="cmd" xml:space="preserve">    profiles:</text>
+  <text x="30" y="326" class="key" xml:space="preserve">      - <tspan class="val">debug</tspan></text>
+  <text x="30" y="340" class="sublabel" xml:space="preserve">  # → solo con --profile debug</text>
+
+  <!-- Activation commands -->
+  <rect x="440" y="205" width="440" height="148" rx="8" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+  <text x="660" y="224" class="label" text-anchor="middle" fill="#4ade80">Activación de Profiles</text>
+  <text x="450" y="242" class="sublabel">Sin profile → solo servicios CORE</text>
+  <text x="450" y="256" class="cmd">docker compose up -d</text>
+  <line x1="450" y1="264" x2="875" y2="264" stroke="#1e293b"/>
+  <text x="450" y="280" class="sublabel">Activar un profile específico</text>
+  <text x="450" y="294" class="cmd">docker compose --profile debug up -d</text>
+  <line x1="450" y1="302" x2="875" y2="302" stroke="#1e293b"/>
+  <text x="450" y="318" class="sublabel">Activar múltiples profiles</text>
+  <text x="450" y="332" class="cmd">docker compose \</text>
+  <text x="450" y="346" class="cmd">  --profile debug --profile monitoring up -d</text>
+</svg>

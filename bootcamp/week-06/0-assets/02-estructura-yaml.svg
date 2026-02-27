@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" width="900" height="400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117"/>
+      <stop offset="100%" style="stop-color:#0a1628"/>
+    </linearGradient>
+    <style>
+      .title  { font-family:'Courier New',monospace; font-size:18px; font-weight:bold; fill:#38bdf8; }
+      .section{ font-family:'Courier New',monospace; font-size:10px; fill:#fbbf24; font-weight:bold; }
+      .key    { font-family:'Courier New',monospace; font-size:10px; fill:#a78bfa; }
+      .val    { font-family:'Courier New',monospace; font-size:10px; fill:#4ade80; }
+      .comment{ font-family:'Courier New',monospace; font-size:9px; fill:#6b7280; font-style:italic; }
+      .ann    { font-family:'Courier New',monospace; font-size:9px; fill:#f59e0b; }
+      .label  { font-family:'Courier New',monospace; font-size:10px; fill:#fff; font-weight:bold; }
+    </style>
+  </defs>
+  <rect width="900" height="400" fill="url(#bg)" rx="12"/>
+  <rect width="900" height="400" fill="none" stroke="#0284c7" stroke-width="1" stroke-opacity="0.5" rx="12"/>
+
+  <text x="450" y="28" class="title" text-anchor="middle">Anatomía de docker-compose.yml</text>
+
+  <!-- YAML CODE panel -->
+  <rect x="20" y="42" width="450" height="345" rx="8" fill="#0a0a0a" stroke="#1e293b" stroke-width="1.5"/>
+  <text x="30" y="60" class="comment"># docker-compose.yml</text>
+
+  <!-- services -->
+  <text x="30" y="78" class="key">services:</text>
+  <rect x="24" y="66" width="8" height="14" rx="1" fill="#7c3aed" opacity="0.7"/>
+
+  <text x="30" y="95" class="key">  api:</text>
+  <text x="30" y="112" class="val">    build: ./api</text>
+  <text x="30" y="129" class="val">    image: myapi:dev</text>
+  <text x="30" y="146" class="val">    container_name: my-api</text>
+  <text x="30" y="163" class="val">    ports:</text>
+  <text x="30" y="180" class="val">      - "8000:8000"</text>
+  <text x="30" y="197" class="val">    environment:</text>
+  <text x="30" y="214" class="val">      DB_HOST: db</text>
+  <text x="30" y="231" class="val">    depends_on:</text>
+  <text x="30" y="248" class="val">      - db</text>
+  <text x="30" y="265" class="val">    restart: unless-stopped</text>
+  <text x="30" y="282" class="val">    networks:</text>
+  <text x="30" y="299" class="val">      - app-net</text>
+
+  <!-- volumes section -->
+  <text x="30" y="316" class="key">volumes:</text>
+  <rect x="24" y="304" width="8" height="14" rx="1" fill="#0284c7" opacity="0.7"/>
+  <text x="30" y="333" class="val">  db-data:</text>
+
+  <!-- networks section -->
+  <text x="30" y="350" class="key">networks:</text>
+  <rect x="24" y="338" width="8" height="14" rx="1" fill="#059669" opacity="0.7"/>
+  <text x="30" y="367" class="val">  app-net:</text>
+
+  <!-- ANNOTATIONS panel -->
+  <rect x="490" y="42" width="395" height="345" rx="8" fill="#0f172a" stroke="#1e293b" stroke-width="1.5"/>
+
+  <!-- Annotation: services -->
+  <rect x="500" y="55" width="375" height="48" rx="6" fill="#1e1b4b" stroke="#7c3aed" stroke-width="1"/>
+  <text x="515" y="72" class="ann" fill="#a78bfa">services: ← nivel top-level</text>
+  <text x="515" y="87" class="comment">Define los contenedores del stack. Cada clave es un nombre de servicio.</text>
+
+  <!-- Annotation: build vs image -->
+  <rect x="500" y="112" width="375" height="62" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+  <text x="515" y="128" class="ann">build: vs image:</text>
+  <text x="515" y="143" class="comment">build: construye desde Dockerfile en esa ruta.</text>
+  <text x="515" y="158" class="comment">image: usa una imagen ya existente (registry/local).</text>
+
+  <!-- Annotation: ports -->
+  <rect x="500" y="183" width="375" height="48" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+  <text x="515" y="199" class="ann">ports: "HOST:CONTAINER"</text>
+  <text x="515" y="214" class="comment">Mapea puerto del host al del contenedor. Puede omitirse si no es accesible externamente.</text>
+
+  <!-- Annotation: depends_on -->
+  <rect x="500" y="240" width="375" height="48" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+  <text x="515" y="256" class="ann">depends_on: — orden de arranque</text>
+  <text x="515" y="271" class="comment">No espera a que el servicio esté listo, solo que haya arrancado.</text>
+
+  <!-- Annotation: volumes/networks top-level -->
+  <rect x="500" y="297" width="375" height="82" rx="6" fill="#0c4a6e" stroke="#0284c7" stroke-width="1"/>
+  <text x="515" y="313" class="ann" fill="#38bdf8">volumes: y networks: top-level</text>
+  <text x="515" y="328" class="comment">Declaran recursos compartidos entre servicios.</text>
+  <text x="515" y="343" class="comment">Sin declarar → se crean con nombre automático.</text>
+  <text x="515" y="358" class="comment">networks.app-net.internal: true → sin acceso a internet.</text>
+  <text x="515" y="370" class="val" font-size="9">volumes.db-data:    # solo la clave crea el named volume</text>
+</svg>

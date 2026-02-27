@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 340" width="900" height="340">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117"/>
+      <stop offset="100%" style="stop-color:#1a1130"/>
+    </linearGradient>
+    <linearGradient id="ramGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#8b5cf6"/>
+      <stop offset="100%" style="stop-color:#4c1d95"/>
+    </linearGradient>
+    <style>
+      .title { font-family:'Courier New',monospace; font-size:18px; font-weight:bold; fill:#c084fc; }
+      .label { font-family:'Courier New',monospace; font-size:11px; fill:#fff; font-weight:bold; }
+      .sublabel { font-family:'Courier New',monospace; font-size:9px; fill:#94a3b8; }
+      .cmd { font-family:'Courier New',monospace; font-size:10px; fill:#4ade80; }
+      .bad  { font-family:'Courier New',monospace; font-size:9px; fill:#f87171; }
+      .good { font-family:'Courier New',monospace; font-size:9px; fill:#4ade80; }
+      .note { font-family:'Courier New',monospace; font-size:9px; fill:#fbbf24; }
+    </style>
+  </defs>
+  <rect width="900" height="340" fill="url(#bg)" rx="12"/>
+  <rect width="900" height="340" fill="none" stroke="#7c3aed" stroke-width="1" stroke-opacity="0.5" rx="12"/>
+
+  <text x="450" y="28" class="title" text-anchor="middle">tmpfs Mount — Almacenamiento en RAM (sin disco)</text>
+
+  <!-- Comparación: disco vs RAM -->
+  <!-- Named Volume (disco) -->
+  <rect x="20" y="45" width="260" height="240" rx="10" fill="#0f172a" stroke="#374151" stroke-width="1.5"/>
+  <text x="150" y="66" class="label" text-anchor="middle" fill="#f59e0b">📀 Named Volume (disco)</text>
+  <rect x="35" y="76" width="230" height="80" rx="6" fill="#1e293b" stroke="#475569"/>
+  <text x="150" y="96" class="sublabel" text-anchor="middle">Container</text>
+  <text x="150" y="112" class="cmd" text-anchor="middle">/app/uploads</text>
+  <line x1="150" y1="157" x2="150" y2="185" stroke="#f59e0b" stroke-width="2"/>
+  <polygon points="146,183 154,183 150,191" fill="#f59e0b"/>
+  <text x="150" y="143" class="sublabel" text-anchor="middle">monta en</text>
+  <rect x="35" y="192" width="230" height="55" rx="6" fill="#1a1a2e" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="150" y="213" class="label" text-anchor="middle" fill="#f59e0b">Disco</text>
+  <text x="150" y="230" class="sublabel" text-anchor="middle">/var/lib/docker/volumes</text>
+  <text x="150" y="245" class="sublabel" text-anchor="middle">persiste después del rm</text>
+
+  <!-- tmpfs (RAM) -->
+  <rect x="320" y="45" width="260" height="240" rx="10" fill="#0f172a" stroke="#8b5cf6" stroke-width="1.5"/>
+  <text x="450" y="66" class="label" text-anchor="middle" fill="#c084fc">💾 tmpfs (RAM)</text>
+  <rect x="335" y="76" width="230" height="80" rx="6" fill="#1e293b" stroke="#475569"/>
+  <text x="450" y="96" class="sublabel" text-anchor="middle">Container</text>
+  <text x="450" y="112" class="cmd" text-anchor="middle">/tmp   /var/run</text>
+  <line x1="450" y1="157" x2="450" y2="185" stroke="#8b5cf6" stroke-width="2">
+    <animate attributeName="stroke-dasharray" values="0,30;30,0;0,30" dur="1.5s" repeatCount="indefinite"/>
+  </line>
+  <polygon points="446,183 454,183 450,191" fill="#8b5cf6"/>
+  <text x="450" y="143" class="sublabel" text-anchor="middle">monta en</text>
+  <rect x="335" y="192" width="230" height="55" rx="6" fill="#1a1130" stroke="#8b5cf6" stroke-width="1.5"/>
+  <text x="450" y="213" class="label" text-anchor="middle" fill="#c084fc">RAM del Host</text>
+  <text x="450" y="230" class="sublabel" text-anchor="middle">acceso ultrarrápido</text>
+  <text x="450" y="245" class="sublabel" text-anchor="middle" fill="#f87171">se borra al parar el contenedor</text>
+
+  <!-- Ventajas / uso -->
+  <rect x="615" y="45" width="265" height="240" rx="10" fill="#0f172a" stroke="#374151" stroke-width="1.5"/>
+  <text x="747" y="66" class="label" text-anchor="middle">¿Cuándo usar tmpfs?</text>
+  <text x="630" y="85" class="good">✅ Datos sensibles en /tmp</text>
+  <text x="630" y="100" class="good">✅ Sesiones no persistentes</text>
+  <text x="630" y="115" class="good">✅ Cache solo durante ejecución</text>
+  <text x="630" y="130" class="good">✅ read_only: true + /tmp</text>
+  <text x="630" y="145" class="good">✅ Rendimiento vs disco</text>
+  <line x1="625" y1="155" x2="873" y2="155" stroke="#334155"/>
+  <text x="630" y="172" class="bad">❌ Archivos que deben persistir</text>
+  <text x="630" y="187" class="bad">❌ Logs a auditar</text>
+  <text x="630" y="202" class="bad">❌ DB data</text>
+  <line x1="625" y1="215" x2="873" y2="215" stroke="#334155"/>
+  <text x="630" y="232" class="cmd" font-size="9">tmpfs:</text>
+  <text x="630" y="247" class="cmd" font-size="9">  - /tmp:size=50m,mode=1777</text>
+  <text x="630" y="262" class="cmd" font-size="9">  - /var/run:size=10m</text>
+
+  <!-- Nota abajo -->
+  <rect x="20" y="300" width="860" height="28" rx="6" fill="#0f172a" stroke="#334155"/>
+  <text x="450" y="318" class="note" text-anchor="middle">tmpfs vive en RAM → no deja rastro en disco → ideal para secretos temporales y archivos de sesión efímeros</text>
+</svg>

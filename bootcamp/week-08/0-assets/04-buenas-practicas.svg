@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" width="900" height="400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117"/>
+      <stop offset="100%" style="stop-color:#1a0505"/>
+    </linearGradient>
+    <style>
+      .title   { font-family:'Courier New',monospace; font-size:18px; font-weight:bold; fill:#f87171; }
+      .label   { font-family:'Courier New',monospace; font-size:10px; fill:#fff; font-weight:bold; }
+      .sublabel{ font-family:'Courier New',monospace; font-size:9px; fill:#94a3b8; }
+      .cmd     { font-family:'Courier New',monospace; font-size:9px; fill:#4ade80; }
+      .key     { font-family:'Courier New',monospace; font-size:9px; fill:#a78bfa; }
+      .bad     { font-family:'Courier New',monospace; font-size:9px; fill:#f87171; }
+      .note    { font-family:'Courier New',monospace; font-size:9px; fill:#fbbf24; }
+      .check   { font-family:'Courier New',monospace; font-size:9px; fill:#4ade80; }
+    </style>
+  </defs>
+  <rect width="900" height="400" fill="url(#bg)" rx="12"/>
+  <rect width="900" height="400" fill="none" stroke="#dc2626" stroke-width="1" stroke-opacity="0.5" rx="12"/>
+
+  <text x="450" y="28" class="title" text-anchor="middle">Buenas Prácticas de Seguridad — Checklist</text>
+
+  <!-- Layer 1: Dockerfile -->
+  <rect x="20" y="44" width="270" height="210" rx="8" fill="#0f1a0f" stroke="#4ade80" stroke-width="1.5"/>
+  <rect x="20" y="44" width="270" height="26" rx="8" fill="#064e3b"/>
+  <text x="155" y="62" class="label" text-anchor="middle" fill="#4ade80">📄 Dockerfile</text>
+
+  <text x="32" y="86" class="cmd">☑ imagen base con tag específico</text>
+  <text x="32" y="100" class="sublabel">  FROM node:20.11-alpine3.19</text>
+  <text x="32" y="116" class="cmd">☑ multi-stage build</text>
+  <text x="32" y="130" class="sublabel">  FROM ... AS builder → FROM alpine</text>
+  <text x="32" y="144" class="cmd">☑ usuario no-root</text>
+  <text x="32" y="158" class="sublabel">  RUN adduser -S app; USER app</text>
+  <text x="32" y="174" class="cmd">☑ COPY --chown=app:app</text>
+  <text x="32" y="188" class="sublabel">  permisos correctos en archivos</text>
+  <text x="32" y="202" class="cmd">☑ .dockerignore</text>
+  <text x="32" y="216" class="sublabel">  excluir .git, node_modules, .env</text>
+  <text x="32" y="230" class="cmd">☑ sin secretos en imagen</text>
+  <text x="32" y="244" class="sublabel">  no ARG/ENV con passwords</text>
+
+  <!-- Layer 2: Compose -->
+  <rect x="310" y="44" width="270" height="210" rx="8" fill="#0f0a1a" stroke="#a78bfa" stroke-width="1.5"/>
+  <rect x="310" y="44" width="270" height="26" rx="8" fill="#2e1065"/>
+  <text x="445" y="62" class="label" text-anchor="middle" fill="#a78bfa">🐙 Docker Compose</text>
+
+  <text x="322" y="86" class="key">☑ redes internas (internal: true)</text>
+  <text x="322" y="100" class="sublabel">  db solo en internal-net</text>
+  <text x="322" y="116" class="key">☑ secrets: en vez de env vars</text>
+  <text x="322" y="130" class="sublabel">  /run/secrets/nombre</text>
+  <text x="322" y="144" class="key">☑ read_only: true en fs</text>
+  <text x="322" y="158" class="sublabel">  sistema de archivos read-only</text>
+  <text x="322" y="174" class="key">☑ healthchecks definidos</text>
+  <text x="322" y="188" class="sublabel">  depends_on: condition: healthy</text>
+  <text x="322" y="202" class="key">☑ restart: unless-stopped</text>
+  <text x="322" y="216" class="sublabel">  no always en desarrollo</text>
+  <text x="322" y="230" class="key">☑ límites de recursos</text>
+  <text x="322" y="244" class="sublabel">  mem_limit / cpus</text>
+
+  <!-- Layer 3: CI/Security -->
+  <rect x="600" y="44" width="280" height="210" rx="8" fill="#1a0505" stroke="#ef4444" stroke-width="1.5"/>
+  <rect x="600" y="44" width="280" height="26" rx="8" fill="#7f1d1d"/>
+  <text x="740" y="62" class="label" text-anchor="middle" fill="#f87171">🔒 CI / Producción</text>
+
+  <text x="612" y="86" class="bad">☑ trivy scan antes de push</text>
+  <text x="612" y="100" class="sublabel">  bloquear si CRITICAL/HIGH</text>
+  <text x="612" y="116" class="bad">☑ .env en .gitignore</text>
+  <text x="612" y="130" class="sublabel">  usar .env.example como template</text>
+  <text x="612" y="144" class="bad">☑ no usar :latest en CI</text>
+  <text x="612" y="158" class="sublabel">  tags inmutables: sha256 o versión</text>
+  <text x="612" y="174" class="bad">☑ Docker Content Trust (DCT)</text>
+  <text x="612" y="188" class="sublabel">  verificar firma de imágenes</text>
+  <text x="612" y="202" class="bad">☑ registry privado</text>
+  <text x="612" y="216" class="sublabel">  no hub público para imágenes internas</text>
+  <text x="612" y="230" class="bad">☑ cap_drop: - ALL</text>
+  <text x="612" y="244" class="sublabel">  drop capabilities no necesarios</text>
+
+  <!-- Bottom priority guide -->
+  <rect x="20" y="270" width="860" height="112" rx="8" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <text x="450" y="290" class="label" text-anchor="middle" fill="#f87171">Prioridades de implementación</text>
+  <line x1="20" y1="298" x2="880" y2="298" stroke="#334155"/>
+
+  <rect x="30" y="306" width="170" height="36" rx="6" fill="#064e3b" stroke="#4ade80" stroke-width="1"/>
+  <text x="115" y="322" class="cmd" text-anchor="middle">1. imagen base slim</text>
+  <text x="115" y="336" class="sublabel" text-anchor="middle">+ usuario no-root</text>
+
+  <rect x="215" y="306" width="170" height="36" rx="6" fill="#1e0a3a" stroke="#a78bfa" stroke-width="1"/>
+  <text x="300" y="322" class="key" text-anchor="middle">2. secrets + redes</text>
+  <text x="300" y="336" class="sublabel" text-anchor="middle">+ .dockerignore</text>
+
+  <rect x="400" y="306" width="170" height="36" rx="6" fill="#1a0505" stroke="#ef4444" stroke-width="1"/>
+  <text x="485" y="322" class="bad" text-anchor="middle">3. scan en CI</text>
+  <text x="485" y="336" class="sublabel" text-anchor="middle">+ bloquear CVEs</text>
+
+  <rect x="585" y="306" width="170" height="36" rx="6" fill="#1a1a0a" stroke="#fbbf24" stroke-width="1"/>
+  <text x="670" y="322" class="note" text-anchor="middle">4. healthchecks</text>
+  <text x="670" y="336" class="sublabel" text-anchor="middle">+ restart policy</text>
+
+  <rect x="770" y="306" width="100" height="36" rx="6" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+  <text x="820" y="322" class="sublabel" text-anchor="middle">5. cap_drop</text>
+  <text x="820" y="336" class="sublabel" text-anchor="middle">+ read_only</text>
+
+  <text x="450" y="374" class="note" text-anchor="middle">Implementar en orden: base sólida → configuración segura → automatizar verificación en CI</text>
+</svg>

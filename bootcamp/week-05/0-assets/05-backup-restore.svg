@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 360" width="900" height="360">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117"/>
+      <stop offset="100%" style="stop-color:#0a2010"/>
+    </linearGradient>
+    <style>
+      .title { font-family:'Courier New',monospace; font-size:18px; font-weight:bold; fill:#34d399; }
+      .label { font-family:'Courier New',monospace; font-size:11px; fill:#fff; font-weight:bold; }
+      .sublabel { font-family:'Courier New',monospace; font-size:9px; fill:#94a3b8; }
+      .cmd { font-family:'Courier New',monospace; font-size:10px; fill:#4ade80; }
+      .step { font-family:'Courier New',monospace; font-size:10px; fill:#fbbf24; font-weight:bold; }
+      .note { font-family:'Courier New',monospace; font-size:9px; fill:#fbbf24; }
+      .path { font-family:'Courier New',monospace; font-size:9px; fill:#93c5fd; }
+    </style>
+  </defs>
+  <rect width="900" height="360" fill="url(#bg)" rx="12"/>
+  <rect width="900" height="360" fill="none" stroke="#059669" stroke-width="1" stroke-opacity="0.5" rx="12"/>
+
+  <text x="450" y="28" class="title" text-anchor="middle">Backup y Restore de Volúmenes</text>
+
+  <!-- BACKUP FLOW -->
+  <text x="20" y="52" class="step">── BACKUP ──────────────────────────────────────────────────────────</text>
+
+  <!-- Paso 1: Volume con datos -->
+  <rect x="20" y="62" width="145" height="90" rx="8" fill="#0c4a6e" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="92" y="82" class="label" text-anchor="middle">📦 Volume</text>
+  <text x="92" y="97" class="sublabel" text-anchor="middle">mi-datos</text>
+  <text x="35" y="113" class="path">_data/</text>
+  <text x="42" y="127" class="path">├── db.sqlite</text>
+  <text x="42" y="141" class="path">└── uploads/</text>
+
+  <!-- Arrow 1 -->
+  <line x1="166" y1="107" x2="198" y2="107" stroke="#f59e0b" stroke-width="2"/>
+  <polygon points="196,103 204,107 196,111" fill="#f59e0b"/>
+  <text x="182" y="99" class="sublabel" text-anchor="middle">-v</text>
+
+  <!-- Paso 2: Container efímero con tar -->
+  <rect x="200" y="62" width="195" height="90" rx="8" fill="#1e1b4b" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="297" y="82" class="label" text-anchor="middle">Container efímero</text>
+  <text x="210" y="97" class="cmd" font-size="9">docker run --rm</text>
+  <text x="210" y="112" class="cmd" font-size="9">  -v mi-datos:/data:ro</text>
+  <text x="210" y="127" class="cmd" font-size="9">  -v $(pwd):/backup</text>
+  <text x="210" y="142" class="cmd" font-size="9">  alpine tar czf /backup/bk.tar.gz /data</text>
+
+  <!-- Arrow 2 -->
+  <line x1="396" y1="107" x2="428" y2="107" stroke="#f59e0b" stroke-width="2"/>
+  <polygon points="426,103 434,107 426,111" fill="#f59e0b"/>
+
+  <!-- Paso 3: tar.gz en host -->
+  <rect x="430" y="62" width="145" height="90" rx="8" fill="#064e3b" stroke="#10b981" stroke-width="1.5"/>
+  <text x="502" y="82" class="label" text-anchor="middle">📁 Host</text>
+  <text x="502" y="97" class="sublabel" text-anchor="middle">$(pwd)/</text>
+  <text x="445" y="113" class="path">backup/</text>
+  <text x="452" y="128" class="path">└── bk.tar.gz</text>
+  <text x="452" y="143" class="sublabel">← el backup</text>
+
+  <!-- Copiar/mover a safeguard -->
+  <line x1="576" y1="107" x2="608" y2="107" stroke="#f59e0b" stroke-width="2"/>
+  <polygon points="606,103 614,107 606,111" fill="#f59e0b"/>
+  <text x="592" y="99" class="sublabel" text-anchor="middle">cp/scp</text>
+
+  <!-- Almacenamiento remoto -->
+  <rect x="610" y="62" width="145" height="90" rx="8" fill="#1c1917" stroke="#78716c" stroke-width="1.5"/>
+  <text x="682" y="82" class="label" text-anchor="middle" fill="#a8a29e">☁️  Remoto</text>
+  <text x="682" y="97" class="sublabel" text-anchor="middle">S3 / NAS / SCP</text>
+  <text x="625" y="115" class="sublabel">bk-2026-02-27.tar.gz</text>
+  <text x="625" y="130" class="sublabel">bk-2026-02-26.tar.gz</text>
+  <text x="625" y="145" class="sublabel">bk-2026-02-25.tar.gz</text>
+
+  <!-- RESTORE FLOW -->
+  <text x="20" y="177" class="step">── RESTORE ─────────────────────────────────────────────────────────</text>
+
+  <!-- tar.gz origen -->
+  <rect x="20" y="187" width="145" height="80" rx="8" fill="#064e3b" stroke="#10b981" stroke-width="1.5"/>
+  <text x="92" y="207" class="label" text-anchor="middle">📁 bk.tar.gz</text>
+  <text x="92" y="222" class="sublabel" text-anchor="middle">el archivo backup</text>
+  <text x="35" y="240" class="cmd" font-size="9">ls -lh backup/</text>
+  <text x="35" y="254" class="cmd" font-size="9">bk.tar.gz  2.3M</text>
+
+  <line x1="166" y1="227" x2="198" y2="227" stroke="#f59e0b" stroke-width="2"/>
+  <polygon points="196,223 204,227 196,231" fill="#f59e0b"/>
+
+  <!-- Container restore -->
+  <rect x="200" y="187" width="225" height="80" rx="8" fill="#1e1b4b" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="312" y="207" class="label" text-anchor="middle">Container efímero</text>
+  <text x="210" y="222" class="cmd" font-size="9">docker run --rm</text>
+  <text x="210" y="237" class="cmd" font-size="9">  -v mi-datos:/data</text>
+  <text x="210" y="252" class="cmd" font-size="9">  -v $(pwd):/backup alpine</text>
+  <text x="210" y="264" class="cmd" font-size="9">  tar xzf /backup/bk.tar.gz -C /data</text>
+
+  <line x1="426" y1="227" x2="458" y2="227" stroke="#f59e0b" stroke-width="2"/>
+  <polygon points="456,223 464,227 456,231" fill="#f59e0b"/>
+
+  <!-- Nuevo volume restaurado -->
+  <rect x="460" y="187" width="145" height="80" rx="8" fill="#0c4a6e" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="532" y="207" class="label" text-anchor="middle">📦 Volume</text>
+  <text x="532" y="222" class="sublabel" text-anchor="middle">mi-datos (restaurado)</text>
+  <text x="475" y="240" class="path">_data/</text>
+  <text x="482" y="255" class="path">├── db.sqlite ✅</text>
+  <text x="482" y="268" class="path">└── uploads/ ✅</text>
+
+  <!-- Attach nuevo container -->
+  <line x1="606" y1="227" x2="638" y2="227" stroke="#10b981" stroke-width="2"/>
+  <polygon points="636,223 644,227 636,231" fill="#10b981"/>
+
+  <rect x="640" y="187" width="130" height="80" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="1.5"/>
+  <text x="705" y="207" class="label" text-anchor="middle">Container</text>
+  <text x="705" y="222" class="label" text-anchor="middle">nuevo</text>
+  <text x="705" y="240" class="sublabel" text-anchor="middle">monta el volumen</text>
+  <text x="705" y="255" class="sublabel" text-anchor="middle">restaurado ✅</text>
+
+  <!-- Tips abajo -->
+  <rect x="20" y="285" width="860" height="62" rx="6" fill="#0f172a" stroke="#334155"/>
+  <text x="35" y="303" class="note">💡 Tip: Detén el contenedor antes de hacer backup para garantizar consistencia de datos</text>
+  <text x="35" y="320" class="cmd" font-size="9">docker compose stop api   # detener antes del backup</text>
+  <text x="35" y="336" class="cmd" font-size="9">docker run --rm -v mi-datos:/data:ro -v $(pwd):/backup alpine tar czf /backup/$(date +%Y%m%d).tar.gz /data</text>
+</svg>

@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 380" width="900" height="380">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117"/>
+      <stop offset="100%" style="stop-color:#0a1628"/>
+    </linearGradient>
+    <style>
+      .title { font-family:'Courier New',monospace; font-size:18px; font-weight:bold; fill:#38bdf8; }
+      .label { font-family:'Courier New',monospace; font-size:11px; fill:#fff; font-weight:bold; }
+      .sublabel { font-family:'Courier New',monospace; font-size:9px; fill:#94a3b8; }
+      .cmd { font-family:'Courier New',monospace; font-size:9.5px; fill:#4ade80; }
+      .bad { font-family:'Courier New',monospace; font-size:9px; fill:#f87171; }
+      .note { font-family:'Courier New',monospace; font-size:9px; fill:#fbbf24; }
+      .key { font-family:'Courier New',monospace; font-size:9px; fill:#a78bfa; }
+    </style>
+  </defs>
+  <rect width="900" height="380" fill="url(#bg)" rx="12"/>
+  <rect width="900" height="380" fill="none" stroke="#0284c7" stroke-width="1" stroke-opacity="0.5" rx="12"/>
+
+  <text x="450" y="28" class="title" text-anchor="middle">Docker Compose — Por qué y Para qué</text>
+
+  <!-- Sin Compose: múltiples docker run -->
+  <rect x="15" y="40" width="420" height="300" rx="10" fill="#1a0505" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="225" y="60" class="label" text-anchor="middle" fill="#f87171">❌ Sin Compose: 4 comandos sin coordinación</text>
+
+  <rect x="28" y="70" width="394" height="52" rx="6" fill="#111"/>
+  <text x="35" y="86" class="bad">$ docker network create app-net</text>
+  <text x="35" y="102" class="bad">$ docker volume create pg-data</text>
+
+  <rect x="28" y="130" width="394" height="66" rx="6" fill="#111"/>
+  <text x="35" y="147" class="bad">$ docker run -d --name postgres \</text>
+  <text x="35" y="162" class="bad">    --network app-net -v pg-data:/var/lib/postgresql/data \</text>
+  <text x="35" y="177" class="bad">    -e POSTGRES_PASSWORD=secret postgres:16</text>
+
+  <rect x="28" y="204" width="394" height="66" rx="6" fill="#111"/>
+  <text x="35" y="221" class="bad">$ docker run -d --name api \</text>
+  <text x="35" y="236" class="bad">    --network app-net -p 8000:8000 \</text>
+  <text x="35" y="251" class="bad">    -e DB_HOST=postgres myapi:latest</text>
+
+  <rect x="28" y="278" width="394" height="52" rx="6" fill="#111"/>
+  <text x="35" y="295" class="bad">$ docker run -d --name nginx \</text>
+  <text x="35" y="310" class="bad">    --network app-net -p 80:80 nginx:alpine</text>
+
+  <!-- Con Compose -->
+  <rect x="465" y="40" width="420" height="300" rx="10" fill="#011a05" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="675" y="60" class="label" text-anchor="middle" fill="#4ade80">✅ Con Compose: un archivo, un comando</text>
+
+  <rect x="478" y="70" width="394" height="245" rx="6" fill="#0a0a0a" stroke="#1e3a1e"/>
+  <text x="488" y="87" class="key">services:</text>
+  <text x="500" y="102" class="key">  db:</text>
+  <text x="512" y="117" class="cmd">    image: postgres:16</text>
+  <text x="512" y="132" class="cmd">    environment:</text>
+  <text x="524" y="147" class="cmd">      POSTGRES_PASSWORD: secret</text>
+  <text x="512" y="162" class="cmd">    volumes:</text>
+  <text x="524" y="177" class="cmd">      - pg-data:/var/lib/postgresql/data</text>
+  <text x="500" y="194" class="key">  api:</text>
+  <text x="512" y="209" class="cmd">    build: .</text>
+  <text x="512" y="224" class="cmd">    ports: ["8000:8000"]</text>
+  <text x="512" y="239" class="cmd">    depends_on: [db]</text>
+  <text x="500" y="256" class="key">  nginx:</text>
+  <text x="512" y="271" class="cmd">    image: nginx:alpine</text>
+  <text x="512" y="286" class="cmd">    ports: ["80:80"]</text>
+  <text x="488" y="303" class="key">volumes:</text>
+  <text x="500" y="303" class="cmd">  pg-data:</text>
+
+  <!-- VS arrow -->
+  <text x="443" y="198" class="label" text-anchor="middle" fill="#f59e0b">VS</text>
+
+  <!-- Comandos abajo -->
+  <rect x="15" y="350" width="870" height="24" rx="6" fill="#0f172a" stroke="#334155"/>
+  <text x="30" y="366" class="cmd">$ docker compose up -d    # levanta todo en orden correcto</text>
+  <text x="450" y="366" class="cmd">$ docker compose down -v  # baja todo y limpia volúmenes</text>
+</svg>

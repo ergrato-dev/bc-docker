@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 360" width="900" height="360">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117"/>
+      <stop offset="100%" style="stop-color:#0a1628"/>
+    </linearGradient>
+    <style>
+      .title   { font-family:'Courier New',monospace; font-size:18px; font-weight:bold; fill:#38bdf8; }
+      .label   { font-family:'Courier New',monospace; font-size:10px; fill:#fff; font-weight:bold; }
+      .sublabel{ font-family:'Courier New',monospace; font-size:9px; fill:#94a3b8; }
+      .cmd     { font-family:'Courier New',monospace; font-size:9px; fill:#4ade80; }
+      .state   { font-family:'Courier New',monospace; font-size:10px; font-weight:bold; }
+      .note    { font-family:'Courier New',monospace; font-size:9px; fill:#fbbf24; }
+    </style>
+  </defs>
+  <rect width="900" height="360" fill="url(#bg)" rx="12"/>
+  <rect width="900" height="360" fill="none" stroke="#0284c7" stroke-width="1" stroke-opacity="0.5" rx="12"/>
+
+  <text x="450" y="28" class="title" text-anchor="middle">Ciclo de Vida de Servicios en Compose</text>
+
+  <!-- State: created -->
+  <circle cx="90" cy="100" r="45" fill="#1e293b" stroke="#475569" stroke-width="2"/>
+  <text x="90" y="96" class="state" text-anchor="middle" fill="#94a3b8">created</text>
+  <text x="90" y="112" class="sublabel" text-anchor="middle">existe</text>
+  <text x="90" y="124" class="sublabel" text-anchor="middle">no corre</text>
+
+  <!-- State: running -->
+  <circle cx="280" cy="100" r="45" fill="#064e3b" stroke="#10b981" stroke-width="2.5">
+    <animate attributeName="stroke-width" values="2.5;4;2.5" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <text x="280" y="96" class="state" text-anchor="middle" fill="#4ade80">running</text>
+  <text x="280" y="112" class="sublabel" text-anchor="middle">proceso</text>
+  <text x="280" y="124" class="sublabel" text-anchor="middle">activo</text>
+
+  <!-- State: paused -->
+  <circle cx="470" cy="100" r="45" fill="#1c1917" stroke="#78716c" stroke-width="2"/>
+  <text x="470" y="96" class="state" text-anchor="middle" fill="#a8a29e">paused</text>
+  <text x="470" y="112" class="sublabel" text-anchor="middle">congelado</text>
+  <text x="470" y="124" class="sublabel" text-anchor="middle">en RAM</text>
+
+  <!-- State: stopped -->
+  <circle cx="660" cy="100" r="45" fill="#1a0505" stroke="#ef4444" stroke-width="2"/>
+  <text x="660" y="96" class="state" text-anchor="middle" fill="#f87171">stopped</text>
+  <text x="660" y="112" class="sublabel" text-anchor="middle">proceso</text>
+  <text x="660" y="124" class="sublabel" text-anchor="middle">terminado</text>
+
+  <!-- State: removed -->
+  <rect x="795" y="60" width="80" height="80" rx="8" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+  <text x="835" y="96" class="state" text-anchor="middle" fill="#475569">removed</text>
+  <text x="835" y="112" class="sublabel" text-anchor="middle">eliminado</text>
+
+  <!-- Transiciones con comandos -->
+  <!-- created → running (up) -->
+  <line x1="136" y1="90" x2="233" y2="90" stroke="#4ade80" stroke-width="1.5"/>
+  <polygon points="231,86 239,90 231,94" fill="#4ade80"/>
+  <text x="185" y="82" class="cmd" text-anchor="middle">up / start</text>
+
+  <!-- running → paused -->
+  <line x1="326" y1="90" x2="423" y2="90" stroke="#78716c" stroke-width="1.5"/>
+  <polygon points="421,86 429,90 421,94" fill="#78716c"/>
+  <text x="375" y="82" class="cmd" text-anchor="middle">pause</text>
+
+  <!-- paused → running -->
+  <line x1="423" y1="110" x2="326" y2="110" stroke="#4ade80" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <polygon points="328,106 320,110 328,114" fill="#4ade80"/>
+  <text x="375" y="128" class="cmd" text-anchor="middle">unpause</text>
+
+  <!-- running → stopped (stop) -->
+  <line x1="326" y1="110" x2="613" y2="110" stroke="#ef4444" stroke-width="1.5"/>
+  <polygon points="611,106 619,110 611,114" fill="#ef4444"/>
+  <text x="470" y="148" class="cmd" text-anchor="middle">stop</text>
+
+  <!-- stopped → running (start) -->
+  <path d="M 610 88 Q 470 56 328 88" fill="none" stroke="#4ade80" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <polygon points="330,84 322,88 330,92" fill="#4ade80"/>
+  <text x="470" y="52" class="cmd" text-anchor="middle">start</text>
+
+  <!-- stopped → removed (rm) -->
+  <line x1="706" y1="100" x2="793" y2="100" stroke="#f87171" stroke-width="1.5"/>
+  <polygon points="791,96 799,100 791,104" fill="#f87171"/>
+  <text x="750" y="92" class="cmd" text-anchor="middle">rm / down</text>
+
+  <!-- Compose commands summary -->
+  <rect x="15" y="170" width="870" height="170" rx="8" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+  <text x="450" y="192" class="label" text-anchor="middle" fill="#38bdf8">Comandos Compose de Ciclo de Vida</text>
+
+  <!-- Table header -->
+  <line x1="20" y1="200" x2="880" y2="200" stroke="#334155"/>
+  <text x="50" y="216" class="label" fill="#fbbf24">Comando</text>
+  <text x="340" y="216" class="label" fill="#fbbf24">Qué hace</text>
+  <text x="630" y="216" class="label" fill="#fbbf24">Efecto en datos</text>
+  <line x1="20" y1="222" x2="880" y2="222" stroke="#334155"/>
+
+  <text x="50" y="238" class="cmd">docker compose up -d</text>
+  <text x="340" y="238" class="sublabel">Levanta todos los servicios</text>
+  <text x="630" y="238" class="sublabel">Crea volúmenes si no existen</text>
+
+  <text x="50" y="254" class="cmd">docker compose stop</text>
+  <text x="340" y="254" class="sublabel">Para contenedores (los mantiene)</text>
+  <text x="630" y="254" class="sublabel">Datos intactos ✅</text>
+
+  <text x="50" y="270" class="cmd">docker compose down</text>
+  <text x="340" y="270" class="sublabel">Para y elimina contenedores + redes</text>
+  <text x="630" y="270" class="sublabel">Volúmenes intactos ✅</text>
+
+  <text x="50" y="286" class="cmd" fill="#f87171">docker compose down -v</text>
+  <text x="340" y="286" class="sublabel">Para, elimina contenedores + redes</text>
+  <text x="630" y="286" class="sublabel" fill="#f87171">Borra volúmenes ❌</text>
+
+  <text x="50" y="302" class="cmd">docker compose restart</text>
+  <text x="340" y="302" class="sublabel">Reinicia contenedores</text>
+  <text x="630" y="302" class="sublabel">Datos intactos ✅</text>
+
+  <text x="50" y="318" class="cmd">docker compose logs -f</text>
+  <text x="340" y="318" class="sublabel">Sigue los logs de todos los servicios</text>
+  <text x="630" y="318" class="sublabel">—</text>
+</svg>

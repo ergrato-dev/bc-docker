@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 390" width="900" height="390">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117"/>
+      <stop offset="100%" style="stop-color:#0f1a0a"/>
+    </linearGradient>
+    <style>
+      .title   { font-family:'Courier New',monospace; font-size:18px; font-weight:bold; fill:#4ade80; }
+      .label   { font-family:'Courier New',monospace; font-size:10px; fill:#fff; font-weight:bold; }
+      .sublabel{ font-family:'Courier New',monospace; font-size:9px; fill:#94a3b8; }
+      .cmd     { font-family:'Courier New',monospace; font-size:9px; fill:#4ade80; }
+      .key     { font-family:'Courier New',monospace; font-size:9px; fill:#a78bfa; }
+      .val     { font-family:'Courier New',monospace; font-size:9px; fill:#4ade80; }
+      .note    { font-family:'Courier New',monospace; font-size:9px; fill:#fbbf24; }
+    </style>
+    <marker id="arrowb" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#38bdf8"/>
+    </marker>
+    <marker id="arrowg" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#4ade80"/>
+    </marker>
+  </defs>
+  <rect width="900" height="390" fill="url(#bg)" rx="12"/>
+  <rect width="900" height="390" fill="none" stroke="#16a34a" stroke-width="1" stroke-opacity="0.5" rx="12"/>
+
+  <text x="450" y="28" class="title" text-anchor="middle">Scaling y Restart Policies en Compose</text>
+
+  <!-- Scaling diagram -->
+  <!-- client -->
+  <ellipse cx="55" cy="145" rx="40" ry="28" fill="#0f2a4a" stroke="#38bdf8" stroke-width="1.5"/>
+  <text x="55" y="141" class="label" text-anchor="middle" fill="#38bdf8">client</text>
+  <text x="55" y="155" class="sublabel" text-anchor="middle">requests</text>
+
+  <!-- arrow to nginx -->
+  <line x1="96" y1="145" x2="135" y2="145" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#arrowb)"/>
+
+  <!-- nginx load balancer -->
+  <rect x="137" y="115" width="100" height="60" rx="8" fill="#0f2a4a" stroke="#38bdf8" stroke-width="2"/>
+  <text x="187" y="139" class="label" text-anchor="middle" fill="#38bdf8">nginx</text>
+  <text x="187" y="153" class="sublabel" text-anchor="middle">load balancer</text>
+  <text x="187" y="165" class="sublabel" text-anchor="middle">round-robin</text>
+
+  <!-- arrows to workers -->
+  <line x1="238" y1="135" x2="300" y2="105" stroke="#4ade80" stroke-width="1" marker-end="url(#arrowg)"/>
+  <line x1="238" y1="145" x2="300" y2="145" stroke="#4ade80" stroke-width="1" marker-end="url(#arrowg)"/>
+  <line x1="238" y1="155" x2="300" y2="185" stroke="#4ade80" stroke-width="1" marker-end="url(#arrowg)"/>
+
+  <!-- worker instances (3) -->
+  <rect x="302" y="78" width="100" height="52" rx="8" fill="#0f3a2a" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="352" y="100" class="label" text-anchor="middle">worker_1</text>
+  <text x="352" y="114" class="sublabel" text-anchor="middle">web:5000</text>
+
+  <rect x="302" y="118" width="100" height="52" rx="8" fill="#0f3a2a" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="352" y="140" class="label" text-anchor="middle">worker_2</text>
+  <text x="352" y="154" class="sublabel" text-anchor="middle">web:5000</text>
+
+  <rect x="302" y="158" width="100" height="52" rx="8" fill="#0f3a2a" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="352" y="180" class="label" text-anchor="middle">worker_3</text>
+  <text x="352" y="194" class="sublabel" text-anchor="middle">web:5000</text>
+
+  <!-- shared db -->
+  <rect x="450" y="118" width="100" height="52" rx="8" fill="#1e0a3a" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="500" y="140" class="label" text-anchor="middle">db</text>
+  <text x="500" y="152" class="sublabel" text-anchor="middle">compartida</text>
+  <text x="500" y="164" class="sublabel" text-anchor="middle">1 instancia</text>
+  <line x1="403" y1="145" x2="449" y2="145" stroke="#a78bfa" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrowb)"/>
+
+  <!-- Scale command box -->
+  <rect x="15" y="232" width="540" height="140" rx="8" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+  <text x="285" y="252" class="label" text-anchor="middle" fill="#4ade80">Comandos de Escala</text>
+  <text x="25" y="270" class="note">Escalar N réplicas en composición</text>
+  <text x="25" y="286" class="cmd">docker compose up -d --scale worker=3</text>
+  <text x="25" y="306" class="note">Definir réplicas en compose.yml (deploy)</text>
+  <text x="25" y="322" class="key" xml:space="preserve">    deploy:</text>
+  <text x="25" y="336" class="key" xml:space="preserve">      replicas: <tspan class="val">3</tspan><tspan class="sublabel">  # ideal con Docker Swarm</tspan></text>
+  <text x="25" y="356" class="note">Sin conflicto de puertos: no mapear host ports en worker</text>
+  <text x="25" y="370" class="sublabel">ports: ["5000"] en vez de ["5000:5000"]</text>
+
+  <!-- Restart policies table -->
+  <rect x="570" y="232" width="315" height="140" rx="8" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+  <text x="727" y="252" class="label" text-anchor="middle" fill="#4ade80">restart_policy</text>
+  <line x1="578" y1="260" x2="878" y2="260" stroke="#334155"/>
+  <text x="578" y="276" class="key" fill="#fbbf24">Valor</text>
+  <text x="740" y="276" class="key" fill="#fbbf24">Comportamiento</text>
+  <line x1="578" y1="282" x2="878" y2="282" stroke="#334155"/>
+  <text x="578" y="298" class="cmd">no</text>
+  <text x="640" y="298" class="sublabel">Nunca reinicia</text>
+  <text x="578" y="314" class="cmd">always</text>
+  <text x="640" y="314" class="sublabel">Siempre, incluso manual stop</text>
+  <text x="578" y="330" class="cmd">on-failure</text>
+  <text x="640" y="330" class="sublabel">Solo si exit code ≠ 0</text>
+  <text x="578" y="346" class="cmd">unless-stopped</text>
+  <text x="640" y="346" class="sublabel">Siempre salvo docker stop</text>
+  <text x="578" y="368" class="note" xml:space="preserve">💡 unless-stopped es la política recomendada en producción</text>
+</svg>

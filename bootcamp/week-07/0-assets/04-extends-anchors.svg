@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 390" width="900" height="390">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117"/>
+      <stop offset="100%" style="stop-color:#0f1a0a"/>
+    </linearGradient>
+    <style>
+      .title   { font-family:'Courier New',monospace; font-size:18px; font-weight:bold; fill:#4ade80; }
+      .label   { font-family:'Courier New',monospace; font-size:10px; fill:#fff; font-weight:bold; }
+      .sublabel{ font-family:'Courier New',monospace; font-size:9px; fill:#94a3b8; }
+      .cmd     { font-family:'Courier New',monospace; font-size:9px; fill:#4ade80; }
+      .key     { font-family:'Courier New',monospace; font-size:9px; fill:#a78bfa; }
+      .val     { font-family:'Courier New',monospace; font-size:9px; fill:#4ade80; }
+      .anchor  { font-family:'Courier New',monospace; font-size:10px; fill:#f59e0b; font-weight:bold; }
+      .note    { font-family:'Courier New',monospace; font-size:9px; fill:#fbbf24; }
+    </style>
+  </defs>
+  <rect width="900" height="390" fill="url(#bg)" rx="12"/>
+  <rect width="900" height="390" fill="none" stroke="#16a34a" stroke-width="1" stroke-opacity="0.5" rx="12"/>
+
+  <text x="450" y="28" class="title" text-anchor="middle">Anchors, References y extends en Compose</text>
+
+  <!-- Left: YAML anchors source -->
+  <rect x="20" y="44" width="250" height="170" rx="8" fill="#0f172a" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="145" y="64" class="label" text-anchor="middle" fill="#f59e0b">① Definir anchor  &amp;</text>
+  <text x="145" y="80" class="sublabel" text-anchor="middle">fragmento reutilizable</text>
+  <text x="30" y="100" class="cmd">x-defaults:</text>
+  <text x="30" y="114" class="anchor">&amp;defaults            ← anchor</text>
+  <text x="30" y="128" class="key">  restart: <tspan class="val">unless-stopped</tspan></text>
+  <text x="30" y="142" class="key">  logging:</text>
+  <text x="30" y="156" class="key">    driver: <tspan class="val">json-file</tspan></text>
+  <text x="30" y="170" class="key">    options:</text>
+  <text x="30" y="184" class="key">      max-size: <tspan class="val">"10m"</tspan></text>
+  <text x="30" y="198" class="key">      max-file: <tspan class="val">"3"</tspan></text>
+
+  <!-- Arrow to merge -->
+  <line x1="271" y1="130" x2="320" y2="130" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <polygon points="318,126 326,130 318,134" fill="#f59e0b"/>
+
+  <!-- Middle: using the anchor -->
+  <rect x="322" y="44" width="250" height="170" rx="8" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5"/>
+  <text x="447" y="64" class="label" text-anchor="middle" fill="#38bdf8">② Usar reference  *</text>
+  <text x="447" y="80" class="sublabel" text-anchor="middle">dentro de cada servicio</text>
+  <text x="330" y="100" class="cmd">services:</text>
+  <text x="330" y="114" class="cmd">  api:</text>
+  <text x="330" y="128" class="anchor">    &lt;&lt;: *defaults  ← merge key</text>
+  <text x="330" y="142" class="sublabel">    # hereda restart + logging</text>
+  <text x="330" y="156" class="key">    image: <tspan class="val">my-api</tspan></text>
+  <text x="330" y="172" class="cmd">  worker:</text>
+  <text x="330" y="186" class="anchor">    &lt;&lt;: *defaults  ← merge key</text>
+  <text x="330" y="200" class="key">    image: <tspan class="val">my-worker</tspan></text>
+
+  <!-- Arrow to result -->
+  <line x1="573" y1="130" x2="622" y2="130" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <polygon points="620,126 628,130 620,134" fill="#38bdf8"/>
+
+  <!-- Right: expanded result -->
+  <rect x="624" y="44" width="256" height="170" rx="8" fill="#052e16" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="752" y="64" class="label" text-anchor="middle" fill="#4ade80">③ Resultado expandido</text>
+  <text x="752" y="80" class="sublabel" text-anchor="middle">compose ve esto</text>
+  <text x="634" y="100" class="cmd">services:</text>
+  <text x="634" y="114" class="cmd">  api:</text>
+  <text x="634" y="128" class="key">    restart: <tspan class="val">unless-stopped</tspan></text>
+  <text x="634" y="142" class="key">    logging:</text>
+  <text x="634" y="156" class="key">      driver: <tspan class="val">json-file</tspan></text>
+  <text x="634" y="170" class="key">      options: <tspan class="sublabel">...</tspan></text>
+  <text x="634" y="184" class="key">    image: <tspan class="val">my-api</tspan></text>
+
+  <!-- extends section -->
+  <rect x="20" y="230" width="400" height="145" rx="8" fill="#0f172a" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="220" y="250" class="label" text-anchor="middle" fill="#a78bfa">extends: herencia entre archivos</text>
+  <text x="30" y="268" class="sublabel">base-compose.yml</text>
+  <text x="30" y="282" class="cmd" xml:space="preserve">services:</text>
+  <text x="30" y="296" class="key" xml:space="preserve">  app: <tspan class="sublabel">&amp;conf básico del servicio</tspan></text>
+  <text x="30" y="310" class="key" xml:space="preserve">    image: <tspan class="val">my-app:base</tspan></text>
+  <text x="30" y="326" class="key" xml:space="preserve">    restart: <tspan class="val">unless-stopped</tspan></text>
+  <line x1="200" y1="236" x2="200" y2="370" stroke="#334155"/>
+  <text x="210" y="268" class="sublabel">compose.override.yml</text>
+  <text x="210" y="282" class="cmd" xml:space="preserve">services:</text>
+  <text x="210" y="296" class="cmd" xml:space="preserve">  app:</text>
+  <text x="210" y="310" class="key" xml:space="preserve">    extends:</text>
+  <text x="210" y="324" class="key" xml:space="preserve">      file: <tspan class="val">base-compose.yml</tspan></text>
+  <text x="210" y="338" class="key" xml:space="preserve">      service: <tspan class="val">app</tspan></text>
+  <text x="210" y="352" class="key" xml:space="preserve">    image: <tspan class="val">my-app:prod</tspan>  <tspan class="sublabel">← sobreescribe</tspan></text>
+
+  <!-- Comparison table -->
+  <rect x="440" y="230" width="440" height="145" rx="8" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+  <text x="660" y="250" class="label" text-anchor="middle" fill="#4ade80">Anchors vs extends</text>
+  <line x1="450" y1="258" x2="875" y2="258" stroke="#334155"/>
+  <text x="455" y="274" class="label" fill="#fbbf24">           anchors (&amp;/*)</text>
+  <text x="655" y="274" class="label" fill="#a78bfa">   extends:</text>
+  <line x1="450" y1="280" x2="875" y2="280" stroke="#334155"/>
+  <text x="455" y="296" class="sublabel">Scope:     mismo archivo</text>
+  <text x="655" y="296" class="sublabel">   entre archivos</text>
+  <text x="455" y="312" class="sublabel">Granular:  cualquier block</text>
+  <text x="655" y="312" class="sublabel">   servicio completo</text>
+  <text x="455" y="328" class="sublabel">Sintaxis:  YAML nativo</text>
+  <text x="655" y="328" class="sublabel">   clave compose</text>
+  <text x="455" y="344" class="sublabel">Uso común: logging, restart</text>
+  <text x="655" y="344" class="sublabel">   base dev/prod</text>
+  <text x="455" y="365" class="note" xml:space="preserve">💡 Ambos reducen duplicación — anchors + extends se complementan</text>
+</svg>

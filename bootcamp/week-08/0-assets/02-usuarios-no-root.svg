@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 380" width="900" height="380">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117"/>
+      <stop offset="100%" style="stop-color:#1a0505"/>
+    </linearGradient>
+    <style>
+      .title   { font-family:'Courier New',monospace; font-size:18px; font-weight:bold; fill:#f87171; }
+      .label   { font-family:'Courier New',monospace; font-size:10px; fill:#fff; font-weight:bold; }
+      .sublabel{ font-family:'Courier New',monospace; font-size:9px; fill:#94a3b8; }
+      .cmd     { font-family:'Courier New',monospace; font-size:9px; fill:#4ade80; }
+      .key     { font-family:'Courier New',monospace; font-size:9px; fill:#a78bfa; }
+      .val     { font-family:'Courier New',monospace; font-size:9px; fill:#4ade80; }
+      .bad     { font-family:'Courier New',monospace; font-size:9px; fill:#f87171; }
+      .note    { font-family:'Courier New',monospace; font-size:9px; fill:#fbbf24; }
+    </style>
+  </defs>
+  <rect width="900" height="380" fill="url(#bg)" rx="12"/>
+  <rect width="900" height="380" fill="none" stroke="#dc2626" stroke-width="1" stroke-opacity="0.5" rx="12"/>
+
+  <text x="450" y="28" class="title" text-anchor="middle">Usuarios No-Root en Contenedores</text>
+
+  <!-- Root side (bad) -->
+  <rect x="20" y="44" width="420" height="180" rx="8" fill="#1a0505" stroke="#ef4444" stroke-width="2"/>
+  <text x="230" y="64" class="label" text-anchor="middle" fill="#f87171">❌ root (uid=0) — peligroso</text>
+
+  <!-- Dockerfile root -->
+  <rect x="30" y="72" width="195" height="140" rx="6" fill="#0f0505" stroke="#ef4444" stroke-width="1"/>
+  <text x="127" y="90" class="sublabel" text-anchor="middle" fill="#f87171">Dockerfile ❌</text>
+  <text x="40" y="108" class="cmd">FROM node:20</text>
+  <text x="40" y="122" class="cmd">WORKDIR /app</text>
+  <text x="40" y="136" class="cmd">COPY . .</text>
+  <text x="40" y="150" class="cmd">RUN npm install</text>
+  <text x="40" y="164" class="bad"># sin USER =</text>
+  <text x="40" y="178" class="bad"># ejecuta como root</text>
+  <text x="40" y="192" class="cmd">CMD ["node","app.js"]</text>
+
+  <!-- Root risks -->
+  <rect x="235" y="72" width="195" height="140" rx="6" fill="#0f0505" stroke="#ef4444" stroke-width="1"/>
+  <text x="332" y="90" class="sublabel" text-anchor="middle" fill="#f87171">Riesgos ⚠️</text>
+  <text x="245" y="108" class="bad">• escape → root en host</text>
+  <text x="245" y="124" class="bad">• acceso a /proc /sys</text>
+  <text x="245" y="140" class="bad">• puede instalar paquetes</text>
+  <text x="245" y="156" class="bad">• modifica archivos host</text>
+  <text x="245" y="172" class="bad">• mounts del sistema</text>
+  <text x="245" y="192" class="note">uid=0 mismo en host y</text>
+  <text x="245" y="206" class="note">contenedor → peligroso</text>
+
+  <!-- Non-root side (good) -->
+  <rect x="460" y="44" width="420" height="180" rx="8" fill="#052e16" stroke="#16a34a" stroke-width="2"/>
+  <text x="670" y="64" class="label" text-anchor="middle" fill="#4ade80">✅ non-root (uid≥1000) — seguro</text>
+
+  <!-- Dockerfile non-root -->
+  <rect x="470" y="72" width="195" height="140" rx="6" fill="#0f1a0a" stroke="#4ade80" stroke-width="1"/>
+  <text x="567" y="90" class="sublabel" text-anchor="middle" fill="#4ade80">Dockerfile ✅</text>
+  <text x="480" y="108" class="cmd">FROM node:20-alpine</text>
+  <text x="480" y="122" class="cmd" xml:space="preserve">RUN addgroup -S app \</text>
+  <text x="480" y="136" class="cmd" xml:space="preserve">  &amp;&amp; adduser -S app -G app</text>
+  <text x="480" y="150" class="cmd">WORKDIR /app</text>
+  <text x="480" y="164" class="cmd">COPY --chown=app:app . .</text>
+  <text x="480" y="178" class="key">USER <tspan class="val">app</tspan>          ← clave</text>
+  <text x="480" y="192" class="cmd">CMD ["node","app.js"]</text>
+
+  <!-- Benefits -->
+  <rect x="675" y="72" width="195" height="140" rx="6" fill="#0f1a0a" stroke="#4ade80" stroke-width="1"/>
+  <text x="772" y="90" class="sublabel" text-anchor="middle" fill="#4ade80">Beneficios ✅</text>
+  <text x="685" y="108" class="cmd">• sin acceso a /proc /sys</text>
+  <text x="685" y="124" class="cmd">• no instala paquetes</text>
+  <text x="685" y="140" class="cmd">• uid≠0 limita impacto</text>
+  <text x="685" y="156" class="cmd">• no modifica host</text>
+  <text x="685" y="172" class="cmd">• mínimo privilegio</text>
+  <text x="685" y="188" class="sublabel">uid=1001 en host es</text>
+  <text x="685" y="202" class="sublabel">usuario limitado ✅</text>
+
+  <!-- Bottom: verification and tips -->
+  <rect x="20" y="240" width="415" height="120" rx="8" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+  <text x="227" y="258" class="label" text-anchor="middle" fill="#f87171">Verificar usuario activo</text>
+  <text x="30" y="276" class="cmd"># dentro del contenedor</text>
+  <text x="30" y="290" class="cmd">docker exec -it app whoami</text>
+  <text x="30" y="304" class="sublabel">app          ← correcto ✅</text>
+  <text x="30" y="322" class="cmd">docker exec -it app id</text>
+  <text x="30" y="336" class="sublabel">uid=1001(app) gid=1001(app) ← correcto ✅</text>
+  <text x="30" y="352" class="bad"># uid=0(root) ← PROBLEMA ❌</text>
+
+  <rect x="455" y="240" width="425" height="120" rx="8" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+  <text x="667" y="258" class="label" text-anchor="middle" fill="#4ade80">Tips importantes</text>
+  <text x="465" y="276" class="note">📁 --chown al COPY para que app pueda leer sus archivos</text>
+  <text x="465" y="294" class="note">🚫 Nunca COPY sin --chown si USER viene después</text>
+  <text x="465" y="312" class="cmd">✅  COPY --chown=app:app . .</text>
+  <text x="465" y="330" class="sublabel">Algunos puertos (&lt;1024) requieren root → usar 8080 en vez de 80</text>
+  <text x="465" y="348" class="sublabel">Mapear con -p 80:8080 en docker run o compose ports</text>
+</svg>

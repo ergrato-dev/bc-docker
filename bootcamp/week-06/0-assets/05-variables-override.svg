@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 390" width="900" height="390">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117"/>
+      <stop offset="100%" style="stop-color:#0a1628"/>
+    </linearGradient>
+    <style>
+      .title   { font-family:'Courier New',monospace; font-size:18px; font-weight:bold; fill:#38bdf8; }
+      .label   { font-family:'Courier New',monospace; font-size:10px; fill:#fff; font-weight:bold; }
+      .sublabel{ font-family:'Courier New',monospace; font-size:9px; fill:#94a3b8; }
+      .cmd     { font-family:'Courier New',monospace; font-size:9px; fill:#4ade80; }
+      .note    { font-family:'Courier New',monospace; font-size:9px; fill:#fbbf24; }
+      .key     { font-family:'Courier New',monospace; font-size:9px; fill:#a78bfa; }
+      .val     { font-family:'Courier New',monospace; font-size:9px; fill:#4ade80; }
+      .winner  { font-family:'Courier New',monospace; font-size:11px; font-weight:bold; }
+    </style>
+  </defs>
+  <rect width="900" height="390" fill="url(#bg)" rx="12"/>
+  <rect width="900" height="390" fill="none" stroke="#0284c7" stroke-width="1" stroke-opacity="0.5" rx="12"/>
+
+  <text x="450" y="28" class="title" text-anchor="middle">Variables de Entorno y Override Files — Prioridad</text>
+
+  <!-- Priority pyramid (left panel) -->
+  <!-- Level 5 - highest priority: -e flag -->
+  <rect x="30" y="48" width="385" height="44" rx="6" fill="#0a1f0a" stroke="#4ade80" stroke-width="2.5"/>
+  <text x="80" y="68" class="winner" fill="#4ade80">⑤ -e FLAG  (mayor prioridad)</text>
+  <text x="80" y="84" class="cmd">docker compose run -e APP_ENV=prod web</text>
+  <text x="390" y="68" class="note" text-anchor="end">🏆 gana</text>
+
+  <!-- Level 4: docker-compose.override.yml -->
+  <rect x="50" y="102" width="345" height="44" rx="6" fill="#0f1a2e" stroke="#38bdf8" stroke-width="2"/>
+  <text x="90" y="122" class="winner" fill="#38bdf8">④ docker-compose.override.yml</text>
+  <text x="90" y="137" class="sublabel">environment: APP_ENV: staging</text>
+
+  <!-- Level 3: docker-compose.yml environment -->
+  <rect x="70" y="156" width="305" height="44" rx="6" fill="#1a1a0a" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="85" y="176" class="label" fill="#fbbf24">③ docker-compose.yml → environment:</text>
+  <text x="85" y="191" class="sublabel">APP_ENV: ${APP_ENV:-development}</text>
+
+  <!-- Level 2: .env file -->
+  <rect x="90" y="210" width="265" height="44" rx="6" fill="#1a0a1a" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="100" y="230" class="label" fill="#a78bfa">② .env  (next to compose file)</text>
+  <text x="100" y="245" class="key">APP_ENV<tspan fill="#94a3b8">=</tspan><tspan fill="#4ade80">local</tspan></text>
+
+  <!-- Level 1: Dockerfile ENV -->
+  <rect x="110" y="264" width="225" height="44" rx="6" fill="#1a0505" stroke="#475569" stroke-width="1"/>
+  <text x="120" y="284" class="label" fill="#475569">① Dockerfile ENV  (menor)</text>
+  <text x="120" y="299" class="sublabel">ENV APP_ENV=production</text>
+
+  <!-- arrow up -->
+  <line x1="222" y1="316" x2="222" y2="340" stroke="#94a3b8" stroke-width="1"/>
+  <text x="222" y="355" class="sublabel" text-anchor="middle">menor prioridad</text>
+  <line x1="222" y1="360" x2="222" y2="374" stroke="#94a3b8" stroke-width="1"/>
+  <polygon points="218,374 222,382 226,374" fill="#94a3b8"/>
+
+  <!-- Right panel: merge example -->
+  <rect x="490" y="44" width="395" height="332" rx="8" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+  <text x="688" y="64" class="label" text-anchor="middle" fill="#38bdf8">Ejemplo de Fusión</text>
+
+  <!-- .env file -->
+  <rect x="500" y="72" width="170" height="70" rx="6" fill="#1a0a1a" stroke="#a78bfa" stroke-width="1"/>
+  <text x="585" y="90" class="label" text-anchor="middle" fill="#a78bfa">.env</text>
+  <text x="510" y="105" class="key">APP_ENV<tspan fill="#94a3b8">=</tspan><tspan class="val">local</tspan></text>
+  <text x="510" y="119" class="key">DB_PASS<tspan fill="#94a3b8">=</tspan><tspan class="val">secret</tspan></text>
+  <text x="510" y="133" class="key">PORT<tspan fill="#94a3b8">=</tspan><tspan class="val">3000</tspan></text>
+
+  <!-- override.yml -->
+  <rect x="690" y="72" width="185" height="70" rx="6" fill="#0f1a2e" stroke="#38bdf8" stroke-width="1"/>
+  <text x="782" y="90" class="label" text-anchor="middle" fill="#38bdf8">compose.override.yml</text>
+  <text x="700" y="105" class="key">APP_ENV<tspan fill="#94a3b8">: </tspan><tspan class="val">staging</tspan></text>
+  <text x="700" y="119" class="sublabel"># DB_PASS no definido</text>
+  <text x="700" y="133" class="key">PORT<tspan fill="#94a3b8">: </tspan><tspan class="val">4000</tspan></text>
+
+  <!-- merge arrows -->
+  <line x1="585" y1="143" x2="585" y2="172" stroke="#a78bfa" stroke-width="1.5"/>
+  <polygon points="581,170 585,178 589,170" fill="#a78bfa"/>
+  <line x1="782" y1="143" x2="782" y2="172" stroke="#38bdf8" stroke-width="1.5"/>
+  <polygon points="778,170 782,178 786,170" fill="#38bdf8"/>
+
+  <!-- result -->
+  <rect x="568" y="178" width="220" height="82" rx="6" fill="#064e3b" stroke="#4ade80" stroke-width="2"/>
+  <text x="678" y="198" class="winner" text-anchor="middle" fill="#4ade80">resultado final</text>
+  <text x="578" y="214" class="key">APP_ENV<tspan fill="#94a3b8">: </tspan><tspan fill="#fbbf24">staging</tspan><tspan fill="#94a3b8">  ← override wins</tspan></text>
+  <text x="578" y="230" class="key">DB_PASS<tspan fill="#94a3b8">: </tspan><tspan class="val">secret</tspan><tspan fill="#94a3b8">    ← de .env</tspan></text>
+  <text x="578" y="246" class="key">PORT<tspan fill="#94a3b8">: </tspan><tspan fill="#fbbf24">4000</tspan><tspan fill="#94a3b8">      ← override wins</tspan></text>
+
+  <!-- Tips section -->
+  <line x1="500" y1="272" x2="875" y2="272" stroke="#1e293b"/>
+  <text x="688" y="291" class="label" text-anchor="middle" fill="#fbbf24">Buenas Prácticas</text>
+  <text x="500" y="307" class="cmd">✅  .env → valores por defecto locales (no commitear)</text>
+  <text x="500" y="323" class="cmd">✅  override.yml → sobrescribir para dev/staging</text>
+  <text x="500" y="339" class="sublabel">    Archivo ignorado en .gitignore</text>
+  <text x="500" y="355" class="cmd">✅  Usar ${VAR:-default} en compose.yml</text>
+  <text x="500" y="371" class="sublabel">    Provee un valor de fallback si la var no está definida</text>
+</svg>

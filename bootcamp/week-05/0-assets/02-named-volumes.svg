@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 380" width="900" height="380">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117"/>
+      <stop offset="100%" style="stop-color:#0a1628"/>
+    </linearGradient>
+    <linearGradient id="volGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0284c7"/>
+      <stop offset="100%" style="stop-color:#0c4a6e"/>
+    </linearGradient>
+    <linearGradient id="ctGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#7c3aed"/>
+      <stop offset="100%" style="stop-color:#3b0764"/>
+    </linearGradient>
+    <style>
+      .title { font-family:'Courier New',monospace; font-size:18px; font-weight:bold; fill:#38bdf8; }
+      .label { font-family:'Courier New',monospace; font-size:11px; fill:#fff; font-weight:bold; }
+      .sublabel { font-family:'Courier New',monospace; font-size:9px; fill:#94a3b8; }
+      .cmd { font-family:'Courier New',monospace; font-size:10px; fill:#4ade80; }
+      .arrow { fill:#f59e0b; }
+      .note { font-family:'Courier New',monospace; font-size:9px; fill:#fbbf24; }
+    </style>
+  </defs>
+  <rect width="900" height="380" fill="url(#bg)" rx="12"/>
+  <rect width="900" height="380" fill="none" stroke="#0284c7" stroke-width="1" stroke-opacity="0.5" rx="12"/>
+
+  <!-- Título -->
+  <text x="450" y="28" class="title" text-anchor="middle">Named Volumes — Ciclo de Vida</text>
+
+  <!-- Step 1: create -->
+  <rect x="20" y="45" width="155" height="60" rx="8" fill="#0c4a6e" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="97" y="63" class="label" text-anchor="middle">1. Crear</text>
+  <text x="30" y="80" class="cmd">$ docker volume create</text>
+  <text x="30" y="94" class="cmd">  mi-datos</text>
+
+  <!-- Step 2: mount in container -->
+  <rect x="210" y="45" width="155" height="60" rx="8" fill="#3b0764" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="287" y="63" class="label" text-anchor="middle">2. Montar</text>
+  <text x="220" y="80" class="cmd">$ docker run -v</text>
+  <text x="220" y="94" class="cmd">  mi-datos:/app/data</text>
+
+  <!-- Flechas entre steps -->
+  <line x1="176" y1="75" x2="208" y2="75" stroke="#f59e0b" stroke-width="2"/>
+  <polygon points="208,71 216,75 208,79" fill="#f59e0b"/>
+
+  <!-- Step 3: persist after rm -->
+  <rect x="400" y="45" width="155" height="60" rx="8" fill="#3b0764" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="477" y="63" class="label" text-anchor="middle">3. Persiste</text>
+  <text x="410" y="80" class="cmd">$ docker rm container</text>
+  <text x="410" y="94" class="sublabel">  ↑ volumen intacto ✅</text>
+
+  <line x1="366" y1="75" x2="398" y2="75" stroke="#f59e0b" stroke-width="2"/>
+  <polygon points="398,71 406,75 398,79" fill="#f59e0b"/>
+
+  <!-- Step 4: use in new container -->
+  <rect x="590" y="45" width="155" height="60" rx="8" fill="#0c4a6e" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="667" y="63" class="label" text-anchor="middle">4. Reutilizar</text>
+  <text x="600" y="80" class="cmd">$ docker run -v</text>
+  <text x="600" y="94" class="cmd">  mi-datos:/data</text>
+
+  <line x1="556" y1="75" x2="588" y2="75" stroke="#f59e0b" stroke-width="2"/>
+  <polygon points="588,71 596,75 588,79" fill="#f59e0b"/>
+
+  <!-- Diagram central: volume shared between 2 containers -->
+  <!-- Volumen central -->
+  <ellipse cx="450" cy="240" rx="80" ry="40" fill="url(#volGrad)" stroke="#38bdf8" stroke-width="2">
+    <animate attributeName="rx" values="78;82;78" dur="3s" repeatCount="indefinite"/>
+  </ellipse>
+  <text x="450" y="235" class="label" text-anchor="middle">📦 mi-datos</text>
+  <text x="450" y="250" class="sublabel" text-anchor="middle">/var/lib/docker/volumes/</text>
+  <text x="450" y="263" class="sublabel" text-anchor="middle">mi-datos/_data</text>
+
+  <!-- Container A -->
+  <rect x="130" y="205" width="160" height="70" rx="8" fill="#1e1b4b" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="210" y="225" class="label" text-anchor="middle">Container A</text>
+  <text x="210" y="242" class="sublabel" text-anchor="middle">escribe /app/data</text>
+  <text x="210" y="258" class="cmd" text-anchor="middle">echo "hola" &gt; file.txt</text>
+
+  <!-- Container B -->
+  <rect x="610" y="205" width="160" height="70" rx="8" fill="#1e1b4b" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="690" y="225" class="label" text-anchor="middle">Container B</text>
+  <text x="690" y="242" class="sublabel" text-anchor="middle">lee /data</text>
+  <text x="690" y="258" class="cmd" text-anchor="middle">cat /data/file.txt</text>
+
+  <!-- Líneas containers → volume -->
+  <line x1="290" y1="240" x2="368" y2="240" stroke="#a78bfa" stroke-width="2" stroke-dasharray="6,3">
+    <animate attributeName="stroke-dashoffset" values="18;0" dur="1.5s" repeatCount="indefinite"/>
+  </line>
+  <polygon points="368,236 376,240 368,244" fill="#a78bfa"/>
+
+  <line x1="610" y1="240" x2="532" y2="240" stroke="#a78bfa" stroke-width="2" stroke-dasharray="6,3">
+    <animate attributeName="stroke-dashoffset" values="0;18" dur="1.5s" repeatCount="indefinite"/>
+  </line>
+  <polygon points="532,236 524,240 532,244" fill="#a78bfa"/>
+
+  <!-- Notas datos compartidos -->
+  <text x="450" y="305" class="note" text-anchor="middle">✅ Los datos escritos por A son visibles para B</text>
+  <text x="450" y="322" class="note" text-anchor="middle">✅ Los datos persisten aunque se eliminen los contenedores</text>
+
+  <!-- Comandos resumen abajo -->
+  <rect x="20" y="338" width="860" height="30" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <text x="30" y="358" class="cmd">docker volume ls</text>
+  <text x="200" y="358" class="cmd">docker volume inspect mi-datos</text>
+  <text x="460" y="358" class="cmd">docker volume rm mi-datos</text>
+  <text x="660" y="358" class="cmd">docker volume prune</text>
+</svg>

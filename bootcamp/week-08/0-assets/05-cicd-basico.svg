@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 390" width="900" height="390">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117"/>
+      <stop offset="100%" style="stop-color:#1a0505"/>
+    </linearGradient>
+    <style>
+      .title   { font-family:'Courier New',monospace; font-size:18px; font-weight:bold; fill:#f87171; }
+      .label   { font-family:'Courier New',monospace; font-size:10px; fill:#fff; font-weight:bold; }
+      .sublabel{ font-family:'Courier New',monospace; font-size:9px; fill:#94a3b8; }
+      .cmd     { font-family:'Courier New',monospace; font-size:9px; fill:#4ade80; }
+      .key     { font-family:'Courier New',monospace; font-size:9px; fill:#a78bfa; }
+      .bad     { font-family:'Courier New',monospace; font-size:9px; fill:#f87171; }
+      .note    { font-family:'Courier New',monospace; font-size:9px; fill:#fbbf24; }
+    </style>
+    <marker id="arroww" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#94a3b8"/>
+    </marker>
+    <marker id="arrowg" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#4ade80"/>
+    </marker>
+    <marker id="arrowr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#ef4444"/>
+    </marker>
+  </defs>
+  <rect width="900" height="390" fill="url(#bg)" rx="12"/>
+  <rect width="900" height="390" fill="none" stroke="#dc2626" stroke-width="1" stroke-opacity="0.5" rx="12"/>
+
+  <text x="450" y="28" class="title" text-anchor="middle">CI/CD Básico con Docker</text>
+
+  <!-- Pipeline steps (horizontal) -->
+  <!-- Step 1: git push -->
+  <rect x="20" y="56" width="120" height="68" rx="8" fill="#1a1a0a" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="80" y="78" class="note" text-anchor="middle">① git push</text>
+  <text x="80" y="94" class="sublabel" text-anchor="middle">developer</text>
+  <text x="80" y="108" class="sublabel" text-anchor="middle">→ main branch</text>
+  <text x="80" y="120" class="sublabel" text-anchor="middle">trigger CI</text>
+
+  <line x1="141" y1="90" x2="165" y2="90" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arroww)"/>
+
+  <!-- Step 2: docker build -->
+  <rect x="167" y="56" width="120" height="68" rx="8" fill="#0f2a4a" stroke="#38bdf8" stroke-width="1.5"/>
+  <text x="227" y="78" class="label" text-anchor="middle" fill="#38bdf8">② build</text>
+  <text x="227" y="94" class="cmd" text-anchor="middle">docker build</text>
+  <text x="227" y="108" class="sublabel" text-anchor="middle">--no-cache</text>
+  <text x="227" y="120" class="sublabel" text-anchor="middle">-t app:sha</text>
+
+  <line x1="288" y1="90" x2="312" y2="90" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arroww)"/>
+
+  <!-- Step 3: unit tests -->
+  <rect x="314" y="56" width="120" height="68" rx="8" fill="#0f1a2e" stroke="#6366f1" stroke-width="1.5"/>
+  <text x="374" y="78" class="label" text-anchor="middle" fill="#818cf8">③ tests</text>
+  <text x="374" y="94" class="cmd" text-anchor="middle">docker run</text>
+  <text x="374" y="108" class="cmd" text-anchor="middle">--rm app:sha</text>
+  <text x="374" y="120" class="sublabel" text-anchor="middle">npm test / pytest</text>
+
+  <line x1="435" y1="90" x2="459" y2="90" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arroww)"/>
+
+  <!-- Step 4: trivy scan -->
+  <rect x="461" y="56" width="120" height="68" rx="8" fill="#1a0505" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="521" y="78" class="bad" text-anchor="middle">④ scan</text>
+  <text x="521" y="94" class="cmd" text-anchor="middle">trivy image</text>
+  <text x="521" y="108" class="sublabel" text-anchor="middle">--exit-code 1</text>
+  <text x="521" y="120" class="sublabel" text-anchor="middle">CRITICAL,HIGH</text>
+
+  <line x1="582" y1="90" x2="606" y2="90" stroke="#4ade80" stroke-width="1.5" marker-end="url(#arrowg)"/>
+  <!-- fail arrow -->
+  <line x1="521" y1="125" x2="521" y2="165" stroke="#ef4444" stroke-width="1.5" marker-end="url(#arrowr)"/>
+
+  <!-- Step 5: push registry -->
+  <rect x="608" y="56" width="120" height="68" rx="8" fill="#052e16" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="668" y="78" class="cmd" text-anchor="middle">⑤ push</text>
+  <text x="668" y="94" class="cmd" text-anchor="middle">docker push</text>
+  <text x="668" y="108" class="sublabel" text-anchor="middle">registry privado</text>
+  <text x="668" y="120" class="sublabel" text-anchor="middle">app:v1.2.3</text>
+
+  <line x1="729" y1="90" x2="753" y2="90" stroke="#4ade80" stroke-width="1.5" marker-end="url(#arrowg)"/>
+
+  <!-- Step 6: deploy -->
+  <rect x="755" y="56" width="125" height="68" rx="8" fill="#0f3a2a" stroke="#4ade80" stroke-width="2"/>
+  <text x="817" y="78" class="cmd" text-anchor="middle">⑥ deploy</text>
+  <text x="817" y="94" class="sublabel" text-anchor="middle">docker compose</text>
+  <text x="817" y="108" class="sublabel" text-anchor="middle">pull &amp;&amp; up -d</text>
+  <text x="817" y="120" class="cmd" text-anchor="middle">🚀 producción</text>
+
+  <!-- Fail label -->
+  <rect x="461" y="168" width="120" height="36" rx="6" fill="#1a0505" stroke="#ef4444" stroke-width="1"/>
+  <text x="521" y="184" class="bad" text-anchor="middle">❌ build falla</text>
+  <text x="521" y="198" class="sublabel" text-anchor="middle">notificar equipo</text>
+
+  <!-- GitHub Actions example -->
+  <rect x="20" y="224" width="540" height="148" rx="8" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+  <text x="290" y="244" class="label" text-anchor="middle" fill="#f87171">.github/workflows/docker.yml</text>
+  <text x="30" y="262" class="key" xml:space="preserve">name: <tspan class="cmd">Docker CI</tspan></text>
+  <text x="30" y="276" class="key" xml:space="preserve">on: <tspan class="sublabel">[push]</tspan></text>
+  <text x="30" y="290" class="key" xml:space="preserve">jobs:</text>
+  <text x="30" y="304" class="key" xml:space="preserve">  build:</text>
+  <text x="30" y="318" class="key" xml:space="preserve">    runs-on: <tspan class="cmd">ubuntu-latest</tspan></text>
+  <text x="30" y="332" class="key" xml:space="preserve">    steps:</text>
+  <text x="30" y="346" class="key" xml:space="preserve">      - uses: <tspan class="cmd">actions/checkout@v4</tspan></text>
+  <text x="30" y="360" class="key" xml:space="preserve">      - run: <tspan class="cmd">docker build -t app:${{ github.sha }} .</tspan></text>
+  <text x="30" y="374" class="key" xml:space="preserve">      - run: <tspan class="cmd">trivy image --exit-code 1 app:${{ github.sha }}</tspan></text>
+
+  <!-- Tagging strategy -->
+  <rect x="580" y="224" width="300" height="148" rx="8" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+  <text x="730" y="244" class="label" text-anchor="middle" fill="#f87171">Estrategia de Tags</text>
+  <line x1="588" y1="252" x2="872" y2="252" stroke="#334155"/>
+  <text x="590" y="268" class="note">Tipo</text>
+  <text x="680" y="268" class="note">Tag</text>
+  <line x1="588" y1="274" x2="872" y2="274" stroke="#334155"/>
+  <text x="590" y="290" class="sublabel">commit SHA</text>
+  <text x="680" y="290" class="cmd">app:a1b2c3d</text>
+  <text x="590" y="306" class="sublabel">rama main</text>
+  <text x="680" y="306" class="cmd">app:main</text>
+  <text x="590" y="322" class="sublabel">release tag</text>
+  <text x="680" y="322" class="cmd">app:v1.2.3</text>
+  <text x="590" y="338" class="sublabel">latest</text>
+  <text x="680" y="338" class="bad">❌ evitar en CI</text>
+  <text x="590" y="360" class="note" xml:space="preserve">Tags inmutables → reproducibilidad</tspan></text>
+</svg>
