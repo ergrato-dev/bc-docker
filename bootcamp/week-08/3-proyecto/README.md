@@ -2,12 +2,12 @@
 
 ## 📋 Información del Proyecto
 
-| Atributo         | Valor                                             |
-| ---------------- | ------------------------------------------------- |
-| **Nombre**       | SecureShop — E-Commerce Docker Production-Ready   |
-| **Duración**     | 1.5 horas                                         |
-| **Nivel**        | Avanzado                                          |
-| **Semana**       | 08 — Proyecto Final del Bootcamp                  |
+| Atributo     | Valor                                           |
+| ------------ | ----------------------------------------------- |
+| **Nombre**   | SecureShop — E-Commerce Docker Production-Ready |
+| **Duración** | 1.5 horas                                       |
+| **Nivel**    | Avanzado                                        |
+| **Semana**   | 08 — Proyecto Final del Bootcamp                |
 
 ---
 
@@ -15,13 +15,13 @@
 
 SecureShop es la culminación de todo lo aprendido en el bootcamp. Construirás un stack e-commerce completo que aplique **todas** las buenas prácticas de seguridad y producción:
 
-| Servicio    | Imagen          | Seguridad requerida                         |
-| ----------- | --------------- | -------------------------------------------- |
-| `nginx`     | nginx:1.27-alpine| No-root, read_only, cap_drop                |
-| `api`       | Dockerfile local| No-root, healthcheck, secrets, scan limpio  |
-| `db`        | postgres:16     | Secrets, no puertos expuestos, healthcheck  |
-| `cache`     | redis:7-alpine  | No puertos expuestos, healthcheck           |
-| `worker`    | Dockerfile local| No-root, sin puertos, escalable             |
+| Servicio | Imagen            | Seguridad                         |
+| -------- | ----------------- | --------------------------------- |
+| `nginx`  | nginx:1.27-alpine | No-root, read_only, cap_drop      |
+| `api`    | Dockerfile        | No-root, healthcheck, secrets     |
+| `db`     | postgres:16       | Secrets, healthcheck, sin puertos |
+| `cache`  | redis:7-alpine    | Healthcheck, sin puertos          |
+| `worker` | Dockerfile        | No-root, sin puertos, escalable   |
 
 ---
 
@@ -206,23 +206,23 @@ networks:
 
 ## 📊 Evaluación Final del Bootcamp
 
-| Semana               | Competencia                           | Peso |
-| -------------------- | ------------------------------------- | ---- |
-| 1-3: Fundamentos     | Contenedores, imágenes, gestión       | 15%  |
-| 4-5: Infraestructura | Redes y volúmenes                     | 15%  |
-| 6-7: Compose         | Multi-servicio, avanzado              | 30%  |
-| **8: Seguridad**     | **Production-ready, CI/CD**           | **40%** |
+| Semana               | Competencia                     | Peso    |
+| -------------------- | ------------------------------- | ------- |
+| 1-3: Fundamentos     | Contenedores, imágenes, gestión | 15%     |
+| 4-5: Infraestructura | Redes y volúmenes               | 15%     |
+| 6-7: Compose         | Multi-servicio, avanzado        | 30%     |
+| **8: Seguridad**     | **Production-ready, CI/CD**     | **40%** |
 
 ### Rúbrica Proyecto Final
 
-| Criterio                          | Puntos |
-| --------------------------------- | ------ |
-| Dockerfile no-root + hardening    | 20     |
-| Compose con secrets y seguridad   | 25     |
-| Healthchecks + depends_on         | 15     |
-| Scan Trivy sin CRITICALs          | 20     |
-| Pipeline CI/CD funcional          | 20     |
-| **Total**                         | **100**|
+| Criterio                        | Puntos  |
+| ------------------------------- | ------- |
+| Dockerfile no-root + hardening  | 20      |
+| Compose con secrets y seguridad | 25      |
+| Healthchecks + depends_on       | 15      |
+| Scan Trivy sin CRITICALs        | 20      |
+| Pipeline CI/CD funcional        | 20      |
+| **Total**                       | **100** |
 
 ---
 
@@ -240,4 +240,4 @@ Al completar este proyecto habrás dominado:
 
 ---
 
-*"Un contenedor sin seguridad es solo un proceso con alias bonito." — Bootcamp Docker*
+_"Un contenedor sin seguridad es solo un proceso con alias bonito." — Bootcamp Docker_

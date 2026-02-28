@@ -37,7 +37,8 @@
 
   <!-- Paso 2: Container efímero con tar -->
   <rect x="200" y="62" width="195" height="90" rx="8" fill="#1e1b4b" stroke="#7c3aed" stroke-width="1.5"/>
-  <text x="297" y="82" class="label" text-anchor="middle">Container efímero</text>
+  <text x="297" y="77" class="label" text-anchor="middle" font-size="10">Container</text>
+  <text x="297" y="88" class="label" text-anchor="middle" font-size="10">efímero</text>
   <text x="210" y="97" class="cmd" font-size="9">docker run --rm</text>
   <text x="210" y="112" class="cmd" font-size="9">  -v mi-datos:/data:ro</text>
   <text x="210" y="127" class="cmd" font-size="9">  -v $(pwd):/backup</text>
@@ -83,7 +84,8 @@
 
   <!-- Container restore -->
   <rect x="200" y="187" width="225" height="80" rx="8" fill="#1e1b4b" stroke="#7c3aed" stroke-width="1.5"/>
-  <text x="312" y="207" class="label" text-anchor="middle">Container efímero</text>
+  <text x="312" y="202" class="label" text-anchor="middle" font-size="10">Container</text>
+  <text x="312" y="213" class="label" text-anchor="middle" font-size="10">efímero</text>
   <text x="210" y="222" class="cmd" font-size="9">docker run --rm</text>
   <text x="210" y="237" class="cmd" font-size="9">  -v mi-datos:/data</text>
   <text x="210" y="252" class="cmd" font-size="9">  -v $(pwd):/backup alpine</text>

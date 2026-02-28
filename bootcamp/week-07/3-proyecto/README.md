@@ -2,12 +2,12 @@
 
 ## 📋 Información del Proyecto
 
-| Atributo         | Valor                                               |
-| ---------------- | --------------------------------------------------- |
-| **Nombre**       | EduStack — Plataforma E-Learning Multi-Entorno      |
-| **Duración**     | 1.5 horas                                           |
-| **Nivel**        | Avanzado                                            |
-| **Stack**        | FastAPI + PostgreSQL + Redis + Nginx + Workers      |
+| Atributo     | Valor                                          |
+| ------------ | ---------------------------------------------- |
+| **Nombre**   | EduStack — Plataforma E-Learning Multi-Entorno |
+| **Duración** | 1.5 horas                                      |
+| **Nivel**    | Avanzado                                       |
+| **Stack**    | FastAPI + PostgreSQL + Redis + Nginx + Workers |
 
 ---
 
@@ -27,16 +27,16 @@ Al completar este proyecto:
 
 EduStack es una plataforma de cursos online. Los servicios son:
 
-| Servicio      | Rol                                              |
-| ------------- | ------------------------------------------------ |
-| `nginx`       | Reverse proxy + archivos estáticos               |
-| `api`         | API REST (FastAPI) — endpoints de cursos y auth  |
-| `worker`      | Procesador de tareas asíncronas (correos, certs) |
-| `db`          | PostgreSQL principal                             |
-| `cache`       | Redis (sesiones + cola de tareas)                |
-| `adminer`     | Admin de BD (profile: tools)                     |
-| `prometheus`  | Métricas (profile: monitoring)                   |
-| `grafana`     | Dashboards (profile: monitoring)                 |
+| Servicio     | Rol                                       |
+| ------------ | ----------------------------------------- |
+| `nginx`      | Reverse proxy + estáticos                 |
+| `api`        | API REST (FastAPI) + auth                 |
+| `worker`     | Tareas asíncronas (correos, certificados) |
+| `db`         | PostgreSQL principal                      |
+| `cache`      | Redis (sesiones + cola)                   |
+| `adminer`    | Admin de BD (profile: tools)              |
+| `prometheus` | Métricas (profile: monitoring)            |
+| `grafana`    | Dashboards (profile: monitoring)          |
 
 ---
 
@@ -64,13 +64,13 @@ x-base-service: &base
 ### 3. Secrets (obligatorio)
 
 - Crear `secrets/db_password.txt` y `secrets/jwt_secret.txt`
-- Referencias en el compose con `file:` 
+- Referencias en el compose con `file:`
 - No hardcodear credenciales
 
 ### 4. Healthchecks (obligatorio)
 
 - `db`: healthcheck con `pg_isready`
-- `cache`: healthcheck con `redis-cli ping`  
+- `cache`: healthcheck con `redis-cli ping`
 - `api`: healthcheck con endpoint `/health`
 - `api` y `worker` con `depends_on: condition: service_healthy`
 
@@ -115,8 +115,8 @@ edustack/
 
 ```yaml
 # x-: Anchors reutilizables
-x-base: &base
-  # TODO: agregar restart y logging
+x-base: &base # TODO: agregar restart y logging
+
 
 services:
   nginx:
@@ -180,9 +180,11 @@ networks:
 Crear los siguientes archivos (NO commitear):
 
 ## db_password.txt
+
 echo "tu_password_seguro" > secrets/db_password.txt
 
-## jwt_secret.txt  
+## jwt_secret.txt
+
 openssl rand -hex 32 > secrets/jwt_secret.txt
 ```
 
@@ -204,11 +206,11 @@ openssl rand -hex 32 > secrets/jwt_secret.txt
 
 ## 📊 Evaluación
 
-| Criterio                      | Puntos |
-| ----------------------------- | ------ |
-| Anchors YAML implementados    | 15     |
-| Profiles correctos            | 20     |
-| Secrets correctamente usados  | 25     |
-| Healthchecks en todos         | 25     |
-| Worker escalable              | 15     |
-| **Total**                     | **100**|
+| Criterio                     | Puntos  |
+| ---------------------------- | ------- |
+| Anchors YAML implementados   | 15      |
+| Profiles correctos           | 20      |
+| Secrets correctamente usados | 25      |
+| Healthchecks en todos        | 25      |
+| Worker escalable             | 15      |
+| **Total**                    | **100** |

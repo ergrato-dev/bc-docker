@@ -116,5 +116,5 @@
   <text x="680" y="322" class="cmd">app:v1.2.3</text>
   <text x="590" y="338" class="sublabel">latest</text>
   <text x="680" y="338" class="bad">❌ evitar en CI</text>
-  <text x="590" y="360" class="note" xml:space="preserve">Tags inmutables → reproducibilidad</tspan></text>
+  <text x="590" y="360" class="note" xml:space="preserve">Tags inmutables → reproducibilidad</text>
 </svg>

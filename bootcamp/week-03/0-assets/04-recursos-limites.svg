@@ -58,7 +58,7 @@
   <rect x="670" y="175" width="120" height="15" rx="3" fill="#667eea"/>
   <text x="820" y="185" fill="#667eea" font-size="9">1 GB</text>
   
-  <text x="635" y="210" fill="#a0a0a0" font-size="9">--cpus=0.5 --memory=1g</text>
+  <text x="730" y="210" text-anchor="middle" fill="#a0a0a0" font-size="8">--cpus=0.5 --memory=1g</text>
   
   <!-- Contenedor 3 - Sin límites (peligro) -->
   <rect x="380" y="240" width="220" height="110" rx="8" fill="#0d1117" stroke="#f5576c" stroke-width="2" stroke-dasharray="5,5"/>
