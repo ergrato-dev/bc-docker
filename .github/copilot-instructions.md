@@ -42,9 +42,9 @@ bc-docker/
 │   └── copilot-instructions.md     # Este archivo
 ├── .vscode/
 │   └── extensions.json
-├── _assets/                         # Assets globales del proyecto
-├── _docs/                           # Documentación general
-├── _scripts/                        # Scripts de utilidad
+├── assets/                          # Assets globales del proyecto
+├── docs/                            # Documentación general
+├── scripts/                         # Scripts de utilidad
 ├── bootcamp/
 │   └── week-XX/
 │       ├── README.md                # Descripción y objetivos

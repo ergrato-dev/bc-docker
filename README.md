@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="_assets/docker-bootcamp-banner.svg" alt="Bootcamp Docker Zero to Hero" width="100%">
+  <img src="assets/docker-bootcamp-banner.svg" alt="Bootcamp Docker Zero to Hero" width="100%">
 </p>
 
 <p align="center">
@@ -139,7 +139,7 @@ docker run hello-world
 ### 4. Navegar a la Semana Actual
 
 ```bash
-cd bootcamp/week-01
+cd bootcamp/week-01-fundamentos_docker
 ```
 
 ### 5. Seguir las Instrucciones
@@ -242,8 +242,8 @@ Después de completar este bootcamp, estarás preparado para:
 </p>
 
 <p align="center">
-  <a href="bootcamp/week-01">Comenzar Semana 1</a> •
-  <a href="_docs">Ver Documentación</a> •
+  <a href="bootcamp/week-01-fundamentos_docker">Comenzar Semana 1</a> •
+  <a href="docs">Ver Documentación</a> •
   <a href="https://github.com/epti-dev/bc-docker/issues">Reportar Issue</a> •
   <a href="CONTRIBUTING.md">Contribuir</a>
 </p>
