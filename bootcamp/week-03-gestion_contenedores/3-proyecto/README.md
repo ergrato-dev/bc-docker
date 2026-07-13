@@ -66,7 +66,7 @@ Tu tarea es desplegar, configurar, monitorear y mantener estos servicios.
 | Servicio | Imagen       | Puerto | Memoria | CPU  |
 | -------- | ------------ | ------ | ------- | ---- |
 | web      | nginx:alpine | 8080   | 128MB   | 0.5  |
-| api      | alpine:3.19  | 3000   | 256MB   | 1.0  |
+| api      | alpine:3.21  | 3000   | 256MB   | 1.0  |
 | db       | mysql:8.0    | 3306   | 512MB   | 1.0  |
 | cache    | redis:alpine | 6379   | 128MB   | 0.25 |
 

@@ -19,7 +19,7 @@
   <rect x="50" y="80" width="180" height="80" rx="10" fill="#16213e" stroke="#667eea" stroke-width="2"/>
   <rect x="50" y="80" width="180" height="25" rx="10" fill="#667eea"/>
   <text x="140" y="98" text-anchor="middle" fill="#fff" font-size="13" font-weight="bold">FROM</text>
-  <text x="140" y="130" text-anchor="middle" fill="#667eea" font-size="11">FROM node:20-alpine</text>
+  <text x="140" y="130" text-anchor="middle" fill="#667eea" font-size="11">FROM node:22-alpine</text>
   <text x="140" y="148" text-anchor="middle" fill="#a0a0a0" font-size="10">Imagen base</text>
   
   <!-- Flecha 1 -->

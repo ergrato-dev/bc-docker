@@ -32,7 +32,7 @@ La técnica más poderosa para reducir tamaño: usar múltiples etapas de build.
 
 ```dockerfile
 # ❌ Sin multi-stage: imagen de 1.2 GB
-FROM node:20
+FROM node:22
 
 WORKDIR /app
 COPY . .
@@ -57,7 +57,7 @@ CMD ["node", "dist/server.js"]
 # ✅ Con multi-stage: imagen de 150 MB
 
 # ========== Etapa 1: Build ==========
-FROM node:20 AS builder
+FROM node:22 AS builder
 
 WORKDIR /app
 
@@ -70,7 +70,7 @@ COPY . .
 RUN npm run build
 
 # ========== Etapa 2: Producción ==========
-FROM node:20-alpine AS production
+FROM node:22-alpine AS production
 
 WORKDIR /app
 
@@ -112,10 +112,10 @@ COPY --from=nginx:alpine /etc/nginx/nginx.conf /etc/nginx/
 
 | Imagen             | Tamaño  | Base           | Uso                               |
 | ------------------ | ------- | -------------- | --------------------------------- |
-| `node:20`          | ~1 GB   | Debian         | Desarrollo, compatibilidad máxima |
-| `node:20-slim`     | ~200 MB | Debian minimal | Producción general                |
-| `node:20-alpine`   | ~140 MB | Alpine Linux   | Producción optimizada             |
-| `node:20-bookworm` | ~1 GB   | Debian 12      | Cuando necesitas glibc            |
+| `node:22`          | ~1 GB   | Debian         | Desarrollo, compatibilidad máxima |
+| `node:22-slim`     | ~200 MB | Debian minimal | Producción general                |
+| `node:22-alpine`   | ~140 MB | Alpine Linux   | Producción optimizada             |
+| `node:22-bookworm` | ~1 GB   | Debian 12      | Cuando necesitas glibc            |
 
 ### Comparativa de Imágenes Python
 
@@ -129,16 +129,16 @@ COPY --from=nginx:alpine /etc/nginx/nginx.conf /etc/nginx/
 
 ```dockerfile
 # Desarrollo - máxima compatibilidad
-FROM node:20
+FROM node:22
 
 # Producción general - buen balance
-FROM node:20-slim
+FROM node:22-slim
 
 # Producción optimizada - mínimo tamaño
-FROM node:20-alpine
+FROM node:22-alpine
 
 # Aplicaciones con dependencias nativas complejas
-FROM node:20-bookworm
+FROM node:22-bookworm
 ```
 
 > ⚠️ **Alpine y musl**: Alpine usa `musl` en lugar de `glibc`. Algunas librerías nativas pueden tener problemas. Prueba siempre.
@@ -151,7 +151,7 @@ FROM node:20-bookworm
 
 ```dockerfile
 # ❌ Mal orden - invalida caché frecuentemente
-FROM node:20-alpine
+FROM node:22-alpine
 WORKDIR /app
 COPY . .                    # ← Cualquier cambio invalida todo
 RUN npm install
@@ -160,7 +160,7 @@ CMD ["node", "server.js"]
 
 ```dockerfile
 # ✅ Buen orden - maximiza uso de caché
-FROM node:20-alpine
+FROM node:22-alpine
 WORKDIR /app
 
 # 1. Dependencias (cambian poco)
@@ -228,7 +228,7 @@ RUN go build -ldflags="-s -w" -o /app/server
 ### Usuario No-Root
 
 ```dockerfile
-FROM node:20-alpine
+FROM node:22-alpine
 
 # Crear usuario y grupo
 RUN addgroup -S appgroup && \
@@ -249,7 +249,7 @@ CMD ["node", "server.js"]
 
 ```dockerfile
 # Build
-FROM golang:1.21 AS builder
+FROM golang:1.25 AS builder
 WORKDIR /app
 COPY . .
 RUN CGO_ENABLED=0 go build -o /server
@@ -265,7 +265,7 @@ ENTRYPOINT ["/server"]
 
 ```dockerfile
 # Para binarios Go completamente estáticos
-FROM golang:1.21 AS builder
+FROM golang:1.25 AS builder
 WORKDIR /app
 COPY . .
 RUN CGO_ENABLED=0 GOOS=linux go build -a -ldflags='-s -w' -o /server
@@ -287,13 +287,13 @@ ENTRYPOINT ["/server"]
 # ============================================
 
 # --- Etapa 1: Dependencias ---
-FROM node:20-alpine AS deps
+FROM node:22-alpine AS deps
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci --only=production && npm cache clean --force
 
 # --- Etapa 2: Build ---
-FROM node:20-alpine AS builder
+FROM node:22-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
@@ -302,7 +302,7 @@ RUN npm run build && \
     npm prune --production
 
 # --- Etapa 3: Producción ---
-FROM node:20-alpine AS production
+FROM node:22-alpine AS production
 
 # Metadatos
 LABEL maintainer="dev@example.com" \
@@ -386,7 +386,7 @@ docker images --format "table {{.Repository}}\t{{.Tag}}\t{{.Size}}" | sort -k3 -
 
 1. ¿Qué es un multi-stage build y cuándo lo usarías?
 2. ¿Por qué el orden de las instrucciones afecta el tiempo de build?
-3. ¿Cuál es la diferencia entre `node:20` y `node:20-alpine`?
+3. ¿Cuál es la diferencia entre `node:22` y `node:22-alpine`?
 4. ¿Por qué debemos limpiar cachés en la misma instrucción RUN?
 5. ¿Qué beneficios tiene usar un usuario no-root?
 

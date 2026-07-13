@@ -299,7 +299,7 @@ docker run -P nginx
 
 ```dockerfile
 # Dockerfile
-FROM node:20-alpine
+FROM node:22-alpine
 WORKDIR /app
 COPY . .
 EXPOSE 3000
@@ -350,7 +350,7 @@ docker run -p 127.0.0.1:5432:5432 postgres
 
 ```dockerfile
 # Dockerfile con EXPOSE documentado
-FROM python:3.11-slim
+FROM python:3.12-slim
 WORKDIR /app
 COPY . .
 # Puerto de la aplicación

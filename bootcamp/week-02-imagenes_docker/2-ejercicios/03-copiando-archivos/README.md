@@ -104,7 +104,7 @@ echo "# Notas del desarrollo" > NOTES.md
 Crea un `Dockerfile` básico:
 
 ```dockerfile
-FROM node:20-alpine
+FROM node:22-alpine
 WORKDIR /app
 COPY . .
 EXPOSE 3000
@@ -169,7 +169,7 @@ Actualiza el `Dockerfile` con orden optimizado:
 
 ```dockerfile
 # Imagen base
-FROM node:20-alpine
+FROM node:22-alpine
 
 # Directorio de trabajo
 WORKDIR /app

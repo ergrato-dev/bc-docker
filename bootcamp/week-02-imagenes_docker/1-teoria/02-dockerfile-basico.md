@@ -17,7 +17,7 @@ Un **Dockerfile** es un archivo de texto que contiene todas las instrucciones ne
 
 ```dockerfile
 # Ejemplo básico de Dockerfile
-FROM alpine:3.19
+FROM alpine:3.21
 RUN apk add --no-cache curl
 CMD ["curl", "--version"]
 ```
@@ -46,7 +46,7 @@ FROM <imagen>:<tag>
 
 # Ejemplos
 FROM ubuntu:22.04
-FROM node:20-alpine
+FROM node:22-alpine
 FROM python:3.12-slim
 FROM scratch              # Imagen vacía (para binarios estáticos)
 ```
@@ -57,7 +57,7 @@ FROM scratch              # Imagen vacía (para binarios estáticos)
 
 | ✅ Hacer                     | ❌ Evitar               |
 | ---------------------------- | ----------------------- |
-| `FROM node:20-alpine`        | `FROM node:latest`      |
+| `FROM node:22-alpine`        | `FROM node:latest`      |
 | `FROM python:3.12-slim`      | `FROM python`           |
 | Usar tags específicos        | Usar `latest`           |
 | Preferir `-alpine` o `-slim` | Usar imágenes completas |
@@ -204,7 +204,7 @@ EXPOSE 53/udp
 ```dockerfile
 # Dockerfile para aplicación Node.js
 # Imagen base con Node.js sobre Alpine
-FROM node:20-alpine
+FROM node:22-alpine
 
 # Crear directorio de trabajo
 WORKDIR /app

@@ -101,10 +101,10 @@ Montan un directorio del **host** directamente en el contenedor. Ideales para de
 
 ```bash
 # Montar directorio actual en /app
-docker run -v $(pwd):/app node:20-alpine
+docker run -v $(pwd):/app node:22-alpine
 
 # Sintaxis con --mount (más explícita)
-docker run --mount type=bind,source=$(pwd),target=/app node:20-alpine
+docker run --mount type=bind,source=$(pwd),target=/app node:22-alpine
 ```
 
 ### 3. tmpfs Mounts

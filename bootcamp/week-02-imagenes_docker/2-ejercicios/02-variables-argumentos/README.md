@@ -74,7 +74,7 @@ Crea un `Dockerfile` que cumpla con:
 
 **Requisitos del Dockerfile:**
 
-1. Usar `alpine:3.19` como base
+1. Usar `alpine:3.21` como base
 2. Definir `ARG APP_VERSION` con valor por defecto `1.0.0`
 3. Definir `ENV APP_NAME="Mi App Docker"`
 4. Definir `ENV APP_VERSION=${APP_VERSION}` (pasar ARG a ENV)

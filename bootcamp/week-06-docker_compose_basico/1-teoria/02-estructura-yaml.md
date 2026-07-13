@@ -49,7 +49,7 @@ El único elemento requerido. Define los contenedores de la aplicación.
 ```yaml
 services:
   api:
-    image: node:20-alpine
+    image: node:22-alpine
   db:
     image: postgres:16-alpine
 ```

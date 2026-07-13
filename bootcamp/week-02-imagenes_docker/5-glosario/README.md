@@ -41,9 +41,9 @@
 
 | Tipo           | Ejemplo                    | Tamaño  | Uso                               |
 | -------------- | -------------------------- | ------- | --------------------------------- |
-| **Full**       | `node:20`                  | ~1 GB   | Desarrollo, máxima compatibilidad |
-| **Slim**       | `node:20-slim`             | ~200 MB | Producción general                |
-| **Alpine**     | `node:20-alpine`           | ~140 MB | Producción optimizada             |
+| **Full**       | `node:22`                  | ~1 GB   | Desarrollo, máxima compatibilidad |
+| **Slim**       | `node:22-slim`             | ~200 MB | Producción general                |
+| **Alpine**     | `node:22-alpine`           | ~140 MB | Producción optimizada             |
 | **Distroless** | `gcr.io/distroless/nodejs` | ~100 MB | Máxima seguridad                  |
 | **Scratch**    | `scratch`                  | 0 B     | Binarios estáticos                |
 

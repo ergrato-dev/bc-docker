@@ -176,7 +176,7 @@ docker exec mysql-test mysql -utestuser -ptestpass456 testdb -e "SHOW TABLES;"
 ```bash
 # TODO: Crear Dockerfile con variables
 cat > Dockerfile << 'EOF'
-FROM alpine:3.19
+FROM alpine:3.21
 ENV APP_MODE=dockerfile
 ENV LOG_LEVEL=info
 ENV VERSION=1.0

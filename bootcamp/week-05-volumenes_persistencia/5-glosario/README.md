@@ -31,7 +31,7 @@ Tipo de montaje que enlaza directamente un directorio o archivo del **sistema ho
 
 ```bash
 # -v ruta_host:ruta_contenedor
-docker run -v $(pwd)/src:/app/src node:20-alpine
+docker run -v $(pwd)/src:/app/src node:22-alpine
 ```
 
 **Diferencia clave**: A diferencia de los Named Volumes, Docker no gestiona la ubicación del bind mount; el usuario la especifica explícitamente.

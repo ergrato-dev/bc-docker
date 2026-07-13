@@ -17,7 +17,7 @@ SecureShop es la culminación de todo lo aprendido en el bootcamp. Construirás 
 
 | Servicio | Imagen            | Seguridad                         |
 | -------- | ----------------- | --------------------------------- |
-| `nginx`  | nginx:1.27-alpine | No-root, read_only, cap_drop      |
+| `nginx`  | nginx:1.30-alpine | No-root, read_only, cap_drop      |
 | `api`    | Dockerfile        | No-root, healthcheck, secrets     |
 | `db`     | postgres:16       | Secrets, healthcheck, sin puertos |
 | `cache`  | redis:7-alpine    | Healthcheck, sin puertos          |
@@ -132,7 +132,7 @@ x-base: &base
 services:
   nginx:
     <<: *base
-    image: nginx:1.27.2-alpine
+    image: nginx:1.30-alpine
     ports:
       - "80:80"
     # TODO: cap_drop, read_only, tmpfs, user

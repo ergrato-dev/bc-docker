@@ -55,7 +55,7 @@ docker run --entrypoint bash miimagen  # bash (ENTRYPOINT sobreescrito)
 ### Ejemplo Práctico: CLI Tool
 
 ```dockerfile
-FROM alpine:3.19
+FROM alpine:3.21
 RUN apk add --no-cache curl
 
 # curl es el ejecutable fijo
@@ -92,7 +92,7 @@ ENV APP_HOME=/app \
 ### Uso de Variables ENV
 
 ```dockerfile
-FROM node:20-alpine
+FROM node:22-alpine
 
 # Definir variables
 ENV APP_DIR=/app \
@@ -198,7 +198,7 @@ USER <usuario>[:<grupo>]
 USER <UID>[:<GID>]
 
 # Ejemplo: Crear y usar usuario no-root
-FROM node:20-alpine
+FROM node:22-alpine
 
 # Crear usuario sin privilegios
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup

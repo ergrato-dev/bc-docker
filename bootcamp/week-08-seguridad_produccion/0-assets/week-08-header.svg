@@ -65,7 +65,7 @@
   <rect x="283" y="58" width="220" height="185" rx="8" stroke="#16a34a" stroke-width="1.5" fill="#011a05" fill-opacity="0.8"/>
   <text x="393" y="74" class="lab good" text-anchor="middle">✅ SEGURO</text>
 
-  <text x="293" y="92" class="hint good">FROM node:20.18-alpine</text>
+  <text x="293" y="92" class="hint good">FROM node:22.12-alpine</text>
   <text x="293" y="108" class="hint good">RUN adduser -S app -G app</text>
   <text x="293" y="124" class="hint good">COPY --chown=app:app . .</text>
   <text x="293" y="140" class="hint good">USER app</text>

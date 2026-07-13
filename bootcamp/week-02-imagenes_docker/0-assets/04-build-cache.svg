@@ -15,7 +15,7 @@
   
   <!-- Capa 1 -->
   <rect x="50" y="115" width="340" height="50" rx="6" fill="#16213e" stroke="#43e97b" stroke-width="2"/>
-  <text x="70" y="145" fill="#43e97b" font-size="11">FROM node:20-alpine</text>
+  <text x="70" y="145" fill="#43e97b" font-size="11">FROM node:22-alpine</text>
   <text x="360" y="145" fill="#43e97b" font-size="10" text-anchor="end">✓ CACHED</text>
   
   <!-- Capa 2 -->
@@ -46,7 +46,7 @@
   
   <!-- Capa 1 -->
   <rect x="510" y="115" width="340" height="50" rx="6" fill="#16213e" stroke="#43e97b" stroke-width="2"/>
-  <text x="530" y="145" fill="#43e97b" font-size="11">FROM node:20-alpine</text>
+  <text x="530" y="145" fill="#43e97b" font-size="11">FROM node:22-alpine</text>
   <text x="820" y="145" fill="#43e97b" font-size="10" text-anchor="end">✓ CACHED</text>
   
   <!-- Capa 2 -->

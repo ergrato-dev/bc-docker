@@ -10,7 +10,7 @@ services:
     image: myapp:latest
 
   debug-tools:
-    image: alpine:3.19
+    image: alpine:3.21
     profiles:             # Solo con --profile debug
       - debug
 
@@ -81,7 +81,7 @@ services:
 
   # Profile: debug (herramientas de depuración)
   debug-shell:
-    image: alpine:3.19
+    image: alpine:3.21
     command: sleep infinity
     profiles:
       - debug

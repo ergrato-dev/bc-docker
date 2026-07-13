@@ -146,7 +146,7 @@ docker run --rm \
   --tmpfs /tmp:rw,size=1g \
   -v $(pwd):/workspace \
   -w /workspace \
-  node:20-alpine \
+  node:22-alpine \
   sh -c "npm test"
 
 # Los archivos en /tmp desaparecen al terminar (--rm + tmpfs)

@@ -118,7 +118,7 @@ Crea `Dockerfile.single`:
 
 ```dockerfile
 # ❌ Sin Multi-stage - Imagen grande
-FROM node:20
+FROM node:22
 
 WORKDIR /app
 
@@ -152,7 +152,7 @@ Crea `Dockerfile`:
 # ============================================
 # ETAPA 1: Build (Compilación)
 # ============================================
-FROM node:20-alpine AS builder
+FROM node:22-alpine AS builder
 
 WORKDIR /app
 
@@ -170,7 +170,7 @@ RUN npm run build
 # ============================================
 # ETAPA 2: Production (Ejecución)
 # ============================================
-FROM node:20-alpine AS production
+FROM node:22-alpine AS production
 
 # Metadatos
 LABEL maintainer="bootcamp@docker.com" \
@@ -251,10 +251,10 @@ docker history multistage:single
 <summary>Hint 1: Nombrar etapas</summary>
 
 ```dockerfile
-FROM node:20-alpine AS builder
+FROM node:22-alpine AS builder
 # ... comandos de build
 
-FROM node:20-alpine AS production
+FROM node:22-alpine AS production
 COPY --from=builder /app/dist ./dist
 ```
 
@@ -304,7 +304,7 @@ docker images | grep multistage
 
 | Imagen                 | Contenido        | Tamaño Aprox |
 | ---------------------- | ---------------- | ------------ |
-| `node:20`              | Node.js completo | ~1 GB        |
+| `node:22`              | Node.js completo | ~1 GB        |
 | `multistage:single`    | Todo incluido    | ~1.1 GB      |
 | `multistage:optimized` | Solo producción  | ~180 MB      |
 

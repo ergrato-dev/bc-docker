@@ -21,7 +21,7 @@ docker run --rm mi-app id
 ### Imágenes basadas en Alpine
 
 ```dockerfile
-FROM alpine:3.19
+FROM alpine:3.21
 
 # Crear grupo y usuario sin shell de login
 RUN addgroup -S appgroup && \
@@ -71,7 +71,7 @@ CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 ### Imágenes Node.js
 
 ```dockerfile
-FROM node:20-alpine
+FROM node:22-alpine
 
 # node:alpine ya incluye el usuario "node" (UID 1000)
 WORKDIR /app
@@ -94,7 +94,7 @@ CMD ["node", "server.js"]
 
 ```dockerfile
 # Stage de build (puede ser root)
-FROM golang:1.23-alpine AS builder
+FROM golang:1.25-alpine AS builder
 WORKDIR /build
 COPY . .
 RUN CGO_ENABLED=0 go build -o app .
@@ -163,7 +163,7 @@ services:
 ## USER en Multi-Stage Builds
 
 ```dockerfile
-FROM node:20-alpine AS build
+FROM node:22-alpine AS build
 WORKDIR /build
 COPY package*.json .
 RUN npm ci

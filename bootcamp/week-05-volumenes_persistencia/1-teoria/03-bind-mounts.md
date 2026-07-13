@@ -36,7 +36,7 @@ Los cambios en el host **se reflejan inmediatamente** en el contenedor, y viceve
 
 ```bash
 # Montar directorio actual en /app del contenedor
-docker run -v $(pwd):/app node:20-alpine
+docker run -v $(pwd):/app node:22-alpine
 
 # Montar archivo específico
 docker run -v $(pwd)/nginx.conf:/etc/nginx/nginx.conf:ro nginx
@@ -51,7 +51,7 @@ docker run -v $(pwd)/config:/config:ro alpine
 # Montar directorio
 docker run \
   --mount type=bind,source=$(pwd),target=/app \
-  node:20-alpine
+  node:22-alpine
 
 # Montar archivo de configuración como solo lectura
 docker run \
@@ -76,7 +76,7 @@ docker run -d \
   -v $(pwd):/app \
   -w /app \
   -p 3000:3000 \
-  node:20-alpine \
+  node:22-alpine \
   sh -c "npm install && npx nodemon index.js"
 ```
 
@@ -121,7 +121,7 @@ docker run -d \
   -w /workspace \
   -p 8080:8080 \
   -e NODE_ENV=development \
-  node:20-alpine \
+  node:22-alpine \
   sh -c "npm install && npm run dev"
 
 # 3. Editar archivos en tu IDE local — los cambios se aplican automáticamente
@@ -151,7 +151,7 @@ services:
     command: npm run dev
 
   frontend:
-    image: node:20-alpine
+    image: node:22-alpine
     volumes:
       - ./frontend:/app
       - /app/node_modules
@@ -174,7 +174,7 @@ services:
 # no puede leer los archivos creados porque pertenecen a root.
 
 # Solución: especificar usuario al correr el contenedor
-docker run -u $(id -u):$(id -g) -v $(pwd):/app node:20-alpine
+docker run -u $(id -u):$(id -g) -v $(pwd):/app node:22-alpine
 
 # O en el Dockerfile, crear usuario con el mismo UID que el host
 ARG UID=1000
@@ -186,10 +186,10 @@ USER appuser
 
 ```bash
 # En Windows (PowerShell), usar ${PWD} en lugar de $(pwd)
-docker run -v ${PWD}:/app node:20-alpine
+docker run -v ${PWD}:/app node:22-alpine
 
 # O con ruta absoluta de Windows
-docker run -v C:\Users\usuario\proyecto:/app node:20-alpine
+docker run -v C:\Users\usuario\proyecto:/app node:22-alpine
 ```
 
 ### Problema: El directorio host no existe

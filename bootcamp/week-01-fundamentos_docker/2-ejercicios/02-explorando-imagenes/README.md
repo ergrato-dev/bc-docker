@@ -156,7 +156,7 @@ print(f'Plataforma: {sys.platform}')
 ```bash
 # Descargar imágenes populares
 docker pull nginx:alpine
-docker pull node:20-alpine
+docker pull node:22-alpine
 docker pull redis:alpine
 docker pull postgres:16-alpine
 
@@ -217,14 +217,14 @@ docker system df
 
 1. Encuentra la imagen oficial de Node.js más pequeña
 2. Descarga MySQL y averigua qué puerto expone por defecto
-3. Compara los tamaños de `ubuntu:22.04` vs `alpine:3.19`
+3. Compara los tamaños de `ubuntu:22.04` vs `alpine:3.21`
 
 <details>
 <summary>💡 Soluciones</summary>
 
 ```bash
 # 1. Node.js más pequeño
-docker pull node:20-alpine
+docker pull node:22-alpine
 docker images node
 
 # 2. Puerto de MySQL
@@ -234,7 +234,7 @@ docker inspect -f '{{.Config.ExposedPorts}}' mysql:8
 
 # 3. Comparar Ubuntu vs Alpine
 docker pull ubuntu:22.04
-docker pull alpine:3.19
+docker pull alpine:3.21
 docker images --format "{{.Repository}}:{{.Tag}}\t{{.Size}}" | grep -E "ubuntu|alpine"
 # Ubuntu: ~77MB, Alpine: ~7MB
 ```
@@ -247,11 +247,11 @@ docker images --format "{{.Repository}}:{{.Tag}}\t{{.Size}}" | grep -E "ubuntu|a
 
 | Imagen                 | Tamaño Aprox. | Uso Recomendado      |
 | ---------------------- | ------------- | -------------------- |
-| `alpine:3.19`          | 7 MB          | Producción, mínimo   |
+| `alpine:3.21`          | 7 MB          | Producción, mínimo   |
 | `debian:bookworm-slim` | 74 MB         | Compatibilidad       |
 | `ubuntu:22.04`         | 77 MB         | Desarrollo           |
 | `python:3.12-alpine`   | 52 MB         | Apps Python pequeñas |
-| `node:20-alpine`       | 135 MB        | Apps Node.js         |
+| `node:22-alpine`       | 135 MB        | Apps Node.js         |
 | `nginx:alpine`         | 43 MB         | Servidor web         |
 
 ---

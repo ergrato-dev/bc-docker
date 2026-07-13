@@ -35,8 +35,8 @@
   <g transform="translate(50, 90)">
     <!-- Base Layer -->
     <rect x="0" y="200" width="300" height="50" rx="5" fill="url(#layerGrad1)"/>
-    <text x="150" y="225" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">Capa Base: alpine:3.19</text>
-    <text x="150" y="242" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">FROM alpine:3.19</text>
+    <text x="150" y="225" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">Capa Base: alpine:3.21</text>
+    <text x="150" y="242" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">FROM alpine:3.21</text>
     
     <!-- Layer 2 -->
     <rect x="0" y="145" width="300" height="50" rx="5" fill="url(#layerGrad2)"/>

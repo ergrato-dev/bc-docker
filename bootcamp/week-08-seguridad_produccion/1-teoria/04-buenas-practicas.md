@@ -68,9 +68,9 @@ FROM node:latest        # No reproducible, puede cambiar sin aviso
 FROM python:3.12        # El patch puede variar
 
 # ✅ Reproducible y auditables
-FROM node:20.18.0-alpine3.20    # Tag exacto
-FROM python:3.12.7-slim-bookworm
-FROM nginx:1.27.2-alpine
+FROM node:22.12.0-alpine3.21    # Tag exacto
+FROM python:3.12.12-slim-bookworm
+FROM nginx:1.30-alpine
 
 # ✅ con SHA para máxima seguridad
 FROM python:3.12-slim@sha256:abc123...
@@ -90,7 +90,7 @@ docker image ls myapp:fat
 
 ```dockerfile
 # Técnica 1: Multi-stage build
-FROM node:20-alpine AS build
+FROM node:22-alpine AS build
 WORKDIR /app
 COPY package*.json .
 RUN npm ci

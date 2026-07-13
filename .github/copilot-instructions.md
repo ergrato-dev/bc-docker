@@ -86,7 +86,7 @@ bc-docker/
 
 ```dockerfile
 # ✅ Correcto
-FROM alpine:3.19
+FROM alpine:3.21
 
 LABEL maintainer="email@example.com"
 LABEL version="1.0"
@@ -262,7 +262,7 @@ Update README.md
 4. **Documentar** variables de entorno
 5. **Usar** depends_on con condiciones cuando sea necesario
 
-### Al generar ejercicioshttps://github.com/ergrato-dev/bc-docker.git
+### Al generar ejercicios
 
 1. **Estructurar** con objetivos claros
 2. **Incluir** pasos numerados
@@ -456,7 +456,7 @@ docker compose up -d --build
 - Cuando generes código, **siempre** incluir comentarios en español
 - Para Dockerfiles, **priorizar** seguridad y optimización
 - En ejercicios, **incluir** código starter con `# TODO:` markers
-- Para proyectos, **proporcionar** estructura `starter/` y `solution/`
+- Para proyectos, **proporcionar** estructura `starter/` y `solution/` cuando el proyecto lo requiera (no es obligatorio en todas las semanas)
 - En teoría, **usar** analogías para conceptos complejos
 - **Evitar** usar `latest` como tag de imagen
 - **Preferir** Alpine o Slim como imágenes base
@@ -470,7 +470,7 @@ docker compose up -d --build
 
 | Instrucción   | Descripción              | Ejemplo                                     |
 | ------------- | ------------------------ | ------------------------------------------- |
-| `FROM`        | Imagen base              | `FROM node:20-alpine`                       |
+| `FROM`        | Imagen base              | `FROM node:22-alpine`                       |
 | `WORKDIR`     | Directorio de trabajo    | `WORKDIR /app`                              |
 | `COPY`        | Copiar archivos          | `COPY package*.json ./`                     |
 | `ADD`         | Copiar + extraer/URL     | `ADD app.tar.gz /app`                       |

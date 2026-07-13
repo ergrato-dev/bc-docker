@@ -78,7 +78,7 @@ git clone https://github.com/TU_USUARIO/bc-docker.git
 cd bc-docker
 
 # 3. Añade el upstream
-git remote add upstream https://github.com/OWNER/bc-docker.git
+git remote add upstream https://github.com/ergrato-dev/bc-docker.git
 
 # 4. Crea una rama para tu contribución
 git checkout -b feature/mi-contribucion
@@ -107,7 +107,7 @@ git checkout -b feature/mi-contribucion
 
 # Bloques de código con syntax highlighting
 
-FROM alpine:3.19
+FROM alpine:3.21
 ​```
 ````
 
@@ -115,7 +115,7 @@ FROM alpine:3.19
 
 ```dockerfile
 # ✅ Correcto
-FROM alpine:3.19
+FROM alpine:3.21
 LABEL maintainer="email@example.com"
 
 # Comentarios en español
@@ -236,9 +236,9 @@ bc-docker/
 │       ├── 2-ejercicios/       # Ejercicios guiados
 │       ├── 3-proyecto/         # Proyecto semanal
 │       │   ├── README.md
-│       │   ├── starter/        # Código inicial
-│       │   └── solution/       # Solución
-│       ├── 4-recursos/
+│       │   ├── starter/        # Código inicial (opcional, cuando el proyecto lo requiera)
+│       │   └── solution/       # Solución (opcional, no versionada — ver .gitignore)
+│       ├── 4-recursos/         # Curados por semana; puede estar vacío si aún no hay contenido
 │       │   ├── ebooks-free/
 │       │   ├── videografia/
 │       │   └── webgrafia/
@@ -254,8 +254,8 @@ bc-docker/
 
 ## ❓ ¿Preguntas?
 
-- 💬 Abre una [Discussion](https://github.com/OWNER/bc-docker/discussions)
-- 🐛 Reporta un [Issue](https://github.com/OWNER/bc-docker/issues)
+- 💬 Abre una [Discussion](https://github.com/ergrato-dev/bc-docker/discussions)
+- 🐛 Reporta un [Issue](https://github.com/ergrato-dev/bc-docker/issues)
 
 ---
 

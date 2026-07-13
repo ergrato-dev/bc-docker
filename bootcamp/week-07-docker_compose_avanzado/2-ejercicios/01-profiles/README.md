@@ -78,7 +78,7 @@ services:
 
   # PROFILE: debug (utilidades de red)
   debug:
-    image: alpine:3.19
+    image: alpine:3.21
     command: sleep infinity
     profiles:
       - debug

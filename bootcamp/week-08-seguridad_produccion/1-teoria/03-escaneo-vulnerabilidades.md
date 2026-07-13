@@ -122,7 +122,7 @@ grype nginx:alpine --fail-on high
 FROM ubuntu:22.04
 
 # ✅ Alpine: minimalista
-FROM alpine:3.19
+FROM alpine:3.21
 
 # ✅ Distroless: sin shell, sin utilidades del sistema
 FROM gcr.io/distroless/python3-debian12
@@ -136,7 +136,7 @@ FROM scratch
 trivy image ubuntu:22.04 --severity HIGH,CRITICAL
 # Total: 25 (HIGH: 18, CRITICAL: 7)
 
-trivy image alpine:3.19 --severity HIGH,CRITICAL
+trivy image alpine:3.21 --severity HIGH,CRITICAL
 # Total: 0
 ```
 
@@ -160,14 +160,14 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 ```dockerfile
 # El stage de build puede tener herramientas de compilación
-FROM golang:1.23-alpine AS builder
+FROM golang:1.25-alpine AS builder
 RUN apk add --no-cache gcc musl-dev
 WORKDIR /build
 COPY . .
 RUN go build -o app .
 
 # La imagen final NO tiene el compilador ni sus vulnerabilidades
-FROM alpine:3.19
+FROM alpine:3.21
 COPY --from=builder /build/app /app
 USER 65534
 CMD ["/app"]

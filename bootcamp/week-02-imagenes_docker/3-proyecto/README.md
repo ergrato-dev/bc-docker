@@ -52,7 +52,7 @@ Construir una imagen Docker **optimizada** para una API REST en Node.js/Express 
 | Métrica                | Objetivo                    |
 | ---------------------- | --------------------------- |
 | Tamaño imagen final    | < 200 MB                    |
-| Reducción vs `node:20` | ≥ 80%                       |
+| Reducción vs `node:22` | ≥ 80%                       |
 | Build cache hit        | Sí (al cambiar solo código) |
 | Healthcheck            | Pasando                     |
 
@@ -151,7 +151,7 @@ docker stop api-test && docker rm api-test
 Crea un breve reporte con:
 
 - Tamaño de imagen final
-- Comparativa con `node:20` base
+- Comparativa con `node:22` base
 - Captura de `docker history`
 - Verificación de healthcheck
 
@@ -162,7 +162,7 @@ Crea un breve reporte con:
 | Criterio              | Puntos  | Descripción                              |
 | --------------------- | ------- | ---------------------------------------- |
 | Multi-stage funcional | 20      | Dos etapas: builder y production         |
-| Imagen Alpine         | 10      | Usar `node:20-alpine`                    |
+| Imagen Alpine         | 10      | Usar `node:22-alpine`                    |
 | Usuario no-root       | 15      | Crear y usar usuario sin privilegios     |
 | HEALTHCHECK           | 15      | Configurado y pasando                    |
 | .dockerignore         | 10      | Excluye archivos correctos               |
@@ -179,14 +179,14 @@ Crea un breve reporte con:
 <summary>Hint 1: Estructura Multi-stage</summary>
 
 ```dockerfile
-FROM node:20-alpine AS builder
+FROM node:22-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
 # Si hay build: RUN npm run build
 
-FROM node:20-alpine AS production
+FROM node:22-alpine AS production
 WORKDIR /app
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/src ./src

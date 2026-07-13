@@ -257,7 +257,7 @@ Algunos contenedores (distroless, scratch) no tienen shell:
 docker exec -it mi-app /bin/sh
 # Error: executable file not found in $PATH
 
-# Solución 1: Usar debug container (Docker 1.25+)
+# Solución 1: Usar debug container (Docker Desktop 4.33+, GA; 4.27+ en beta)
 docker debug mi-app
 
 # Solución 2: Copiar binarios necesarios

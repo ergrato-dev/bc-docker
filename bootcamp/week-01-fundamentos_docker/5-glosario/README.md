@@ -9,7 +9,7 @@
 Distribución Linux ultraligera (~5MB) optimizada para contenedores. Muy popular como imagen base por su pequeño tamaño.
 
 ```bash
-docker pull alpine:3.19
+docker pull alpine:3.21
 ```
 
 ### C
