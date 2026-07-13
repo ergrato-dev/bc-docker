@@ -93,10 +93,11 @@ RUN apt-get install -y vim
 RUN apt-get clean
 
 # ❌ Instala dependencias DESPUÉS de copiar código
-RUN pip install -r requirements.txt
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
+RUN uv pip install --system -r requirements.txt
 
-# ❌ No limpia caché de pip
-# ❌ No usa --no-cache-dir
+# ❌ No limpia caché de uv
+# ❌ No usa --no-cache
 
 EXPOSE 5000
 
@@ -149,11 +150,14 @@ RUN apt-get update && \
 # Directorio de trabajo
 WORKDIR /app
 
+# ✅ Instalar uv (gestor de paquetes recomendado, más rápido que pip)
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
+
 # ✅ Copiar SOLO requirements primero (mejor caché)
 COPY requirements.txt .
 
-# ✅ Instalar dependencias Python con --no-cache-dir
-RUN pip install --no-cache-dir -r requirements.txt
+# ✅ Instalar dependencias Python con --no-cache
+RUN uv pip install --system --no-cache -r requirements.txt
 
 # ✅ Copiar código fuente AL FINAL (cambia más frecuentemente)
 COPY app.py .
@@ -191,7 +195,7 @@ echo "# Comentario de prueba" >> app.py
 # Reconstruir - observa qué capas se reutilizan
 docker build -t capas:optimized-v2 .
 
-# Deberías ver "Using cache" en las capas de pip install
+# Deberías ver "Using cache" en las capas de uv pip install
 ```
 
 ### Paso 8: Ejecutar y Verificar
@@ -216,10 +220,10 @@ docker stop flask-app && docker rm flask-app
 - [ ] Los comandos `apt-get` están en UNA sola instrucción RUN
 - [ ] La limpieza de apt se hace en la MISMA capa
 - [ ] `requirements.txt` se copia ANTES que el código
-- [ ] `pip install` usa `--no-cache-dir`
+- [ ] `uv pip install` usa `--no-cache`
 - [ ] El código fuente se copia AL FINAL
 - [ ] La imagen optimizada es significativamente más pequeña
-- [ ] Al cambiar solo `app.py`, las capas de pip se reutilizan del caché
+- [ ] Al cambiar solo `app.py`, las capas de uv pip se reutilizan del caché
 
 ---
 
@@ -253,7 +257,7 @@ RUN apt-get update && apt-get install -y curl && ...
 
 # 2. Dependencias (cambian ocasionalmente)
 COPY requirements.txt .
-RUN pip install -r requirements.txt
+RUN uv pip install --system -r requirements.txt
 
 # 3. Código fuente (cambia frecuentemente)
 COPY . .
@@ -267,7 +271,7 @@ COPY . .
 ```bash
 # Al reconstruir, busca estas líneas:
 # ---> Using cache
-# Si aparece después de pip install, ¡está funcionando!
+# Si aparece después de uv pip install, ¡está funcionando!
 ```
 
 </details>
@@ -294,7 +298,7 @@ docker run --rm -it \
 | --------------------------- | ------------------ | ------------------------- |
 | **Imagen base**             | python:3.12 (~1GB) | python:3.12-slim (~150MB) |
 | **Capas RUN apt**           | 4 capas            | 1 capa                    |
-| **Caché de pip**            | No                 | Sí                        |
+| **Caché de uv**             | No                 | Sí                        |
 | **Limpieza apt**            | Capa separada      | Misma capa                |
 | **Tamaño final**            | ~1.2 GB            | ~200 MB                   |
 | **Rebuild (cambio código)** | Reinstala todo     | Reutiliza caché           |

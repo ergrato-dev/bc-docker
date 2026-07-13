@@ -122,17 +122,17 @@ FROM node:22
 
 WORKDIR /app
 
-COPY package*.json ./
-RUN npm install
+COPY package.json ./
+RUN corepack enable && pnpm install
 
 COPY tsconfig.json ./
 COPY src/ ./src/
 
-RUN npm run build
+RUN pnpm run build
 
 ENV NODE_ENV=production
 
-CMD ["npm", "start"]
+CMD ["pnpm", "start"]
 ```
 
 ```bash
@@ -157,15 +157,15 @@ FROM node:22-alpine AS builder
 WORKDIR /app
 
 # Instalar dependencias (incluye devDependencies para TypeScript)
-COPY package*.json ./
-RUN npm install
+COPY package.json ./
+RUN corepack enable && pnpm install
 
 # Copiar código fuente y configuración
 COPY tsconfig.json ./
 COPY src/ ./src/
 
 # Compilar TypeScript a JavaScript
-RUN npm run build
+RUN pnpm run build
 
 # ============================================
 # ETAPA 2: Production (Ejecución)
@@ -180,10 +180,10 @@ WORKDIR /app
 
 # Solo copiar el código compilado (no fuentes .ts)
 COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/package.json ./
 
 # Instalar SOLO dependencias de producción
-RUN npm install --production && npm cache clean --force
+RUN corepack enable && pnpm install --prod
 
 # Variables de entorno
 ENV NODE_ENV=production
@@ -276,9 +276,7 @@ COPY --from=builder /app/package.json ./
 
 ```dockerfile
 # En la etapa de producción
-RUN npm install --production
-# o
-RUN npm ci --only=production
+RUN corepack enable && pnpm install --prod
 ```
 
 </details>

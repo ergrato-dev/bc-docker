@@ -38,10 +38,10 @@ WORKDIR /app
 COPY . .
 
 # Dependencias de desarrollo + producción
-RUN npm install
+RUN corepack enable && pnpm install
 
 # Compilar TypeScript
-RUN npm run build
+RUN pnpm run build
 
 # La imagen final incluye:
 # - node_modules de desarrollo (grande)
@@ -62,12 +62,12 @@ FROM node:22 AS builder
 WORKDIR /app
 
 # Dependencias
-COPY package*.json ./
-RUN npm ci
+COPY package.json pnpm-lock.yaml ./
+RUN corepack enable && pnpm install --frozen-lockfile
 
 # Compilar
 COPY . .
-RUN npm run build
+RUN pnpm run build
 
 # ========== Etapa 2: Producción ==========
 FROM node:22-alpine AS production
@@ -75,8 +75,8 @@ FROM node:22-alpine AS production
 WORKDIR /app
 
 # Solo dependencias de producción
-COPY package*.json ./
-RUN npm ci --only=production && npm cache clean --force
+COPY package.json pnpm-lock.yaml ./
+RUN corepack enable && pnpm install --prod --frozen-lockfile
 
 # Solo el código compilado (no fuentes)
 COPY --from=builder /app/dist ./dist
@@ -154,7 +154,7 @@ FROM node:22-bookworm
 FROM node:22-alpine
 WORKDIR /app
 COPY . .                    # ← Cualquier cambio invalida todo
-RUN npm install
+RUN corepack enable && pnpm install
 CMD ["node", "server.js"]
 ```
 
@@ -164,8 +164,8 @@ FROM node:22-alpine
 WORKDIR /app
 
 # 1. Dependencias (cambian poco)
-COPY package*.json ./
-RUN npm install
+COPY package.json pnpm-lock.yaml ./
+RUN corepack enable && pnpm install
 
 # 2. Código fuente (cambia frecuentemente)
 COPY . .
@@ -210,12 +210,12 @@ RUN apt-get update && \
 # Alpine (apk)
 RUN apk add --no-cache curl git
 
-# Node.js (npm)
-RUN npm ci --only=production && \
-    npm cache clean --force
+# Node.js (pnpm)
+RUN corepack enable && \
+    pnpm install --prod --frozen-lockfile
 
-# Python (pip)
-RUN pip install --no-cache-dir -r requirements.txt
+# Python (uv)
+RUN uv pip install --system --no-cache -r requirements.txt
 
 # Go
 RUN go build -ldflags="-s -w" -o /app/server
@@ -289,17 +289,17 @@ ENTRYPOINT ["/server"]
 # --- Etapa 1: Dependencias ---
 FROM node:22-alpine AS deps
 WORKDIR /app
-COPY package*.json ./
-RUN npm ci --only=production && npm cache clean --force
+COPY package.json pnpm-lock.yaml ./
+RUN corepack enable && pnpm install --prod --frozen-lockfile
 
 # --- Etapa 2: Build ---
 FROM node:22-alpine AS builder
 WORKDIR /app
-COPY package*.json ./
-RUN npm ci
+COPY package.json pnpm-lock.yaml ./
+RUN corepack enable && pnpm install --frozen-lockfile
 COPY . .
-RUN npm run build && \
-    npm prune --production
+RUN pnpm run build && \
+    pnpm prune --prod
 
 # --- Etapa 3: Producción ---
 FROM node:22-alpine AS production

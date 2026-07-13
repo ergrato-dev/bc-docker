@@ -13,8 +13,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # 2. Dependencias de la app (package files) → antes que el código
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN uv pip install --system --no-cache -r requirements.txt
 
 # 3. Código fuente (cambia frecuentemente) → al final
 COPY --chown=appuser:appuser src/ .
@@ -92,10 +93,10 @@ docker image ls myapp:fat
 # Técnica 1: Multi-stage build
 FROM node:22-alpine AS build
 WORKDIR /app
-COPY package*.json .
-RUN npm ci
+COPY package.json pnpm-lock.yaml .
+RUN corepack enable && pnpm install --frozen-lockfile
 COPY . .
-RUN npm run build
+RUN pnpm run build
 
 FROM nginx:alpine           # Solo la imagen final con los artifacts
 COPY --from=build /app/dist /usr/share/nginx/html
@@ -107,7 +108,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Técnica 3: Limpiar cache en el mismo RUN
-RUN pip install --no-cache-dir -r requirements.txt
+RUN uv pip install --system --no-cache -r requirements.txt
 
 # Técnica 4: Usar Alpine o Slim
 FROM python:3.12-slim    # ~50MB vs python:3.12 ~900MB

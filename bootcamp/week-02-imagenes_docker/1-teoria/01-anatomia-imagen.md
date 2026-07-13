@@ -39,7 +39,7 @@ Las imágenes Docker están compuestas por **capas apiladas**, donde cada capa r
 | ---- | --------------------- | ------ | ------------------------------- |
 | 5    | `CMD`                 | 0 B    | Comando de inicio (metadata)    |
 | 4    | `COPY app.js`         | 2 KB   | Código de la aplicación         |
-| 3    | `RUN npm install`     | 50 MB  | Dependencias instaladas         |
+| 3    | `RUN pnpm install`    | 50 MB  | Dependencias instaladas         |
 | 2    | `WORKDIR /app`        | 0 B    | Cambio de directorio (metadata) |
 | 1    | `FROM node:22-alpine` | 180 MB | Imagen base                     |
 

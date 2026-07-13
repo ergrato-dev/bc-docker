@@ -103,8 +103,9 @@ FROM python:3.12-slim
 # TODO: Crear grupo y usuario no-root (uid/gid 1001)
 
 # TODO: Instalar dependencias como root
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN uv pip install --system --no-cache -r requirements.txt
 
 # TODO: Copiar código con --chown correcto
 

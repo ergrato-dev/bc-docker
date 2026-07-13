@@ -113,6 +113,31 @@ temario.
 - Ver eje Seguridad para el detalle de imágenes base EOL — es el hallazgo de actualidad más
   concreto y accionable del repo.
 
+### 7. Preferencia de gestor de paquetes (`uv` / `pnpm`)
+
+**Criterio añadido tras la auditoría inicial** (instrucción global del usuario: Python → `uv`
+preferente, Node → `pnpm` preferente, npm/npx prohibidos).
+
+Estado encontrado antes del fix: **24 ocurrencias de `pip install`** en 15 archivos y **29
+ocurrencias de `npm install`/`npm ci`/`npx`** en 9 archivos de `bootcamp/`, con **0 menciones**
+de `uv` o `pnpm` en todo el repo — el bootcamp enseñaba exclusivamente los gestores por defecto
+(`pip`, `npm`) pese a que es material didáctico que un aprendiz puede copiar literalmente a un
+proyecto real.
+
+**Corregido**: las 53 ocurrencias se migraron a los equivalentes actuales en los 20 archivos
+afectados (`bootcamp/week-02` a `week-08`):
+- Python: `COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv` + `uv pip install --system`
+  (patrón oficial de uv en Docker, sin requerir `pyproject.toml`/lockfile en ejercicios que solo
+  usan `requirements.txt`).
+- Node: `RUN corepack enable && pnpm install` (Corepack viene incluido en `node:22-alpine`, sin
+  paso de instalación aparte); pipelines multi-stage migrados a `pnpm-lock.yaml` +
+  `--frozen-lockfile` donde el ejercicio ya generaba lockfile real.
+- CI: `.../03-pipeline-cicd/README.md` migrado de `actions/setup-python` + `pip install` a
+  `astral-sh/setup-uv`.
+
+Verificación: `grep -rn "pip install\|npm install\|npm ci\|npx " bootcamp --include="*.md"` da
+0 resultados fuera de `uv pip install`/`pnpm`.
+
 ## Tabla priorizada de acciones sugeridas (top 10)
 
 | # | Acción | Eje | Severidad |
@@ -127,8 +152,10 @@ temario.
 | 8 | Arreglar el enlace roto/concatenado en `.github/copilot-instructions.md:265`. | Completitud | 🟢 Bajo |
 | 9 | Aclarar en README que Docker Compose ya usa versionado v5.x (evitar confusión con el mínimo "2.31+"). | Actualidad | 🟢 Bajo |
 | 10 | Considerar añadir lint básico (markdownlint/yamllint/hadolint sobre los snippets) al único workflow existente — mejora que ningún repo de la serie tiene aún, oportunidad de diferenciarse. | Seguridad/Estándares | 🟢 Bajo (mejora, no gap del estándar actual) |
+| 11 | ✅ **Resuelto** — Migrar los 53 usos de `pip install`/`npm install`/`npm ci` a `uv`/`pnpm` en `bootcamp/`. | Actualidad/Estándares | 🟠 Alto |
 
 ---
 
-*Auditoría generada por revisión asistida — no se aplicaron cambios al contenido del repo,
-solo se creó este archivo.*
+*Auditoría generada por revisión asistida. Acciones #1-3 (licencia, imágenes EOL, org refs) y
+#11 (uv/pnpm) ya se aplicaron sobre el contenido del repo en esta misma sesión; el resto queda
+pendiente de decisión del mantenedor.*

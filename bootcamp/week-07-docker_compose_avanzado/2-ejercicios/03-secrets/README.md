@@ -112,8 +112,9 @@ PyJWT==2.9.0
 ```dockerfile
 FROM python:3.12-slim
 WORKDIR /app
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN uv pip install --system --no-cache -r requirements.txt
 COPY main.py .
 EXPOSE 8000
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

@@ -79,8 +79,8 @@ RUN ["ejecutable", "param1", "param2"]
 ```dockerfile
 # Ejemplos
 RUN apt-get update && apt-get install -y curl
-RUN pip install flask
-RUN npm install
+RUN uv pip install --system flask
+RUN pnpm install
 RUN mkdir -p /app/data
 ```
 
@@ -138,7 +138,7 @@ WORKDIR /ruta/al/directorio
 # Ejemplo
 WORKDIR /app
 COPY . .           # Copia al directorio /app
-RUN npm install    # Se ejecuta en /app
+RUN pnpm install   # Se ejecuta en /app
 ```
 
 > 💡 **Tip**: Usa `WORKDIR` en lugar de `RUN cd /directorio`. WORKDIR crea el directorio si no existe.
@@ -209,11 +209,14 @@ FROM node:22-alpine
 # Crear directorio de trabajo
 WORKDIR /app
 
-# Copiar archivos de dependencias
-COPY package*.json ./
+# Habilitar pnpm (incluido en Node vía Corepack, sin instalación aparte)
+RUN corepack enable
 
-# Instalar dependencias
-RUN npm install --production
+# Copiar archivos de dependencias
+COPY package.json pnpm-lock.yaml ./
+
+# Instalar dependencias (respeta el lockfile)
+RUN pnpm install --prod --frozen-lockfile
 
 # Copiar código fuente
 COPY . .
@@ -237,9 +240,12 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /app
 
+# Instalar uv (gestor de paquetes recomendado, más rápido que pip)
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
+
 # Instalar dependencias
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN uv pip install --system --no-cache -r requirements.txt
 
 # Copiar código
 COPY . .

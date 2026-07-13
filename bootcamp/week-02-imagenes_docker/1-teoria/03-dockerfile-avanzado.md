@@ -365,11 +365,11 @@ RUN addgroup -S appgroup && \
 WORKDIR /app
 
 # Copiar dependencias primero (mejor cache)
-COPY --chown=${APP_USER}:appgroup package*.json ./
+COPY --chown=${APP_USER}:appgroup package.json pnpm-lock.yaml ./
 
 # Instalar dependencias
-RUN npm ci --only=production && \
-    npm cache clean --force
+RUN corepack enable && \
+    pnpm install --prod --frozen-lockfile
 
 # Copiar código fuente
 COPY --chown=${APP_USER}:appgroup . .

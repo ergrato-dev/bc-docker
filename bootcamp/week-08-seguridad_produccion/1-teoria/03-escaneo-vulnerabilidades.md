@@ -152,8 +152,9 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # ✅ Fijar versiones de paquetes Python para control
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN uv pip install --system --no-cache -r requirements.txt
 ```
 
 ### 3. Multi-Stage para Reducir la Imagen Final

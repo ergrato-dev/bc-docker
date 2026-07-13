@@ -181,10 +181,10 @@ Crea un breve reporte con:
 ```dockerfile
 FROM node:22-alpine AS builder
 WORKDIR /app
-COPY package*.json ./
-RUN npm ci
+COPY package.json pnpm-lock.yaml ./
+RUN corepack enable && pnpm install --frozen-lockfile
 COPY . .
-# Si hay build: RUN npm run build
+# Si hay build: RUN pnpm run build
 
 FROM node:22-alpine AS production
 WORKDIR /app

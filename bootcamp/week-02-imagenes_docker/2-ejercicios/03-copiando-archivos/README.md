@@ -108,7 +108,7 @@ FROM node:22-alpine
 WORKDIR /app
 COPY . .
 EXPOSE 3000
-CMD ["npm", "start"]
+CMD ["pnpm", "start"]
 ```
 
 ```bash
@@ -176,10 +176,10 @@ WORKDIR /app
 
 # Copiar SOLO archivos de dependencias primero
 # (Esto maximiza el uso de caché)
-COPY package*.json ./
+COPY package.json ./
 
-# Instalar dependencias
-RUN npm install --production
+# Instalar dependencias (habilita pnpm vía Corepack, incluido en Node)
+RUN corepack enable && pnpm install --prod
 
 # Copiar el resto del código fuente
 COPY src/ ./src/
@@ -188,7 +188,7 @@ COPY src/ ./src/
 EXPOSE 3000
 
 # Comando de inicio
-CMD ["npm", "start"]
+CMD ["pnpm", "start"]
 ```
 
 ### Paso 7: Reconstruir y Comparar
@@ -249,8 +249,8 @@ find . -type f | grep -v node_modules | grep -v .git
 <details>
 <summary>Hint 2: Orden óptimo de COPY</summary>
 
-1. Primero: `COPY package*.json ./`
-2. Luego: `RUN npm install`
+1. Primero: `COPY package.json ./`
+2. Luego: `RUN corepack enable && pnpm install`
 3. Después: `COPY src/ ./src/`
 
 Esto evita reinstalar dependencias cuando solo cambió el código.
@@ -263,7 +263,7 @@ Esto evita reinstalar dependencias cuando solo cambió el código.
 
 ```bash
 # Modificar solo src/index.js y reconstruir
-# Observa que las capas de npm install se reutilizan del caché
+# Observa que las capas de pnpm install se reutilizan del caché
 
 # Ver historial de capas
 docker history copy-test:con-ignore

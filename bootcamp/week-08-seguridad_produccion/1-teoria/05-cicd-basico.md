@@ -197,16 +197,17 @@ FROM python:3.12-slim AS base
 WORKDIR /app
 RUN groupadd --gid 1001 appgroup && \
     useradd --uid 1001 --gid appgroup --no-create-home appuser
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
 
 # Dependencias en stage separado → mejor cache en CI
 FROM base AS deps
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN uv pip install --system --no-cache -r requirements.txt
 
 # Stage de test: tiene herramientas de testing
 FROM deps AS test
 COPY requirements-dev.txt .
-RUN pip install --no-cache-dir -r requirements-dev.txt
+RUN uv pip install --system --no-cache -r requirements-dev.txt
 COPY . .
 # docker build --target test -t myapp:test .
 # docker run myapp:test pytest

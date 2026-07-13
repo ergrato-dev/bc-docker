@@ -77,7 +77,7 @@ docker run -d \
   -w /app \
   -p 3000:3000 \
   node:22-alpine \
-  sh -c "npm install && npx nodemon index.js"
+  sh -c "corepack enable && pnpm install && pnpm exec nodemon index.js"
 ```
 
 ### 2. Archivos de Configuración
@@ -122,7 +122,7 @@ docker run -d \
   -p 8080:8080 \
   -e NODE_ENV=development \
   node:22-alpine \
-  sh -c "npm install && npm run dev"
+  sh -c "corepack enable && pnpm install && pnpm run dev"
 
 # 3. Editar archivos en tu IDE local — los cambios se aplican automáticamente
 
@@ -148,7 +148,7 @@ services:
       - "3000:3000"
     environment:
       - NODE_ENV=development
-    command: npm run dev
+    command: pnpm run dev
 
   frontend:
     image: node:22-alpine
@@ -158,7 +158,7 @@ services:
     working_dir: /app
     ports:
       - "5173:5173"
-    command: sh -c "npm install && npm run dev -- --host"
+    command: sh -c "corepack enable && pnpm install && pnpm run dev -- --host"
 ```
 
 > 💡 El truco de `-v /app/node_modules` (volumen anónimo sin ruta de host) evita que el `node_modules` del host sobreescriba el del contenedor, que puede estar compilado para Linux.

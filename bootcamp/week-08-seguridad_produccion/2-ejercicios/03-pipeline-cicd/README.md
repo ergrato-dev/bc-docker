@@ -96,8 +96,9 @@ RUN groupadd --gid 1001 appgroup && \
 
 WORKDIR /app
 
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN uv pip install --system --no-cache -r requirements.txt
 
 COPY --chown=appuser:appgroup src/ ./src/
 
@@ -135,13 +136,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Configurar Python
-        uses: actions/setup-python@v5
+      - name: Instalar uv
+        uses: astral-sh/setup-uv@v5
         with:
           python-version: '3.12'
 
       - name: Instalar dependencias de test
-        run: pip install -r requirements-dev.txt
+        run: uv pip install --system -r requirements-dev.txt
 
       - name: Ejecutar tests
         run: pytest tests/ -v

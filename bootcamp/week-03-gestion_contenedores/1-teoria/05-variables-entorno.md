@@ -182,7 +182,7 @@ ENV NODE_ENV=${BUILD_ENV} \
 
 WORKDIR ${APP_HOME}
 COPY . .
-RUN npm ci --only=production
+RUN corepack enable && pnpm install --prod --frozen-lockfile
 
 EXPOSE ${PORT}
 CMD ["node", "server.js"]

@@ -55,8 +55,9 @@ RUN mkdir -p /app && chown appuser:appgroup /app
 WORKDIR /app
 
 # Instalar dependencias ANTES de cambiar usuario
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN uv pip install --system --no-cache -r requirements.txt
 
 # Copiar código con el propietario correcto
 COPY --chown=appuser:appgroup . .
@@ -76,9 +77,9 @@ FROM node:22-alpine
 # node:alpine ya incluye el usuario "node" (UID 1000)
 WORKDIR /app
 
-# Instalar dependencias como root (para acceder a la caché de npm)
-COPY package*.json ./
-RUN npm ci --only=production
+# Instalar dependencias como root (para acceder a la caché de pnpm)
+COPY package.json pnpm-lock.yaml ./
+RUN corepack enable && pnpm install --prod --frozen-lockfile
 
 # Copiar código con el usuario node
 COPY --chown=node:node . .
@@ -165,10 +166,10 @@ services:
 ```dockerfile
 FROM node:22-alpine AS build
 WORKDIR /build
-COPY package*.json .
-RUN npm ci
+COPY package.json pnpm-lock.yaml .
+RUN corepack enable && pnpm install --frozen-lockfile
 COPY . .
-RUN npm run build
+RUN pnpm run build
 
 FROM nginx:alpine AS final
 
@@ -239,8 +240,9 @@ RUN mkdir -p /app && chown appuser /app
 WORKDIR /app
 
 # 4. Instalar dependencias de la app
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
 COPY requirements.txt .
-RUN pip install -r requirements.txt
+RUN uv pip install --system -r requirements.txt
 
 # 5. Copiar código con el propietario correcto
 COPY --chown=appuser:appuser . .
