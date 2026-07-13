@@ -13,7 +13,7 @@ Este es un repositorio educativo que contiene principalmente documentación y ej
 ### Si encuentras un problema de seguridad:
 
 1. **NO** abras un issue público
-2. Envía un correo electrónico describiendo el problema
+2. Repórtalo vía [GitHub Security Advisories](https://github.com/ergrato-dev/bc-docker/security/advisories/new) del repositorio
 3. Incluye:
    - Descripción del problema
    - Pasos para reproducir

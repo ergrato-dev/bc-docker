@@ -95,6 +95,11 @@ bootcamp/week-XX/
 | Git            | **2.40+**  | Version control     |
 | VS Code        | **Latest** | Recommended editor  |
 
+> Note: Docker Compose jumped from the `2.x` version series straight to `5.x` (skipping
+> `3.x`/`4.x` to avoid confusion with the Compose file format version). `2.31+` remains a
+> valid floor for everything in this bootcamp — don't worry if `docker compose version` shows
+> a higher number.
+
 **Development environment**: Docker Desktop (Windows/macOS) or Docker Engine (Linux)
 
 ---
@@ -111,7 +116,7 @@ bootcamp/week-XX/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/epti-dev/bc-docker.git
+git clone https://github.com/ergrato-dev/bc-docker.git
 cd bc-docker
 ```
 
@@ -196,8 +201,8 @@ Contributions are welcome! This is an open-source educational project.
 
 ## 📞 Support
 
-- 💬 **Discussions**: [GitHub Discussions](https://github.com/epti-dev/bc-docker/discussions)
-- 🐛 **Issues**: [GitHub Issues](https://github.com/epti-dev/bc-docker/issues)
+- 💬 **Discussions**: [GitHub Discussions](https://github.com/ergrato-dev/bc-docker/discussions)
+- 🐛 **Issues**: [GitHub Issues](https://github.com/ergrato-dev/bc-docker/issues)
 
 ---
 
@@ -244,7 +249,7 @@ After completing this bootcamp, you'll be ready for:
 <p align="center">
   <a href="bootcamp/week-01-fundamentos_docker">Start Week 1</a> •
   <a href="docs">View Documentation</a> •
-  <a href="https://github.com/epti-dev/bc-docker/issues">Report Issue</a> •
+  <a href="https://github.com/ergrato-dev/bc-docker/issues">Report Issue</a> •
   <a href="CONTRIBUTING.md">Contribute</a>
 </p>
 
